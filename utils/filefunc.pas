@@ -10,7 +10,7 @@ unit filefunc;
 interface
 
 uses
-    Classes, SysUtils, sysfunc, log, strfunc;
+    Classes, SysUtils, sysfunc, strfunc;
 
 { Определить папку домашней директории }
 function GetHomeDir(): AnsiString;
@@ -37,6 +37,8 @@ function CreateEmptyFileIfNotExists(sPath: AnsiString): Boolean;
 
 implementation
 
+uses
+    log;
 {
 Определить папку домашней директории
 }
@@ -48,7 +50,7 @@ begin
   else if IsOSWindows() then
      result := GetOSWindowsHomeDir()
      else
-       warning(Format('Не поддерживаемая ОС <%s>', [GetOSType()]));
+       WarningMsg(Format('Не поддерживаемая ОС <%s>', [GetOSType()]));
 end;
 
 {
@@ -106,7 +108,7 @@ begin
   result := False;
   if not DirectoryExists(sPath) then
   begin
-     info(Format('Создание папки <%s>', [sPath]));
+     InfoMsg(Format('Создание папки <%s>', [sPath]));
      result := CreateDir(sPath)
   end;
 end;
@@ -118,7 +120,7 @@ function CreateEmptyFile(sPath: AnsiString): Boolean;
 var
     file_tmp: Text;
 begin
-    info(Format('Создание пустого файла <%s>', [sPath]));
+    InfoMsg(Format('Создание пустого файла <%s>', [sPath]));
     AssignFile(file_tmp, sPath);
     try
        Rewrite(file_tmp);

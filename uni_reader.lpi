@@ -59,31 +59,31 @@
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="utils/filefunc.pas"/>
+        <Filename Value="utils/sysfunc.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="utils/sysfunc.pas"/>
+        <Filename Value="utils/inifunc.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit8>
       <Unit9>
-        <Filename Value="utils/inifunc.pas"/>
+        <Filename Value="obj_proto.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit9>
       <Unit10>
-        <Filename Value="obj_proto.pas"/>
+        <Filename Value="data_ctrl/reg_data_ctrl.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
       <Unit11>
-        <Filename Value="data_ctrl/reg_data_ctrl.pas"/>
+        <Filename Value="utils/keyboardfunc.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit11>
       <Unit12>
-        <Filename Value="utils/keyboardfunc.pas"/>
+        <Filename Value="data_ctrl/remoute_opc_node.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit12>
       <Unit13>
-        <Filename Value="data_ctrl/remoute_opc_node.pas"/>
+        <Filename Value="utils/memfunc.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit13>
     </Units>

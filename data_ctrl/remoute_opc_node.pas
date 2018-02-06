@@ -13,6 +13,8 @@ type
   }
   TICRemouteOPCNode = class(TICObjectProto)
   public
+    procedure Free;
+
     { Фунция чтения данных }
     function Read(aValues: TStringList): TStringList; override;
     { Фунция записи данных }
@@ -22,6 +24,14 @@ type
 end;
 
 implementation
+
+uses
+    log;
+
+procedure TICRemouteOPCNode.Free;
+begin
+  inherited Free;
+end;
 
 {
 Фунция чтения данных
@@ -44,6 +54,7 @@ end;
 }
 function TICRemouteOPCNode.Diagnostic(): Boolean;
 begin
+  InfoMsg(Format('Диагностика объекта <%s> класса <%s>', [GetName(), ClassName]));
   result := False;
 end;
 

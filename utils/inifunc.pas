@@ -5,7 +5,7 @@ unit inifunc;
 interface
 
 uses
-    Classes, SysUtils, INIFiles, StrUtils, dictionary, log;
+    Classes, SysUtils, INIFiles, StrUtils, dictionary;
 
 type
     {
@@ -18,7 +18,7 @@ type
       constructor Create();
       constructor Create(sINIFileName: AnsiString);
       destructor Destroy; override;
-      function Free: Boolean;
+      procedure Free;
 
       { Загрузить содержимое INI файла }
       function LoadIniFile(sINIFileName: AnsiString): Boolean;
@@ -28,6 +28,9 @@ type
     end;
 
 implementation
+
+uses
+    log;
 
 constructor TIniDictionary.Create();
 begin
@@ -42,23 +45,12 @@ end;
 
 destructor TIniDictionary.Destroy;
 begin
-     Free;
+     // Free;
      inherited Destroy;
 end;
 
-{
-Освободить всю память занимаемую объектом
-}
-function TIniDictionary.Free(): Boolean;
-var
-   i_section: Integer;
-   section: TStrDictionary;
+procedure TIniDictionary.Free;
 begin
-     for i_section := 0 to Count - 1 do
-     begin
-          section := GetObject(i_section) As TStrDictionary;
-          section.Free;
-     end;
      inherited Free;
 end;
 
@@ -71,17 +63,17 @@ var
    ini_file: TIniFile;
    sections, options: TStringList;
    section_name, option, option_name, option_value: AnsiString;
-   section_dict, option_dict: TStrDictionary;
+   section_dict: TStrDictionary;
 begin
   result := False;
   if sIniFileName = '' then
   begin
-     warning('Не определен INI файл для загрузки данных');
+     WarningMsg('Не определен INI файл для загрузки данных');
      exit;
   end;
   if not FileExists(sIniFileName) then
   begin
-     warning(Format('Файл INI <%s> не найден', [sIniFileName]));
+     WarningMsg(Format('Файл INI <%s> не найден', [sIniFileName]));
      exit;
   end;
 
@@ -104,12 +96,12 @@ begin
              for i_option :=0 to options.Count - 1 do
              begin
                   option := Trim(options[i_option]);
-                  if AnsiStartsStr(option, ';') then
+                  if AnsiStartsStr(';', option) then
                      // Это коментарий обрабатывать не надо
                      continue;
                   idx := Pos('=', option);
-                  option_name := Copy(option, 0, idx);
-                  option_value := Copy(option, idx, Length(option)-idx);
+                  option_name := Copy(option, 0, idx - 1);
+                  option_value := Copy(option, idx + 1, Length(option)-idx);
                   section_dict.AddStrValue(option_name, option_value);
              end;
              AddObject(section_name, section_dict);
@@ -118,22 +110,27 @@ begin
           ini_file.Free;
       end;
   except
-        fatal('Ошибка печати настроек программы');
+        FatalMsg('Ошибка печати настроек программы');
   end;
   // ВНИМАНИЕ! В конце обязательно освободить память
   options.Free;
   sections.Free;
 end;
 
-{ Получить значение параметра }
+{
+Получить значение параметра
+}
 function TIniDictionary.GetOptionValue(sSectionName: AnsiString; sOptionName: AnsiString): AnsiString;
 var
    section: TStrDictionary;
 begin
      result := '';
-     section := GetByName(sSectionName) As TStrDictionary;
-     if section <> Nil then
-        result := section.GetStrValue(sOptionName);
+     if HasKey(sSectionName) then
+     begin
+          section := GetByName(sSectionName) As TStrDictionary;
+          if section <> Nil then
+             result := section.GetStrValue(sOptionName);
+     end;
 end;
 
 end.

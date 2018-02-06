@@ -7,7 +7,7 @@ interface
 uses
     {INIFiles = модуль который содержит класс для работы с INI-файлами}
     Classes, SysUtils, INIFiles, StrUtils,
-    log, config, inifunc, dictionary, strfunc;
+    inifunc, dictionary;
 
 const DEFAULT_SETTINGS_INI_FILENAME: AnsiString = 'settings.ini';
 
@@ -17,14 +17,17 @@ type
     }
 
     TICSettingsManager = class(TObject)
-    public
+    private
       { Полное наименование INI файла }
-      IniFileName: AnsiString;
+      FIniFileName: AnsiString;
       { Содержимое INI файла в виде словаря словарей (разложено по секциям)}
-      Content: TIniDictionary;
+      FContent: TIniDictionary;
+
+    public
 
       constructor Create;
       destructor Destroy; override;
+      procedure Free;
 
       {Генерация имени настроечного INI файла}
       function GenIniFileName(): AnsiString;
@@ -37,6 +40,8 @@ type
       { Собрать полное описание секции с учетом ключа parent }
       function BuildSection(sSectionName: Ansistring): TStrDictionary;
 
+      { Получить значение опции }
+      function GetOptionValue(sSectionName: Ansistring; sOptionName: Ansistring): AnsiString;
     end;
 
 var
@@ -46,18 +51,24 @@ var
 implementation
 
 uses
-    filefunc;
+    filefunc, log, config, strfunc;
 
 constructor TICSettingsManager.Create;
 begin
      inherited Create;
-     Content := TIniDictionary.Create;
+     FContent := TIniDictionary.Create;
 end;
 
 destructor TICSettingsManager.Destroy;
 begin
-     Content.Free;
+     //FContent.Free;
      inherited Destroy;
+end;
+
+procedure TICSettingsManager.Free;
+begin
+   FContent.Free;
+   inherited Free;
 end;
 
 {
@@ -69,11 +80,11 @@ var
 begin
      cur_path := ExtractFileDir(ParamStr(0));
 
-     IniFileName := JoinPath([cur_path, DEFAULT_SETTINGS_INI_FILENAME]);
+     FIniFileName := JoinPath([cur_path, DEFAULT_SETTINGS_INI_FILENAME]);
 
-     debug(Format('Файл настроек: <%s>', [IniFileName]));
+     DebugMsg(Format('Файл настроек: <%s>', [FIniFileName]));
 
-     result := IniFileName;
+     result := FIniFileName;
 end;
 
 {
@@ -88,19 +99,19 @@ var
    options: TStringList;
    option: AnsiString;
 begin
-     if IniFileName = '' then
+     if FIniFileName = '' then
      begin
-        warning('Не определен INI файл настроек для отображения');
+        WarningMsg('Не определен INI файл настроек для отображения');
         exit;
      end;
-     if not FileExists(IniFileName) then
+     if not FileExists(FIniFileName) then
      begin
-        warning(Format('Файл настроек программы <%s> не найден', [IniFileName]));
+        WarningMsg(Format('Файл настроек программы <%s> не найден', [FIniFileName]));
         exit;
      end;
 
-     ini_file := TIniFile.Create(IniFileName);
-     service(Format('Файл настроек программы <%s>:', [IniFileName]));
+     ini_file := TIniFile.Create(FIniFileName);
+     ServiceMsg(Format('Файл настроек программы <%s>:', [FIniFileName]));
      // ВНИМАНИЕ! Перед использованием списков строк в функции
      // надо их создать/выделить под них память
      sections := TStringList.Create;
@@ -111,24 +122,24 @@ begin
            for i_section :=0 to sections.Count - 1 do
            begin
                 section_name := sections[i_section];
-                service(Format('[%s]', [section_name]));
+                ServiceMsg(Format('[%s]', [section_name]));
 
                 options.Clear;
                 ini_file.ReadSectionValues(section_name, options);
                 for i_option :=0 to options.Count - 1 do
                 begin
                      option := options[i_option];
-                     if AnsiStartsStr(option, ';') then
+                     if AnsiStartsStr(';', option) then
                         // Это коментарий обрабатывать не надо
                         continue;
-                     service(Format(#9'%s', [option]));
+                     ServiceMsg(Format(#9'%s', [option]));
                 end;
            end;
         finally
                ini_file.Free;
         end;
      except
-           fatal('Ошибка печати настроек программы');
+           FatalMsg('Ошибка печати настроек программы');
      end;
      // ВНИМАНИЕ! В конце обязательно освободить память
      options.Free;
@@ -149,15 +160,12 @@ begin
 
     if FileExists(sINIFileName) then
     begin
-       Content.LoadIniFile(sIniFileName);
-       if not Content.IsEmpty then
-       begin
-            // Прописать настройки в окружении
-            ENVIRONMENT.AddObject('SETTINGS', self);
-            result := True;
-       end
+       FContent.LoadIniFile(sIniFileName);
+       if not FContent.IsEmpty then
+          // Прописать настройки в окружении
+          result := ENVIRONMENT.SetObject('SETTINGS', self)
        else
-           warning(Format('Не определены настройки в INI файле <%s>' , [sIniFileName]));
+          WarningMsg(Format('Не определены настройки в INI файле <%s>' , [sIniFileName]));
     end;
     result := False;
 end;
@@ -172,13 +180,22 @@ end;
 function TICSettingsManager.BuildSection(sSectionName: Ansistring): TStrDictionary;
 var
    section, parent_section, result_section: TStrDictionary;
+   obj_section: TStrDictionary;
    i: Integer;
    parent_section_list: Array Of String;
    parent_section_name: AnsiString;
 begin
     section := TStrDictionary.Create;
-    if Content.HasKey(sSectionName) then
-       section.Update((Content.GetByName(sSectionName) As TObjStrDictionary).Value)
+    if FContent.HasKey(sSectionName) then
+    begin
+       obj_section := FContent.GetByName(sSectionName) As TStrDictionary;
+       obj_section.AddStrValue('name', sSectionName);
+       // DebugMsg(Format('Класс секции <%s>', [obj_section.ClassName]));
+       if obj_section <> Nil then
+          section.Update(obj_section)
+       else
+          WarningMsg(Format('Не определена секция <%s> в настройках', [sSectionName]));
+    end
     else
        section.AddStrValue('name', sSectionName);
 
@@ -193,9 +210,9 @@ begin
         result := section;
         exit;
     end
-    else if not Content.HasKey(section.GetStrValue('parent')) then
+    else if not FContent.HasKey(section.GetStrValue('parent')) then
     begin
-        warning(Format('Запрашиваемая секция <%s> как родительская для <%s> не найдена', [section.GetStrValue('parent'), sSectionName]));
+        WarningMsg(Format('Запрашиваемая секция <%s> как родительская для <%s> не найдена', [section.GetStrValue('parent'), sSectionName]));
         section.DelItem('parent');
         result := section;
         exit;
@@ -204,12 +221,12 @@ begin
         if IsParseStrList(section.GetStrValue('parent')) then
         begin
            // Список имен
-           parent_section_list := ParseStrList(section.GetStrValue('parent'));
+           parent_section_list := ParseStrArray(section.GetStrValue('parent'));
            result_section := TStrDictionary.Create;
            for i := 0 to Length(parent_section_list) - 1 do
            begin
                parent_section_name := parent_section_list[i];
-               parent_section := BuildSection(section.GetStrValue('parent'));
+               parent_section := BuildSection(parent_section_name);
                result_section.Update(parent_section);
            end;
            result_section.Update(section);
@@ -264,14 +281,21 @@ begin
     result := FileExists(sINIFileName);
 end;
 
-
-var
-  ini_filename: AnsiString;
-
+{
+Получить значение опции
+}
+function TICSettingsManager.GetOptionValue(sSectionName: Ansistring; sOptionName: Ansistring): AnsiString;
 begin
-  SETTINGS_MANAGER := TICSettingsManager.Create;
-  ini_filename := SETTINGS_MANAGER.GenIniFileName();
-  ENVIRONMENT.AddStrValue('SETTINGS_FILENAME', ini_filename);
-  SETTINGS_MANAGER.PrintSettings;
+   result := FContent.GetOptionValue(sSectionName, sOptionName);
+end;
+
+//var
+//  ini_filename: AnsiString;
+//
+//begin
+//  //SETTINGS_MANAGER := TICSettingsManager.Create;
+//  //ini_filename := SETTINGS_MANAGER.GenIniFileName();
+//  //ENVIRONMENT.AddStrValue('SETTINGS_FILENAME', ini_filename);
+//  // SETTINGS_MANAGER.PrintSettings;
 end.
 

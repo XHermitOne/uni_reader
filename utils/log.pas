@@ -46,7 +46,10 @@ unit log;
 46 	голубой
 47 	белый
 
-Версия: 0.0.2.1
+Версия: 0.0.3.2
+
+ВНИМАНИЕ! Вывод сообщений под Linux проверять только в терминале.
+Только он выводит корректно сообщения.
 }
 {$mode objfpc}{$H+}
 
@@ -67,25 +70,25 @@ const CYAN_COLOR_TEXT: AnsiString = Chr($1b) + '[36m';        // cyan
 const WHITE_COLOR_TEXT: AnsiString = Chr($1b) + '[37m';       // white
 const NORMAL_COLOR_TEXT: AnsiString = Chr($1b) + '[0m';       // normal
 
-function get_default_encoding(): AnsiString;
+function GetDefaultEncoding(): AnsiString;
 {Определить включен ли режим отладки}
-function get_debug_mode(): Boolean;
+function GetDebugMode(): Boolean;
 {Определить включен ли режим журналирования}
-function get_log_mode(): Boolean;
+function GetLogMode(): Boolean;
 
-function encode_unicode_string(sTxt: AnsiString; sCodePage: AnsiString = 'utf-8'): AnsiString;
-procedure print_color_txt(sTxt: AnsiString; sColor: AnsiString);
+function EncodeUnicodeString(sTxt: AnsiString; sCodePage: AnsiString = 'utf-8'): AnsiString;
+procedure PrintColorTxt(sTxt: AnsiString; sColor: AnsiString);
 
-function open_log(sLogFileName: AnsiString = ''): boolean;
-function close_log(): boolean;
-function log_msg(sMsg: AnsiString = ''): boolean;
+function OpenLog(sLogFileName: AnsiString = ''): boolean;
+function CloseLog(): boolean;
+function LogMsg(sMsg: AnsiString = ''): boolean;
 
-procedure debug(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
-procedure info(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
-procedure error(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
-procedure warning(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
-procedure fatal(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
-procedure service(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+procedure DebugMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+procedure InfoMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+procedure ErrorMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+procedure WarningMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+procedure FatalMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+procedure ServiceMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
 
 var
     {
@@ -108,7 +111,7 @@ uses
 Определить актуальную кодировку для вывода текста.
 @return (Актуальная кодировка для вывода текста)
 }
-function get_default_encoding(): AnsiString;
+function GetDefaultEncoding(): AnsiString;
 begin
     // writeln(DefaultSystemCodePage, ' ', CP_UTF8);
     result := 'utf-8';
@@ -117,17 +120,21 @@ end;
 {
 Определить включен ли режим отладки
 }
-function get_debug_mode(): Boolean;
+function GetDebugMode(): Boolean;
 begin
     result := ENVIRONMENT.HasKey('DEBUG_MODE');
+    if not result then
+       PrintColorTxt('Режим отладки отключен', YELLOW_COLOR_TEXT);
 end;
 
 {
 Определить включен ли режим журналирования
 }
-function get_log_mode(): Boolean;
+function GetLogMode(): Boolean;
 begin
-    result := ENVIRONMENT.HasKey('LOG_MODE');
+    result := ENVIRONMENT.HasKey('LOG_MODE') and IS_OPEN_LOG_FILE;
+    if not ENVIRONMENT.HasKey('LOG_MODE') then
+       PrintColorTxt('Режим журналирования отключен', YELLOW_COLOR_TEXT);
 end;
 
 {
@@ -136,7 +143,7 @@ end;
 @param (sCodePage Указание кодировки)
 @return (Перекодированный текст)
 }
-function encode_unicode_string(sTxt: AnsiString; sCodePage: AnsiString): AnsiString;
+function EncodeUnicodeString(sTxt: AnsiString; sCodePage: AnsiString): AnsiString;
 begin
     result := '';
     if (sCodePage = 'utf-8') or (sCodePage = 'UTF-8') or (sCodePage = 'utf8') or (sCodePage = 'UTF8') then
@@ -154,16 +161,16 @@ end;
 @param (sTxt Печатаемый текст)
 @param (sColor Дополнительное указание цветовой раскраски)
 }
-procedure print_color_txt(sTxt: AnsiString; sColor: AnsiString);
+procedure PrintColorTxt(sTxt: AnsiString; sColor: AnsiString);
 var
     str_txt: AnsiString;
 begin
-    str_txt := encode_unicode_string(sTxt, get_default_encoding());
+    str_txt := EncodeUnicodeString(sTxt, GetDefaultEncoding());
     // Для Windows систем цветовая раскраска отключена
     if IsOSLinux() then
         // Добавление цветовой раскраски для Linux систем
         str_txt := sColor + str_txt + NORMAL_COLOR_TEXT;
-    writeln(str_txt);
+    WriteLn(str_txt);
 end;
 
 {
@@ -172,7 +179,7 @@ end;
         Если имя файла не определено, то пробуем его взять из оружения системы
         Ключ LOG_FILENAME)
 }
-function open_log(sLogFileName: AnsiString): Boolean;
+function OpenLog(sLogFileName: AnsiString): Boolean;
 begin
     result := False;
 
@@ -181,7 +188,7 @@ begin
        sLogFileName := (ENVIRONMENT.GetByName('LOG_FILENAME') As TObjString).Value;
     if sLogFileName = '' then
     begin
-       warning('Не определено имя файла лога регистрации сообщений программы');
+       WarningMsg('Не определено имя файла лога регистрации сообщений программы');
        exit;
     end;
 
@@ -190,36 +197,37 @@ begin
     CreateEmptyFileIfNotExists(sLogFileName);
 
     try
-       info(Format('Файл регистрации сообщений программы <%s>', [sLogFileName]));
+       InfoMsg(Format('Файл регистрации сообщений программы <%s>', [sLogFileName]));
        AssignFile(LOG_FILE, sLogFileName);
        Append(LOG_FILE);
        if IOResult =0 then
           IS_OPEN_LOG_FILE := True;
 
-       log_msg('vvv Начало регистрации сообщений программы vvv');
+       LogMsg('vvv Начало регистрации сообщений программы vvv');
        result := True;
     except
-       close_log();
-       fatal('Ошибка открытия файла лога', True);
+       CloseLog();
+       FatalMsg('Ошибка открытия файла лога', True);
     end;
 end;
 
 {
 Закрыть файл лога.
 }
-function close_log(): Boolean;
+function CloseLog(): Boolean;
 begin
     try
        if IS_OPEN_LOG_FILE then
        begin
-         log_msg('^^^ Окончание регистрации сообщений программы ^^^');
+         LogMsg('^^^ Окончание регистрации сообщений программы ^^^');
          CloseFile(LOG_FILE);
          IS_OPEN_LOG_FILE := False;
          result := True;
+         exit;
        end;
     except
        on E: EInOutError do
-          fatal('Ошибка закрытия файла лога', True);
+          FatalMsg('Ошибка закрытия файла лога', True);
     end;
     result := False;
 end;
@@ -229,7 +237,7 @@ end;
 @param (sMsg Регистрируемое сообщение)
 @param (bForceLog Признак принудительной регистрации)
 }
-function log_msg(sMsg: AnsiString = ''): Boolean;
+function LogMsg(sMsg: AnsiString = ''): Boolean;
 var
     new_msg: AnsiString;
 begin
@@ -242,8 +250,8 @@ begin
         writeln(LOG_FILE, new_msg);
         result := True;
      except
-        close_log();
-        fatal('Ошибка регистрации сообщения в лог файле', True);
+        CloseLog();
+        FatalMsg('Ошибка регистрации сообщения в лог файле', True);
      end;
 end;
 
@@ -253,12 +261,12 @@ end;
 @param (bForcePrint Принудительно вывести на экран)
 @param (bForceLog Принудительно записать в журнале)
 }
-procedure debug(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
+procedure DebugMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
-    if (get_debug_mode()) or (bForcePrint) then
-       print_color_txt('DEBUG. ' + sMsg, BLUE_COLOR_TEXT);
-    if (get_log_mode()) or (bForceLog) then
-       log_msg('DEBUG. ' + sMsg);
+    if (GetDebugMode()) or (bForcePrint) then
+      PrintColorTxt('DEBUG. ' + sMsg, BLUE_COLOR_TEXT);
+    if (GetLogMode()) or (bForceLog) then
+       LogMsg('DEBUG. ' + sMsg);
 end;
 
 {
@@ -267,12 +275,12 @@ end;
 @param (bForcePrint Принудительно вывести на экран)
 @param (bForceLog Принудительно записать в журнале)
 }
-procedure info(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
+procedure InfoMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
-    if (get_debug_mode()) or (bForcePrint) then
-       print_color_txt('INFO. ' + sMsg, GREEN_COLOR_TEXT);
-    if (get_log_mode()) or (bForceLog) then
-       log_msg('INFO. ' + sMsg);
+    if (GetDebugMode()) or (bForcePrint) then
+      PrintColorTxt('INFO. ' + sMsg, GREEN_COLOR_TEXT);
+    if (GetLogMode()) or (bForceLog) then
+       LogMsg('INFO. ' + sMsg);
 end;
 
 {
@@ -281,12 +289,12 @@ end;
 @param (bForcePrint Принудительно вывести на экран)
 @param (bForceLog Принудительно записать в журнале)
 }
-procedure error(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
+procedure ErrorMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
-    if (get_debug_mode()) or (bForcePrint) then
-       print_color_txt('ERROR. ' + sMsg, RED_COLOR_TEXT);
-    if (get_log_mode()) or (bForceLog) then
-       log_msg('ERROR. ' + sMsg);
+    if (GetDebugMode()) or (bForcePrint) then
+      PrintColorTxt('ERROR. ' + sMsg, RED_COLOR_TEXT);
+    if (GetLogMode()) or (bForceLog) then
+       LogMsg('ERROR. ' + sMsg);
 end;
 
 {
@@ -295,12 +303,12 @@ end;
 @param (bForcePrint Принудительно вывести на экран)
 @param (bForceLog Принудительно записать в журнале)
 }
-procedure warning(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
+procedure WarningMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
-    if (get_debug_mode()) or (bForcePrint) then
-       print_color_txt('WARNING. ' + sMsg, YELLOW_COLOR_TEXT);
-    if (get_log_mode()) or (bForceLog) then
-       log_msg('WARNING. ' + sMsg);
+    if (GetDebugMode()) or (bForcePrint) then
+      PrintColorTxt('WARNING. ' + sMsg, YELLOW_COLOR_TEXT);
+    if (GetLogMode()) or (bForceLog) then
+       LogMsg('WARNING. ' + sMsg);
 end;
 
 
@@ -310,7 +318,7 @@ end;
 @param (bForcePrint Принудительно вывести на экран)
 @param (bForceLog Принудительно записать в журнале)
 }
-procedure fatal(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
+procedure FatalMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 var
     buf : array[0..511] of char;
     msg, except_msg: AnsiString;
@@ -322,15 +330,15 @@ begin
     // StrCat(buf, #13#10);
     except_msg := buf;
 
-    if (get_debug_mode()) or (bForcePrint) then
+    if (GetDebugMode()) or (bForcePrint) then
     begin
-       print_color_txt(msg, RED_COLOR_TEXT);
-       print_color_txt(except_msg, RED_COLOR_TEXT);
+      PrintColorTxt(msg, RED_COLOR_TEXT);
+      PrintColorTxt(except_msg, RED_COLOR_TEXT);
     end;
-    if (get_log_mode()) or (bForceLog) then
+    if (GetLogMode()) or (bForceLog) then
     begin
-       log_msg(msg);
-       log_msg(except_msg);
+       LogMsg(msg);
+       LogMsg(except_msg);
     end;
 end;
 
@@ -340,12 +348,12 @@ end;
 @param (bForcePrint Принудительно вывести на экран)
 @param (bForceLog Принудительно записать в журнале)
 }
-procedure service(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
+procedure ServiceMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
-    if (get_debug_mode()) or (bForcePrint) then
-       print_color_txt('SERVICE. ' + sMsg, CYAN_COLOR_TEXT);
-    if (get_log_mode()) or (bForceLog) then
-       log_msg('SERVICE. ' + sMsg);
+    if (GetDebugMode()) or (bForcePrint) then
+      PrintColorTxt('SERVICE. ' + sMsg, CYAN_COLOR_TEXT);
+    if (GetLogMode()) or (bForceLog) then
+       LogMsg('SERVICE. ' + sMsg);
 end;
 
 

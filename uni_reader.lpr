@@ -6,9 +6,11 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, CustApp, log, config, settings, strfunc, dictionary,
-  filefunc, sysfunc, inifunc, obj_proto, reg_data_ctrl, keyboardfunc, engine,
-  remoute_opc_node
+  Classes, SysUtils, CustApp,
+  dictionary, sysfunc, strfunc, filefunc, config, log,
+  settings, inifunc,
+  obj_proto, reg_data_ctrl, keyboardfunc, engine,
+  remoute_opc_node, memfunc
   { you can add units after this };
 
 type
@@ -46,12 +48,18 @@ begin
   end;
 
   { add your program here }
-  open_log();
-  warning('Простой текст на русском');
-  warning('Простой текст на русском');
-  print_color_txt('Простой текст на русском', CYAN_COLOR_TEXT);
+  InitStatusMemory();
+
+  OpenLog();
+
   ENVIRONMENT.PrintContent;
-  close_log();
+
+  READER_ENGINE.Run('diagnostic');
+  READER_ENGINE.Free;
+
+  CloseLog();
+  // ENVIRONMENT.Clear();
+  PrintLostMemory();
 
   // stop program loop
   Terminate;

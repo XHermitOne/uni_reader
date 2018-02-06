@@ -13,19 +13,25 @@ type
 Разбивает строку с разделителями на части
 и возвращает массив частей.
 }
-function SplitStr(sString: String; tdDelim: Char): TArrayOfString;
+function SplitStr(sString: String; cDelim: Char): TArrayOfString;
 
 { Объединение массива строк в одну строку }
-function JoinStr(StringArray : Array Of String; tdDelim : Char): AnsiString;
+function JoinStr(StringArray : Array Of String; cDelim : Char): AnsiString;
 
 { Удалить обрамление кавычками одинарными и двойными из строки. }
 function StripStr(sString: AnsiString; sChar: Char = ' '): AnsiString;
 
 { Распарсить строку, представляющую собой список строк }
-function ParseStrList(sString: AnsiString): TArrayOfString;
+function ParseStrArray(sString: AnsiString): TArrayOfString;
 
 { Проверка является ли строка серилизованным списком }
 function IsParseStrList(sString: AnsiString): Boolean;
+
+{ Распарсить строку, представляющую собой список строк. Возврашает список строк. }
+function ParseStrList(sString: AnsiString): TStringList;
+
+{ Преобразование списка строк в строку вида [ aaaa, bbbb, cccc ] }
+function ConvertStrListToString(StrList: TStringList): AnsiString;
 
 implementation
 
@@ -33,22 +39,22 @@ implementation
 Разбивает строку с разделителями на части
 и возвращает массив частей.
 }
-function SplitStr(sString: String; tdDelim: Char): TArrayOfString;
+function SplitStr(sString: String; cDelim: Char): TArrayOfString;
 var
   iCounter, iBegin: Integer;
 begin
      if Length(sString) > 0 then
      begin
-          //Include(tdDelim, #0);
+          //Include(cDelim, #0);
           iBegin := 1;
-          SetLength(Result, 0);
+          SetLength(result, 0);
 
           for iCounter := 1 to Length(sString) + 1 do
           begin
-               if (sString[iCounter] = tdDelim) then
+               if (sString[iCounter] = cDelim) or (iCounter = Length(sString)) then
                begin
-                    SetLength(Result, Length(Result) + 1);
-                    result[Length(Result) - 1] := Copy(sString, iBegin, iCounter - iBegin);
+                    SetLength(result, Length(result) + 1);
+                    result[Length(result) - 1] := Copy(sString, iBegin, iCounter - iBegin + 1);
                     iBegin := iCounter + 1;
                end;
           end;//for
@@ -58,13 +64,13 @@ end;
 {
 Объединение массива строк в одну строку.
 }
-function JoinStr(StringArray: Array Of String; tdDelim: Char): AnsiString;
+function JoinStr(StringArray: Array Of String; cDelim: Char): AnsiString;
 var
   i : Integer;
 begin
   result := '';
   for i := Low(StringArray) to High(StringArray) do
-    result := result + StringArray[i] + tdDelim;
+    result := result + StringArray[i] + cDelim;
   Delete(result, Length(result), 1);
 end;
 
@@ -74,12 +80,12 @@ end;
 function StripStr(sString: AnsiString; sChar: Char): AnsiString;
 begin
      result := sString;
-     if AnsiStartsStr(sString, sChar) then
-        result := Copy(sString, 0, 1);
-     if AnsiEndsStr(sString, sChar) then
-        result := Copy(sString, Length(sString) - 1, 1);
+     if AnsiStartsStr(sChar, sString) then
+        result := Copy(sString, 2, Length(sString) - 1);
+     if AnsiEndsStr(sChar, sString) then
+        result := Copy(sString, 1, Length(sString) - 1);
 
-     if AnsiStartsStr(sString, sChar) or AnsiEndsStr(sString, sChar) then
+     if AnsiStartsStr(sChar, sString) or AnsiEndsStr(sChar, sString) then
         result := StripStr(result, sChar);
 end;
 
@@ -88,15 +94,15 @@ end;
 Например:
   [ aaaa, bbbb, cccc ] или ['aaa', 'bbb', 'ccc']
 }
-function ParseStrList(sString: AnsiString): TArrayOfString;
+function ParseStrArray(sString: AnsiString): TArrayOfString;
 var
   i: Integer;
   result_list: Array Of String;
 begin
-     if AnsiStartsStr(sString, '[') then
-        sString := Copy(sString, 0, 1);
-     if AnsiStartsStr(sString, ']') then
-        sString := Copy(sString, Length(sString) - 1, 1);
+     if AnsiStartsStr('[', sString) then
+        sString := Copy(sString, 2, Length(sString) - 1);
+     if AnsiEndsStr(']', sString) then
+        sString := Copy(sString, 1, Length(sString) - 1);
      result_list := SplitStr(sString, ',');
      for i := 0 to Length(result_list) - 1 do
      begin
@@ -112,7 +118,36 @@ end;
 }
 function IsParseStrList(sString: AnsiString): Boolean;
 begin
-     result := AnsiStartsStr(sString, '[') and  AnsiEndsStr(sString, ']');
+     result := AnsiStartsStr('[', sString) and  AnsiEndsStr(']', sString);
+end;
+
+{
+Распарсить строку, представляющую собой список строк
+Например:
+  [ aaaa, bbbb, cccc ] или ['aaa', 'bbb', 'ccc']
+Возврашает список строк.
+}
+function ParseStrList(sString: AnsiString): TStringList;
+var
+  str_array: Array Of String;
+  i: Integer;
+  str_list: TStringList;
+begin
+     str_list := TStringList.Create;
+     str_array := ParseStrArray(sString);
+     for i := 0 to Length(str_array) - 1 do
+         str_list.Add(str_array[i]);
+     result := str_list;
+end;
+
+{
+Преобразование списка строк в строку вида:
+[ aaaa, bbbb, cccc ]
+}
+function ConvertStrListToString(StrList: TStringList): AnsiString;
+begin
+  // ExtractStrings([','], [' '], PChar(result), StrList);
+  result := '[' + Trim(StrList.Text) + ']';
 end;
 
 end.

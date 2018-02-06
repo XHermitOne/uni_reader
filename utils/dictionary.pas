@@ -12,27 +12,33 @@ type
     Класс объектов строк для хранения в словаре
     }
     TObjString = class(TObject)
-    public
+    private
        { Значение }
-       Value: AnsiString;
+       FValue: AnsiString;
+    public
+       property Value: AnsiString read FValue write FValue;
     end;
 
     {
     Класс объектов даты-времени для хранения в словаре
     }
     TObjDateTime = class(TObject)
-    public
+    private
        { Значение }
-       Value: TDateTime;
+       FValue: TDateTime;
+    public
+       property Value: TDateTime read FValue write FValue;
     end;
 
     {
     Класс объектов списка строк для хранения в словаре
     }
     TObjStringList = class(TObject)
-    public
+    private
        { Значение }
-       Value: TStringList;
+       FValue: TStringList;
+    public
+       property Value: TStringList read FValue write FValue;
     end;
 
     {
@@ -40,6 +46,10 @@ type
     }
     TStrDictionary = class(TStringList)
     public
+       constructor Create();
+       destructor Destroy; override;
+       procedure Free;
+
        {Распечатать содержимое словаря}
        procedure PrintContent();
        {Проверка на существование переменной окружения с таким именем}
@@ -47,10 +57,12 @@ type
        { Получить ключ по индексу }
        function GetKey(iIndex: Integer): AnsiString;
        { Список ключей }
-       function GetKeys(): TStrings;
+       function GetKeys(): TStringList;
        function GetKeysStr(): AnsiString;
        {Получить объект по имени}
        function GetByName(sKey: AnsiString): TObject;
+       {Установить объект в словаре}
+       function SetObject(sKey: AnsiString; oObject: TObject): Boolean;
 
        { Проверка на тустой словарь }
        function IsEmpty(): Boolean;
@@ -85,17 +97,42 @@ type
     {
     Класс объектов строк для хранения в словаре
     }
-    TObjStrDictionary = class(TObject)
-    public
-       { Значение }
-       Value: TStrDictionary;
-    end;
+    //TObjStrDictionary = class(TObject)
+    //public
+    //   { Значение }
+    //   Value: TStrDictionary;
+    //end;
 
 
 implementation
 
 uses
     log;
+
+
+constructor TStrDictionary.Create();
+begin
+     inherited Create;
+end;
+
+destructor TStrDictionary.Destroy;
+begin
+     // Free;
+     inherited Destroy;
+end;
+
+procedure TStrDictionary.Free;
+var
+   i: Integer;
+   obj: TObject;
+begin
+     for i := 0 to Count - 1 do
+     begin
+       obj := GetObject(i);
+       obj.Free;
+     end;
+     inherited Free;
+end;
 
 {
 Печать содержимое словаря
@@ -110,7 +147,7 @@ var
 begin
     try
         msg:=Format('Содержимое <%s : %s>:', [UnitName, ClassName]);
-        service(msg);
+        ServiceMsg(msg);
 
         for i := 0 to GetCount-1 do
         begin
@@ -119,6 +156,7 @@ begin
              if item_obj <> Nil then
              begin
                 item_class := item_obj.ClassName;
+                // DebugMsg(Format('Item class <%s>', [item_class]));
                 if item_class = 'TObjString' then
                    item_class := (item_obj As TObjString).Value
                 else
@@ -128,11 +166,11 @@ begin
                  item_class := '<Nil>';
 
              msg:=Format(#9'%s'#9'='#9'%s', [item_name, item_class]);
-             service(msg);
+             ServiceMsg(msg);
         end;
 
     except
-           fatal('Ошибка печати содержания окружения');
+          FatalMsg('Ошибка печати содержания окружения');
     end;
 end;
 
@@ -155,7 +193,29 @@ var
   idx: Integer;
 begin
   idx := IndexOf(sKey);
-  result := GetObject(idx);
+  if idx >= 0 then
+     result := GetObject(idx)
+  else
+      result := Nil;
+end;
+
+{
+Установить объект в словаре
+}
+function TStrDictionary.SetObject(sKey: AnsiString; oObject: TObject): Boolean;
+var
+  idx: Integer;
+begin
+     if not HasKey(sKey) then
+     begin
+        AddObject(sKey, oObject);
+        result := True;
+        exit;
+     end;
+     idx := IndexOf(sKey);
+     Delete(idx);
+     AddObject(sKey, oObject);
+     result := True;
 end;
 
 {
@@ -201,6 +261,7 @@ begin
      begin
         AddStrValue(sKey, sValue);
         result := True;
+        exit;
      end;
 
      obj := GetByName(sKey) As TObjString;
@@ -260,16 +321,17 @@ end;
 {
 Список ключей.
 }
-function TStrDictionary.GetKeys(): TStrings;
+function TStrDictionary.GetKeys(): TStringList;
 var
-   keys: TStrings;
+   keys: TStringList;
    i: Integer;
 begin
-  keys := TStrings.Create;
+  keys := TStringList.Create;
   for i := 0 to Count -1 do
       keys.Add(Strings[i]);
   result := keys;
 end;
+
 
 function TStrDictionary.GetKeysStr(): AnsiString;
 var
@@ -318,6 +380,7 @@ begin
      begin
         AddDateTimeValue(sKey, dtValue);
         result := True;
+        exit;
      end;
 
      obj := GetByName(sKey) As TObjDateTime;
@@ -362,6 +425,7 @@ begin
      begin
         AddStrList(sKey, slValue);
         result := True;
+        exit;
      end;
 
      obj := GetByName(sKey) As TObjStringList;

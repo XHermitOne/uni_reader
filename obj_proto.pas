@@ -15,24 +15,25 @@ type
   TICObjectProto = class(TObject)
   private
     { Объект родительского управляющего объекта }
-    Parent: TObject;
+    FParent: TObject;
     { Наменование объекта }
-    Name: AnsiString;
+    FName: AnsiString;
     { Описание объекта }
-    Description: AnsiString;
+    FDescription: AnsiString;
     { Имена читаемых значений из контроллера данных }
-    ReadValues: TStringList;
+    FReadValues: TStringList;
     { ВНИМАНИЕ! Источники данных запоминают после чтения состояние переменных для
      последующего доступа к ним объектов приемников данных
      Вот это словарь переменных }
-    State: TStrDictionary;
+    FState: TStrDictionary;
 
     { Свойства контроллера данных. Прописаны в INI файле }
-    Properties: TStrDictionary;
+    FProperties: TStrDictionary;
 
   public
     constructor Create;
     destructor Destroy; override;
+    procedure Free;
 
     function GetName(): AnsiString;
     procedure SetName(sName: AnsiString);
@@ -60,51 +61,66 @@ end;
 
 implementation
 
+uses
+    log;
+
 constructor TICObjectProto.Create;
 begin
      inherited Create;
-     Parent := Nil;
-     Name := 'Unknown';
-     Description := '';
-     ReadValues := TStringList.Create;
-     State := TStrDictionary.Create;
+     FParent := Nil;
+     FName := 'Unknown';
+     FDescription := '';
+     FReadValues := TStringList.Create;
+     FState := TStrDictionary.Create;
 end;
 
 destructor TICObjectProto.Destroy;
 begin
-     ReadValues.Free;
-     State.Free;
+     FReadValues.Free;
+     FState.Free;
      inherited Destroy;
+end;
+
+procedure TICObjectProto.Free;
+begin
+  FReadValues.Free;
+  FState.Free;
+  FProperties.Free;
+  inherited Free;
 end;
 
 function TICObjectProto.GetName(): AnsiString;
 begin
-     result := Name;
+     result := FName;
 end;
 
 procedure TICObjectProto.SetName(sName: AnsiString);
 begin
-     Name := sName;
+     FName := sName;
 end;
 
 function TICObjectProto.GetParent(): TObject;
 begin
-     result := Parent;
+     result := FParent;
 end;
 
 procedure TICObjectProto.SetParent(oParent: TObject);
 begin
-     Parent := oParent;
+     FParent := oParent;
 end;
 
 function TICObjectProto.GetProperties(): TStrDictionary;
 begin
-     result := Properties;
+     result := FProperties;
 end;
 
 procedure TICObjectProto.SetProperties(dProperties: TStrDictionary);
 begin
-     Properties := dProperties;
+     FProperties := dProperties;
+     if FProperties.HasKey('name') then
+        SetName(FProperties.GetStrValue('name'))
+     else
+        WarningMsg(Format('Не определено имя объекта в свойствах. Класс <%s>', [ClassName]));
 end;
 
 {
@@ -112,7 +128,7 @@ end;
 }
 function TICObjectProto.IsUnknown(): Boolean;
 begin
-     result := Name = 'Unknown';
+     result := FName = 'Unknown';
 end;
 
 {
@@ -121,7 +137,7 @@ end;
 }
 function TICObjectProto.RegState(aValues: TStrDictionary): Boolean;
 begin
-    result := State.Update(aValues);
+    result := FState.Update(aValues);
 end;
 
 {
@@ -129,7 +145,7 @@ end;
 }
 function TICObjectProto.GetReadValues(): TStringList;
 begin
-     result := ReadValues;
+     result := FReadValues;
 end;
 
 {
