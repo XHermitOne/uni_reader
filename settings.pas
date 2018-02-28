@@ -191,7 +191,7 @@ begin
        obj_section := FContent.GetByName(sSectionName) As TStrDictionary;
        obj_section.AddStrValue('name', sSectionName);
        // DebugMsg(Format('Класс секции <%s>', [obj_section.ClassName]));
-       if obj_section <> Nil then
+       if obj_section <> nil then
           section.Update(obj_section)
        else
           WarningMsg(Format('Не определена секция <%s> в настройках', [sSectionName]));

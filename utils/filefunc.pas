@@ -28,12 +28,17 @@ function SplitPath(sPath: AnsiString): TArrayOfString;
 
 { Создать весь путь папки }
 function CreateDirPath(sPath: AnsiString): Boolean;
+{ Создать весь путь папки. Путь должен быть нормализован. }
+function CreateDirPathTree(sPath: AnsiString): Boolean;
 
 { Создать пустой файл }
 function CreateEmptyFile(sPath: AnsiString): Boolean;
 
 { Создать пустой файл если он не существует }
 function CreateEmptyFileIfNotExists(sPath: AnsiString): Boolean;
+
+{ Нормализовать путь до файла }
+function NormalPathFileName(sPath: AnsiString): AnsiString;
 
 implementation
 
@@ -68,18 +73,10 @@ end;
 Домашняя папка в Windows системах.
 }
 function GetOSWindowsHomeDir(): AnsiString;
-{$IFDEF windows}
-var
-    PIDL : PItemIDList;
-    Folder : array[0..MAX_PATH] of Char;
-    const CSIDL_PERSONAL = $0005;
-{$ENDIF}
 begin
     result := '';
     {$IFDEF windows}
-    SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
-    SHGetPathFromIDList(PIDL, Folder);
-    result := Folder;
+    result := GetAppConfigDir(False);
     {$ENDIF}
 end;
 
@@ -106,11 +103,35 @@ end;
 function CreateDirPath(sPath: AnsiString): Boolean;
 begin
   result := False;
+
+  // Нормализация пути
+  sPath := NormalPathFileName(sPath);
+
   if not DirectoryExists(sPath) then
   begin
      InfoMsg(Format('Создание папки <%s>', [sPath]));
-     result := CreateDir(sPath)
+     result := CreateDirPathTree(sPath);
   end;
+end;
+
+{
+Создать весь путь папки. Путь должен быть нормализован.
+}
+function CreateDirPathTree(sPath: AnsiString): Boolean;
+var
+  parent_path: AnsiString;
+begin
+
+  if not DirectoryExists(sPath) then
+  begin
+    parent_path := ExtractFileDir(sPath);
+    if not DirectoryExists(parent_path) then
+       result := CreateDirPathTree(parent_path);
+    CreateDir(sPath);
+    result := True;
+    exit;
+  end;
+  result := False;
 end;
 
 {
@@ -120,6 +141,9 @@ function CreateEmptyFile(sPath: AnsiString): Boolean;
 var
     file_tmp: Text;
 begin
+    // Нормализация пути
+    sPath := NormalPathFileName(sPath);
+
     InfoMsg(Format('Создание пустого файла <%s>', [sPath]));
     AssignFile(file_tmp, sPath);
     try
@@ -141,6 +165,16 @@ begin
      result := False;
      if not FileExists(sPath) then
         result := CreateEmptyFile(sPath)
+end;
+
+{
+Нормализовать путь до файла.
+}
+function NormalPathFileName(sPath: AnsiString): AnsiString;
+begin
+     // Замена двойных слешей
+     sPath := StringReplace(sPath, PathDelim + PathDelim, PathDelim, [rfReplaceAll]);
+     result := ExpandFileName(sPath);
 end;
 
 end.

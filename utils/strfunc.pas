@@ -5,6 +5,9 @@ unit strfunc;
 interface
 
 uses
+    {$IFDEF windows}
+    Windows,
+    {$ENDIF}
     Classes, SysUtils, StrUtils;
 
 type
@@ -32,6 +35,9 @@ function ParseStrList(sString: AnsiString): TStringList;
 
 { Преобразование списка строк в строку вида [ aaaa, bbbb, cccc ] }
 function ConvertStrListToString(StrList: TStringList): AnsiString;
+
+{ Проверка есть ли строка в списке строк }
+function IsStrInList(sString: AnsiString; StringArray: Array of String): Boolean;
 
 implementation
 
@@ -148,6 +154,20 @@ function ConvertStrListToString(StrList: TStringList): AnsiString;
 begin
   // ExtractStrings([','], [' '], PChar(result), StrList);
   result := '[' + Trim(StrList.Text) + ']';
+end;
+
+{ Проверка есть ли строка в списке строк }
+function IsStrInList(sString: AnsiString; StringArray: Array of String): Boolean;
+var
+  i: Integer;
+begin
+  result := False;
+  for i := 0 to Length(StringArray) - 1 do
+    if StringArray[i] = sString then
+    begin
+         result := True;
+         exit;
+    end;
 end;
 
 end.

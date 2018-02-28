@@ -1,0 +1,19 @@
+object UniReaderDaemonMapper: TUniReaderDaemonMapper
+  DaemonDefs = <  
+    item
+      DaemonClassName = 'TUniReaderDaemon'
+      Name = 'UniReaderGateway'
+      Description = 'Universal reader gateway service. Read data from OPC and share by XML RPC'
+      DisplayName = 'UniReaderGateway'
+      Options = [doAllowStop, doAllowPause]
+      WinBindings.Dependencies = <>
+      WinBindings.StartType = stBoot
+      WinBindings.WaitHint = 0
+      WinBindings.IDTag = 0
+      WinBindings.ServiceType = stWin32
+      WinBindings.ErrorSeverity = esIgnore
+      LogStatusReport = True
+    end>
+  left = 385
+  top = 350
+end

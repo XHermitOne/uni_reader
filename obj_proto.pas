@@ -56,6 +56,10 @@ type
     function GetReadValues(): TStringList;
     { Функция диагностики контроллера данных }
     function Diagnostic(): Boolean; virtual;
+
+  published
+    property Properties: TStrDictionary read GetProperties write SetProperties;
+
 end;
 
 
@@ -67,7 +71,7 @@ uses
 constructor TICObjectProto.Create;
 begin
      inherited Create;
-     FParent := Nil;
+     FParent := nil;
      FName := 'Unknown';
      FDescription := '';
      FReadValues := TStringList.Create;
@@ -153,7 +157,7 @@ end;
 }
 function TICObjectProto.Read(aValues: TStringList): TStringList;
 begin
-  result := Nil;
+  result := nil;
 end;
 
 {

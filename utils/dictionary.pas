@@ -153,7 +153,7 @@ begin
         begin
              item_name := Strings[i];
              item_obj := Objects[i];
-             if item_obj <> Nil then
+             if item_obj <> nil then
              begin
                 item_class := item_obj.ClassName;
                 // DebugMsg(Format('Item class <%s>', [item_class]));
@@ -163,7 +163,7 @@ begin
                    item_class := Format('<%s>', [item_class]);
              end
              else
-                 item_class := '<Nil>';
+                 item_class := '<nil>';
 
              msg:=Format(#9'%s'#9'='#9'%s', [item_name, item_class]);
              ServiceMsg(msg);
@@ -196,7 +196,7 @@ begin
   if idx >= 0 then
      result := GetObject(idx)
   else
-      result := Nil;
+      result := nil;
 end;
 
 {
@@ -246,7 +246,7 @@ var
 begin
     result := '';
     obj := GetByName(sKey) As TObjString;
-    if obj <> Nil then
+    if obj <> nil then
        result := obj.Value;
 end;
 
@@ -286,7 +286,7 @@ var
    key: AnsiString;
    obj: TObject;
 begin
-  if (Dictionary = Nil) or (Dictionary.IsEmpty) then
+  if (Dictionary = nil) or (Dictionary.IsEmpty) then
   begin
        result := False;
        exit;
@@ -365,7 +365,7 @@ var
 begin
     result := 0;
     obj := GetByName(sKey) As TObjDateTime;
-    if obj <> Nil then
+    if obj <> nil then
        result := obj.Value;
 end;
 
@@ -408,9 +408,9 @@ function TStrDictionary.GetStrList(sKey: AnsiString): TStringList;
 var
    obj: TObjStringList;
 begin
-    result := Nil;
+    result := nil;
     obj := GetByName(sKey) As TObjStringList;
-    if obj <> Nil then
+    if obj <> nil then
        result := obj.Value;
 end;
 

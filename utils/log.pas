@@ -46,7 +46,7 @@ unit log;
 46 	голубой
 47 	белый
 
-Версия: 0.0.3.2
+Версия: 0.0.4.3
 
 ВНИМАНИЕ! Вывод сообщений под Linux проверять только в терминале.
 Только он выводит корректно сообщения.
@@ -56,19 +56,23 @@ unit log;
 interface
 
 uses
-    Classes, SysUtils, dictionary, sysfunc;
+    Classes, SysUtils,
+    { Для функций перекодировки UTF8ToWinCP }
+    LazUTF8,
+    dictionary, sysfunc;
 
-const DEFAULT_LOG_FILENAME: AnsiString = 'uni_reader.log';
+const
+  DEFAULT_LOG_FILENAME: AnsiString = 'uni_reader.log';
 
-{ Цвета в консоли }
-const RED_COLOR_TEXT: AnsiString = Chr($1b) + '[31;1m';       // red
-const GREEN_COLOR_TEXT: AnsiString = Chr($1b) + '[32m';       // green
-const YELLOW_COLOR_TEXT: AnsiString = Chr($1b) + '[33;1m';    // yellow
-const BLUE_COLOR_TEXT: AnsiString = Chr($1b) + '[34m';        // blue
-const PURPLE_COLOR_TEXT: AnsiString = Chr($1b) + '[35m';      // purple
-const CYAN_COLOR_TEXT: AnsiString = Chr($1b) + '[36m';        // cyan
-const WHITE_COLOR_TEXT: AnsiString = Chr($1b) + '[37m';       // white
-const NORMAL_COLOR_TEXT: AnsiString = Chr($1b) + '[0m';       // normal
+  { Цвета в консоли }
+  RED_COLOR_TEXT: AnsiString = Chr($1b) + '[31;1m';       // red
+  GREEN_COLOR_TEXT: AnsiString = Chr($1b) + '[32m';       // green
+  YELLOW_COLOR_TEXT: AnsiString = Chr($1b) + '[33;1m';    // yellow
+  BLUE_COLOR_TEXT: AnsiString = Chr($1b) + '[34m';        // blue
+  PURPLE_COLOR_TEXT: AnsiString = Chr($1b) + '[35m';      // purple
+  CYAN_COLOR_TEXT: AnsiString = Chr($1b) + '[36m';        // cyan
+  WHITE_COLOR_TEXT: AnsiString = Chr($1b) + '[37m';       // white
+  NORMAL_COLOR_TEXT: AnsiString = Chr($1b) + '[0m';       // normal
 
 function GetDefaultEncoding(): AnsiString;
 {Определить включен ли режим отладки}
@@ -89,6 +93,13 @@ procedure ErrorMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: bo
 procedure WarningMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
 procedure FatalMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
 procedure ServiceMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+
+procedure DebugMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+procedure InfoMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+procedure ServiceMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+procedure ErrorMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+procedure WarningMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+procedure FatalMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
 
 var
     {
@@ -115,6 +126,8 @@ function GetDefaultEncoding(): AnsiString;
 begin
     // writeln(DefaultSystemCodePage, ' ', CP_UTF8);
     result := 'utf-8';
+    if sysfunc.IsOSWindows() then
+        result := 'cp866';
 end;
 
 {
@@ -122,7 +135,7 @@ end;
 }
 function GetDebugMode(): Boolean;
 begin
-    result := ENVIRONMENT.HasKey('DEBUG_MODE');
+    result := config.ENVIRONMENT.HasKey('DEBUG_MODE');
     if not result then
        PrintColorTxt('Режим отладки отключен', YELLOW_COLOR_TEXT);
 end;
@@ -132,8 +145,8 @@ end;
 }
 function GetLogMode(): Boolean;
 begin
-    result := ENVIRONMENT.HasKey('LOG_MODE') and IS_OPEN_LOG_FILE;
-    if not ENVIRONMENT.HasKey('LOG_MODE') then
+    result := config.ENVIRONMENT.HasKey('LOG_MODE') and IS_OPEN_LOG_FILE;
+    if not config.ENVIRONMENT.HasKey('LOG_MODE') then
        PrintColorTxt('Режим журналирования отключен', YELLOW_COLOR_TEXT);
 end;
 
@@ -152,8 +165,18 @@ begin
         // Поэтому перекодировать здесь не надо
         result := sTxt;
     end
+    else if (sCodePage = 'cp866') or (sCodePage = 'CP866') then
+    begin
+        // С Windows системами мы можем пользоваться
+        // функциями UTF8ToWinCP и WinCPToUTF8 модуль LazUTF8
+        result := LazUTF8.UTF8ToWinCP(sTxt);
+    end
+    else if (sCodePage = 'cp1251') or (sCodePage = 'CP1251') then
+    begin
+       result := LazUTF8.UTF8ToWinCP(sTxt);
+    end
     else
-        writeln('Не поддерживаема кодировка <%s>', sCodePage);
+        WriteLn('Не поддерживаемая кодировка <%s>', sCodePage);
 end;
 
 {
@@ -167,7 +190,7 @@ var
 begin
     str_txt := EncodeUnicodeString(sTxt, GetDefaultEncoding());
     // Для Windows систем цветовая раскраска отключена
-    if IsOSLinux() then
+    if sysfunc.IsOSLinux() then
         // Добавление цветовой раскраски для Linux систем
         str_txt := sColor + str_txt + NORMAL_COLOR_TEXT;
     WriteLn(str_txt);
@@ -181,30 +204,34 @@ end;
 }
 function OpenLog(sLogFileName: AnsiString): Boolean;
 begin
-    result := False;
+    Result := False;
+
+    // Если журналирование отключено, то ничего не делать
+    if not GetLogMode() then
+      Exit;
 
     // Если имя файла не определено, то пробуем его взять из оружения системы
-    if (sLogFileName = '') and ENVIRONMENT.HasKey('LOG_FILENAME') then
-       sLogFileName := (ENVIRONMENT.GetByName('LOG_FILENAME') As TObjString).Value;
+    if (sLogFileName = '') and config.ENVIRONMENT.HasKey('LOG_FILENAME') then
+       sLogFileName := (config.ENVIRONMENT.GetByName('LOG_FILENAME') As TObjString).Value;
     if sLogFileName = '' then
     begin
        WarningMsg('Не определено имя файла лога регистрации сообщений программы');
-       exit;
+       Exit;
     end;
 
     // Проверить наличие папки
-    CreateDirPath(ExtractFileDir(sLogFileName));
-    CreateEmptyFileIfNotExists(sLogFileName);
+    filefunc.CreateDirPath(ExtractFileDir(sLogFileName));
+    filefunc.CreateEmptyFileIfNotExists(sLogFileName);
 
     try
        InfoMsg(Format('Файл регистрации сообщений программы <%s>', [sLogFileName]));
        AssignFile(LOG_FILE, sLogFileName);
        Append(LOG_FILE);
-       if IOResult =0 then
+       if IOResult = 0 then
           IS_OPEN_LOG_FILE := True;
 
        LogMsg('vvv Начало регистрации сообщений программы vvv');
-       result := True;
+       Result := True;
     except
        CloseLog();
        FatalMsg('Ошибка открытия файла лога', True);
@@ -216,20 +243,25 @@ end;
 }
 function CloseLog(): Boolean;
 begin
-    try
-       if IS_OPEN_LOG_FILE then
-       begin
-         LogMsg('^^^ Окончание регистрации сообщений программы ^^^');
-         CloseFile(LOG_FILE);
-         IS_OPEN_LOG_FILE := False;
-         result := True;
-         exit;
-       end;
-    except
-       on E: EInOutError do
-          FatalMsg('Ошибка закрытия файла лога', True);
-    end;
-    result := False;
+  Result := False;
+
+  // Если журналирование отключено, то ничего не делать
+  if not GetLogMode() then
+    Exit;
+
+  try
+    if IS_OPEN_LOG_FILE then
+      begin
+        LogMsg('^^^ Окончание регистрации сообщений программы ^^^');
+        CloseFile(LOG_FILE);
+        IS_OPEN_LOG_FILE := False;
+        Result := True;
+        Exit;
+      end;
+  except
+    on E: EInOutError do
+      FatalMsg('Ошибка закрытия файла лога', True);
+  end;
 end;
 
 {
@@ -243,7 +275,7 @@ var
 begin
      result := False;
      if not IS_OPEN_LOG_FILE then
-        exit;
+        Exit;
 
      new_msg := Format('%s %s', [FormatDateTime('YYYY-MM-DD hh:mm:ss', Now), sMsg]);
      try
@@ -356,6 +388,77 @@ begin
        LogMsg('SERVICE. ' + sMsg);
 end;
 
+{
+Вывести ОТЛАДОЧНУЮ информацию с форматированным текстовым сообщением.
+@param (sMsgFmt Формат текстового сообщения)
+@param (aArgs Аргументы текстового сообщения)
+@param (bForcePrint Принудительно вывести на экран)
+@param (bForceLog Принудительно записать в журнале)
+}
+procedure DebugMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
+begin
+  DebugMsg(Format(sMsgFmt, aArgs), bForcePrint, bForceLog);
+end;
+
+{
+Вывести текстовую ИНФОРМАЦИЮ с форматированным текстовым сообщением.
+@param (sMsgFmt Формат текстового сообщения)
+@param (aArgs Аргументы текстового сообщения)
+@param (bForcePrint Принудительно вывести на экран)
+@param (bForceLog Принудительно записать в журнале)
+}
+procedure InfoMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
+begin
+  InfoMsg(Format(sMsgFmt, aArgs), bForcePrint, bForceLog);
+end;
+
+{
+Вывести СЕРВИСНУЮ информацию с форматированным текстовым сообщением.
+@param (sMsgFmt Формат текстового сообщения)
+@param (aArgs Аргументы текстового сообщения)
+@param (bForcePrint Принудительно вывести на экран)
+@param (bForceLog Принудительно записать в журнале)
+}
+procedure ServiceMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
+begin
+  ServiceMsg(Format(sMsgFmt, aArgs), bForcePrint, bForceLog);
+end;
+
+{
+Вывести информацию об ОШИБКЕ с форматированным текстовым сообщением.
+@param (sMsgFmt Формат текстового сообщения)
+@param (aArgs Аргументы текстового сообщения)
+@param (bForcePrint Принудительно вывести на экран)
+@param (bForceLog Принудительно записать в журнале)
+}
+procedure ErrorMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
+begin
+  ErrorMsg(Format(sMsgFmt, aArgs), bForcePrint, bForceLog);
+end;
+
+{
+Вывести ПРЕДУПРЕЖДЕНИЕ с форматированным текстовым сообщением.
+@param (sMsgFmt Формат текстового сообщения)
+@param (aArgs Аргументы текстового сообщения)
+@param (bForcePrint Принудительно вывести на экран)
+@param (bForceLog Принудительно записать в журнале)
+}
+procedure WarningMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
+begin
+  WarningMsg(Format(sMsgFmt, aArgs), bForcePrint, bForceLog);
+end;
+
+{
+Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ с форматированным текстовым сообщением.
+@param (sMsgFmt Формат текстового сообщения)
+@param (aArgs Аргументы текстового сообщения)
+@param (bForcePrint Принудительно вывести на экран)
+@param (bForceLog Принудительно записать в журнале)
+}
+procedure FatalMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
+begin
+  FatalMsg(Format(sMsgFmt, aArgs), bForcePrint, bForceLog);
+end;
 
 end.
 

@@ -6,12 +6,14 @@ interface
 
 uses
     Classes, SysUtils, Crt,
+    XmlRpcServer, XmlRpcTypes,
     dictionary, settings, obj_proto;
 
 { Режимы запуска движка }
-const RUN_MODE_SINGLE: AnsiString = 'single';
-const RUN_MODE_LOOP: AnsiString = 'loop';
-const RUN_MODE_DIAGNOSTIC: AnsiString = 'diagnostic';
+const
+  RUN_MODE_SINGLE: AnsiString = 'single';
+  RUN_MODE_LOOP: AnsiString = 'loop';
+  RUN_MODE_DIAGNOSTIC: AnsiString = 'diagnostic';
 
 type
     {
@@ -26,6 +28,8 @@ type
       { Словарь зарегистрированных объектов }
       FObjects: TStrDictionary;
 
+      { Сервер удаленного вызова процедур }
+      FRpcServer: TRpcServer;
     public
       constructor Create(TheOwner: TComponent);
       destructor Destroy; override;
@@ -41,7 +45,7 @@ type
       function CreateDataCtrl(Properties: TStrDictionary): TICObjectProto;
 
       { Создание объектов по именам }
-      function CreateDataControllers(ObjectNames: TStringList=Nil): TList;
+      function CreateDataControllers(ObjectNames: TStringList=nil): TList;
 
     end;
 
@@ -65,6 +69,24 @@ type
       function Run(sMode: AnsiString): Boolean;
       { Произвести диагностику объектов }
       function DoDiagnostic(lObjects: TStringList): Boolean;
+
+      { Прочитать значение из источника данных }
+      function ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddress: AnsiString): AnsiString;
+      { Прочитать список значений из источника данных }
+      function ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; const aAddresses : Array Of Const): TStringList;
+
+      { Инициализировать методы удаленного вызова }
+      procedure RegRpcMethods;
+
+      { --- Используемые процедуры удаленного вызова --- }
+      { Тестовая функция для проверки удаленного вызова процедур }
+      procedure EchoTestRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                  List: TList; Return: TRpcReturn);
+
+      { Функция чтения данных из источника удаленного вызова процедур }
+      procedure ReadValueAsStringRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                           List: TList; Return: TRpcReturn);
+
     end;
 
 var
@@ -97,6 +119,7 @@ end;
 destructor TICReaderProto.Destroy;
 begin
   //Free;
+  FRpcServer.Free;
   inherited Destroy;
 end;
 
@@ -167,13 +190,13 @@ begin
     if FObjects.HasKey(sObjName) then
         result := FObjects.GetByName(sObjName) As TICObjectProto;
     WarningMsg(Format('Объект <%s> не найден среди зарегистрированных %s', [sObjName, FObjects.GetKeysStr()]));
-    result := Nil;
+    result := nil;
 end;
 
 {
 Метод создания объекта контроллера данных с инициализацией его свойств.
 @param (Properties  Словарь свойств контроллера данных)
-@return (Объект контроллера данных или Nil в случае ошибки)
+@return (Объект контроллера данных или nil в случае ошибки)
 }
 function TICReaderProto.CreateDataCtrl(Properties: TStrDictionary): TICObjectProto;
 var
@@ -185,7 +208,7 @@ begin
     begin
         type_name := Properties.GetStrValue('type');
         ctrl_obj := CreateRegDataCtrl(self, type_name, Properties);
-        if ctrl_obj <> Nil then
+        if ctrl_obj <> nil then
         begin
              //ctrl_obj.SetParent(self);
              //ctrl_obj.SetProperties(Properties);
@@ -198,9 +221,9 @@ begin
     else
     begin
         name := Properties.GetStrValue('name');
-        ErrorMsg(Format('Ошибка создания объекта источника данных. Не определен тип <%s>', [name]));
+        log.ErrorMsg(Format('Ошибка создания объекта источника данных. Не определен тип <%s>', [name]));
     end;
-    result := Nil;
+    result := nil;
 end;
 
 {
@@ -215,10 +238,10 @@ var
    obj_properties: TStrDictionary;
    is_obj_names_options: Boolean;
 begin
-    InfoMsg('Создание объектов...');
+    log.InfoMsg('Создание объектов...');
     ctrl_objects := TList.Create;
     is_obj_names_options := False;
-    if ObjectNames = Nil then
+    if ObjectNames = nil then
     begin
          obj_names_str := FSettingsManager.GetOptionValue('OPTIONS', 'objects');
          ObjectNames := ParseStrList(obj_names_str);
@@ -231,7 +254,7 @@ begin
 
         // Создаем объекты источников данных
         obj := CreateDataCtrl(obj_properties);
-        if obj <> Nil then
+        if obj <> nil then
             ctrl_objects.Add(obj)
     end;
 
@@ -379,9 +402,10 @@ function TICReader.Run(sMode: AnsiString): Boolean;
 begin
     result := False;
     try
-        result := DoRun(sMode);
+      RegRpcMethods;
+      result := DoRun(sMode);
     except
-        FatalMsg(Format('Ошибка запуска <%s>', [ClassName]));
+      FatalMsg(Format('Ошибка запуска <%s>', [ClassName]));
     end;
 end;
 
@@ -397,19 +421,94 @@ var
    obj: TICObjectProto;
 begin
     result := True;
-    InfoMsg(Format('Запуск диагностики объектов %s', [ConvertStrListToString(lObjects)]));
+    log.InfoMsg(Format('Запуск диагностики объектов %s', [ConvertStrListToString(lObjects)]));
     for i := 0 to lObjects.Count - 1 do
     begin
         obj_properties := FSettingsManager.BuildSection(lObjects[i]);
         obj := CreateDataCtrl(obj_properties);
-        if obj <> Nil then
+        if obj <> nil then
             result := result and obj.Diagnostic();
         obj_properties.Free;
     end;
 end;
 
+{ Прочитать значение из источника данных }
+function TICReader.ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddress: AnsiString): AnsiString;
+var
+  ctrl_obj: TICObjectProto;
 begin
-  READER_ENGINE := TICReader.Create(Nil);
+  Result := '';
+  try
+    ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    Result := ctrl_obj.ReadValueAsString([aAddress]);
+  finally
+    ctrl_obj.Free;
+  end;
+
+end;
+
+{ Прочитать список значений из источника данных }
+function TICReader.ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; const aAddresses : Array Of Const): TStringList;
+begin
+
+end;
+
+{ Инициализировать методы удаленного вызова }
+procedure TICReader.RegRpcMethods;
+var
+  RpcMethodHandler: TRpcMethodHandler;
+begin
+  if not Assigned(FRpcServer) then
+  begin
+    FRpcServer := TRpcServer.Create;
+    FRpcServer.ListenPort := 8080;
+    FRpcServer.EnableIntrospect := True;
+    RpcMethodHandler := TRpcMethodHandler.Create;
+    try
+      RpcMethodHandler.Name := 'tests.echoString';
+      // ВНИМАНИЕ! В Lazarus необходимо указывать @ для связки события с обработчиком
+      //                         V
+      RpcMethodHandler.Method := @EchoTestRpcMethod;
+      RpcMethodHandler.Signature := 'string (string myval)';
+      RpcMethodHandler.Help := 'Just a simple test rpc example method';
+      FRpcServer.RegisterMethodHandler(RpcMethodHandler);
+      RpcMethodHandler := nil;
+
+      FRpcServer.Active := True;
+      // ShowMessage('xml-rpc hello server has been started');
+    finally
+      RpcMethodHandler.Free;
+    end;
+  end;
+end;
+
+{ Тестовая функция для проверки удаленного вызова процедур }
+procedure TICReader.EchoTestRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                      List: TList; Return: TRpcReturn);
+var
+  Msg: string;
+begin
+  {The parameter list is sent to your method as a TList of parameters
+   this must be casted to a parameter to be accessed. If a error occurs
+   during the execution of your method the server will fall back to a global
+   handler and try to recover in which case the stack error will be sent to
+   the client}
+
+   {grab the sent string}
+  Msg := TRpcParameter(List[0]).AsString;
+
+  {return a message showing what was sent}
+  Return.AddItem('You just sent: ' + Msg);
+end;
+
+{ Функция чтения данных из источника удаленного вызова процедур }
+procedure ReadValueAsStringRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                     List: TList; Return: TRpcReturn);
+begin
+end;
+
+begin
+  //READER_ENGINE := TICReader.Create(nil);
 
 end.
 

@@ -128,7 +128,7 @@ begin
      if HasKey(sSectionName) then
      begin
           section := GetByName(sSectionName) As TStrDictionary;
-          if section <> Nil then
+          if section <> nil then
              result := section.GetStrValue(sOptionName);
      end;
 end;
