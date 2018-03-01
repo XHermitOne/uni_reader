@@ -6,10 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, DaemonApp,
-  Interfaces, { this includes the LCL widgetset }
-  engine, config, log;
-  //dictionary, sysfunc, config, log,
-  //settings, engine, remoute_opc_node;
+  Interfaces; { this includes the LCL widgetset }
 
 type
 
@@ -32,6 +29,9 @@ var
   UniReaderDaemon: TUniReaderDaemon;
 
 implementation
+
+uses
+  log, filefunc, engine;
 
 procedure RegisterDaemon;
 begin
@@ -62,11 +62,20 @@ end;
 
 procedure TUniReaderDaemon.DataModuleStart(Sender: TCustomDaemon;
   var OK: Boolean);
+//var
+//  log_filename: AnsiString;
+
 begin
   //InitStatusMemory();
 
   // ENVIRONMENT.PrintContent;
+  //log_filename := filefunc.JoinPath([filefunc.GetHomeDir(), '.uni_reader',
+  //                                   Format('uni_reader_%s.log', [FormatDateTime('YYYY_MM_DD', Now)])]);
+  //log_filename := 'c:\tmp\debug.log';
+  //Application.FileName := log_filename;
 
+  // log.OpenLog(log_filename);
+  //Application.Log(etDebug, '>>> ' + Name);
   READER_ENGINE := TICReader.Create(nil);
   READER_ENGINE.RegRpcMethods;
   //READER_ENGINE.Run('diagnostic');
@@ -82,6 +91,7 @@ procedure TUniReaderDaemon.DataModuleStop(Sender: TCustomDaemon; var OK: Boolean
   );
 begin
   READER_ENGINE.Free;
+  //Application.Log(etDebug, '<<< ' + Name);
   //log.CloseLog();
   // WriteLn('The ' + Name + ' service is not running');
   // PrintLostMemory();

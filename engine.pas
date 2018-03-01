@@ -15,6 +15,8 @@ const
   RUN_MODE_LOOP: AnsiString = 'loop';
   RUN_MODE_DIAGNOSTIC: AnsiString = 'diagnostic';
 
+  DEFAULT_XML_RPC_PORT: Integer = 8080;
+
 type
     {
     TICReaderProto - абстрактный тип движка
@@ -146,10 +148,10 @@ begin
     else
         ini_filename := ENVIRONMENT.GetStrValue('SETTINGS_FILENAME');
 
-    DebugMsg(Format('INI Файл <%s>', [ini_filename]));
+    log.DebugMsgFmt('INI Файл <%s>', [ini_filename]);
     if (ini_filename <> '') and (not FileExists(ini_filename)) then
     begin
-        WarningMsg(Format('Файл настроек <%s> не найден. Используется файл настроек по умолчанию', [ini_filename]));
+        log.WarningMsgFmt('Файл настроек <%s> не найден. Используется файл настроек по умолчанию', [ini_filename]);
         ini_filename := '';
     end;
     result := FSettingsManager.LoadSettings(ini_filename);
@@ -176,7 +178,7 @@ begin
         exit;
     end
     else
-        WarningMsg(Format('Не возможно зарегистрировать объект класса <%s>', [obj.ClassName]));
+        log.WarningMsgFmt('Не возможно зарегистрировать объект класса <%s>', [obj.ClassName]);
     result := False;
 end;
 
@@ -189,7 +191,7 @@ function TICReaderProto.FindObject(sObjName: AnsiString): TICObjectProto;
 begin
     if FObjects.HasKey(sObjName) then
         result := FObjects.GetByName(sObjName) As TICObjectProto;
-    WarningMsg(Format('Объект <%s> не найден среди зарегистрированных %s', [sObjName, FObjects.GetKeysStr()]));
+    log.WarningMsgFmt('Объект <%s> не найден среди зарегистрированных %s', [sObjName, FObjects.GetKeysStr()]);
     result := nil;
 end;
 
@@ -221,7 +223,7 @@ begin
     else
     begin
         name := Properties.GetStrValue('name');
-        log.ErrorMsg(Format('Ошибка создания объекта источника данных. Не определен тип <%s>', [name]));
+        log.ErrorMsgFmt('Ошибка создания объекта источника данных. Не определен тип <%s>', [name]);
     end;
     result := nil;
 end;
@@ -299,18 +301,18 @@ begin
         // чтобы не контролировать актуальность их состояния
         ctrl_objects := CreateDataControllers();
 
-        InfoMsg('Начало обработки...');
+        log.InfoMsg('Начало обработки...');
         for i := 0 to ctrl_objects.Count - 1 do
         begin
              obj := TObject(ctrl_objects.Items[i]) As TICObjectProto;
              obj.Read(obj.GetReadValues());
         end;
-        InfoMsg(Format('...Конец обработки [%d]', [iTick]));
+        log.InfoMsgFmt('...Конец обработки [%d]', [iTick]);
 
         result := True;
         exit;
     except
-        FatalMsg(Format('Ошибка выполнения тика [%d]', [iTick]));
+        log.FatalMsgFmt('Ошибка выполнения тика [%d]', [iTick]);
     end;
     result := False;
 end;
@@ -346,7 +348,7 @@ begin
         // Запуск цикла обработки
         do_exit := False;
         tick := ENVIRONMENT.GetDateTimeValue('TICK_PERIOD');
-        InfoMsg(Format('Период цикла обработки: <%d>...', [tick]));
+        log.InfoMsgFmt('Период цикла обработки: <%d>...', [tick]);
         while not do_exit do
         begin
             start_tick := Now;
@@ -356,23 +358,23 @@ begin
 
             if tick > 0 then
             begin
-                WarningMsg('Для выхода нажмите <ESC>');
+                log.WarningMsg('Для выхода нажмите <ESC>');
                 cur_time := Now;
                 while end_tick > cur_time do
                 begin
                     ch_key := ReadKey();
                     if SameKey(ch_key, ESC_KEY) then
                         do_exit := True;
-                        InfoMsg('Выход из цикла обработки');
+                        log.InfoMsg('Выход из цикла обработки');
                         break;
                     cur_time := Now;
                 end;
             end
             else
-                WarningMsg('Для выхода нажмите <Ctrl + C>');
+                log.WarningMsg('Для выхода нажмите <Ctrl + C>');
 
             ENVIRONMENT.SetDateTimeValue('TICK_DT_STOP', Now);
-            InfoMsg('...Конец периода цикла обработки');
+            log.InfoMsg('...Конец периода цикла обработки');
         end
     end
     else if sMode = RUN_MODE_DIAGNOSTIC then
@@ -386,7 +388,7 @@ begin
     end
     else
     begin
-        WarningMsg(Format('Режим запуска регистратра <%s> не поддерживается системой', [sMode]));
+        log.WarningMsgFmt('Режим запуска регистратра <%s> не поддерживается системой', [sMode]);
         result := False;
         exit;
     end;
@@ -405,7 +407,7 @@ begin
       RegRpcMethods;
       result := DoRun(sMode);
     except
-      FatalMsg(Format('Ошибка запуска <%s>', [ClassName]));
+      log.FatalMsgFmt('Ошибка запуска <%s>', [ClassName]);
     end;
 end;
 
@@ -421,7 +423,7 @@ var
    obj: TICObjectProto;
 begin
     result := True;
-    log.InfoMsg(Format('Запуск диагностики объектов %s', [ConvertStrListToString(lObjects)]));
+    log.InfoMsgFmt('Запуск диагностики объектов %s', [ConvertStrListToString(lObjects)]);
     for i := 0 to lObjects.Count - 1 do
     begin
         obj_properties := FSettingsManager.BuildSection(lObjects[i]);
@@ -436,11 +438,14 @@ end;
 function TICReader.ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddress: AnsiString): AnsiString;
 var
   ctrl_obj: TICObjectProto;
+  str_list: TStringList;
 begin
   Result := '';
   try
     ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
-    Result := ctrl_obj.ReadValueAsString([aAddress]);
+    // Result := ctrl_obj.ReadValueAsString([aAddress]);
+    str_list := ctrl_obj.ReadAddresses([aAddress]);
+    Result := str_list.Strings[0];
   finally
     ctrl_obj.Free;
   end;
@@ -450,34 +455,51 @@ end;
 { Прочитать список значений из источника данных }
 function TICReader.ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; const aAddresses : Array Of Const): TStringList;
 begin
-
+  Result := nil;
 end;
 
 { Инициализировать методы удаленного вызова }
 procedure TICReader.RegRpcMethods;
 var
-  RpcMethodHandler: TRpcMethodHandler;
+  EchoTestRpcMethodHandler: TRpcMethodHandler;
+  ReadValueAsStringRpcMethodHandler: TRpcMethodHandler;
+
 begin
   if not Assigned(FRpcServer) then
   begin
     FRpcServer := TRpcServer.Create;
-    FRpcServer.ListenPort := 8080;
+    FRpcServer.ListenPort := DEFAULT_XML_RPC_PORT;
     FRpcServer.EnableIntrospect := True;
-    RpcMethodHandler := TRpcMethodHandler.Create;
+
+    EchoTestRpcMethodHandler := TRpcMethodHandler.Create;
+    ReadValueAsStringRpcMethodHandler := TRpcMethodHandler.Create;
+
     try
-      RpcMethodHandler.Name := 'tests.echoString';
+      // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+      EchoTestRpcMethodHandler.Name := 'tests.echoString';
       // ВНИМАНИЕ! В Lazarus необходимо указывать @ для связки события с обработчиком
       //                         V
-      RpcMethodHandler.Method := @EchoTestRpcMethod;
-      RpcMethodHandler.Signature := 'string (string myval)';
-      RpcMethodHandler.Help := 'Just a simple test rpc example method';
-      FRpcServer.RegisterMethodHandler(RpcMethodHandler);
-      RpcMethodHandler := nil;
+      EchoTestRpcMethodHandler.Method := @EchoTestRpcMethod;
+      EchoTestRpcMethodHandler.Signature := 'string (string myval)';
+      EchoTestRpcMethodHandler.Help := 'Just a simple test rpc example method';
+      FRpcServer.RegisterMethodHandler(EchoTestRpcMethodHandler);
+      EchoTestRpcMethodHandler := nil;
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+      // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+      ReadValueAsStringRpcMethodHandler.Name := 'sources.ReadValueAsString';
+      ReadValueAsStringRpcMethodHandler.Method := @ReadValueAsStringRpcMethod;
+      ReadValueAsStringRpcMethodHandler.Signature := 'string (string myval)';
+      ReadValueAsStringRpcMethodHandler.Help := 'Read value as string from data source';
+      FRpcServer.RegisterMethodHandler(ReadValueAsStringRpcMethodHandler);
+      ReadValueAsStringRpcMethodHandler := nil;
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       FRpcServer.Active := True;
       // ShowMessage('xml-rpc hello server has been started');
     finally
-      RpcMethodHandler.Free;
+      EchoTestRpcMethodHandler.Free;
+      ReadValueAsStringRpcMethodHandler.Free;
     end;
   end;
 end;
@@ -487,6 +509,7 @@ procedure TICReader.EchoTestRpcMethod(Thread: TRpcThread; const sMethodName: str
                                       List: TList; Return: TRpcReturn);
 var
   Msg: string;
+
 begin
   {The parameter list is sent to your method as a TList of parameters
    this must be casted to a parameter to be accessed. If a error occurs
@@ -494,17 +517,33 @@ begin
    handler and try to recover in which case the stack error will be sent to
    the client}
 
-   {grab the sent string}
+  {grab the sent string}
   Msg := TRpcParameter(List[0]).AsString;
+
+  //log.DebugMsgFmt('Test echo. You just sent: <%s>', [Msg]);
 
   {return a message showing what was sent}
   Return.AddItem('You just sent: ' + Msg);
 end;
 
 { Функция чтения данных из источника удаленного вызова процедур }
-procedure ReadValueAsStringRpcMethod(Thread: TRpcThread; const sMethodName: string;
-                                     List: TList; Return: TRpcReturn);
+procedure TICReader.ReadValueAsStringRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                               List: TList; Return: TRpcReturn);
+var
+  src_type_name: AnsiString;
+  opc_server_name: AnsiString;
+  address: AnsiString;
+  opc_result: AnsiString;
+
 begin
+  src_type_name := TRpcParameter(List[0]).AsString;
+  opc_server_name := TRpcParameter(List[1]).AsString;
+  address := TRpcParameter(List[2]).AsString;
+
+  opc_result := ReadValueAsString(src_type_name, [opc_server_name], address);
+
+  {return a message showing what was sent}
+  Return.AddItem(opc_result);
 end;
 
 begin

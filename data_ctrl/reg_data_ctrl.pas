@@ -10,6 +10,9 @@ uses
 { Функция создания объекта контроллера данных по имени типа}
 function CreateRegDataCtrl(oParent: TObject; sTypeName: AnsiString; Properties: TStrDictionary=nil): TICObjectProto;
 
+{ Функция создания объекта контроллера данных по имени типа }
+function CreateRegDataCtrlArgs(oParent: TObject; sTypeName: AnsiString; const aArgs: Array Of Const): TICObjectProto;
+
 implementation
 
 uses
@@ -51,12 +54,7 @@ begin
     Result := TICOPCServerNode.Create;
     if oParent <> nil then
         Result.SetParent(oParent);
-    if Length(aArgs) >= 1 then
-    begin
-        { Первый элемент - это имя OPC сервера }
-        Result.SetOPCServerName(aArgs[0]);
-    end;
-
+    Result.SetPropertiesArray(aArgs);
     exit;
   end;
 

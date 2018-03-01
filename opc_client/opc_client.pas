@@ -32,7 +32,7 @@ uses
 
 resourcestring
   msgNoOPCServer  = 'Имя OPC сервера незадано!';
-  msgNoConnectOPC = 'Невозможно соединиться с OPC сервером!';
+  msgNoConnectOPC = 'Невозможно соединиться с OPC сервером <%s>!';
   msgNoListTag    = 'Нет списка OPC-тэгов!';
   msgNoListTag1   = 'Список OPC-тэгов пустой!';
   msgErrAddGroup  = 'Ошибка добавления группы %s';
@@ -243,7 +243,7 @@ begin
         m_pIOPCServer := CreateComObject(ProgIDToClassID(ServerName)) as IOPCServer;
       except
         m_pIOPCServer := nil;
-        log.FatalMsg(msgNoConnectOPC);
+        log.FatalMsgFmt(msgNoConnectOPC, [ServerName]);
         Exit;
       end;
       AddGroups;

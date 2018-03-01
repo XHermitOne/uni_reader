@@ -46,7 +46,7 @@ unit log;
 46 	голубой
 47 	белый
 
-Версия: 0.0.4.3
+Версия: 0.0.5.2
 
 ВНИМАНИЕ! Вывод сообщений под Linux проверять только в терминале.
 Только он выводит корректно сообщения.
@@ -59,12 +59,13 @@ uses
     Classes, SysUtils,
     { Для функций перекодировки UTF8ToWinCP }
     LazUTF8,
+    DaemonApp,
     dictionary, sysfunc;
 
 const
   DEFAULT_LOG_FILENAME: AnsiString = 'uni_reader.log';
 
-  { Цвета в консоли }
+  { Цвета в консоли Linux }
   RED_COLOR_TEXT: AnsiString = Chr($1b) + '[31;1m';       // red
   GREEN_COLOR_TEXT: AnsiString = Chr($1b) + '[32m';       // green
   YELLOW_COLOR_TEXT: AnsiString = Chr($1b) + '[33;1m';    // yellow
@@ -73,6 +74,15 @@ const
   CYAN_COLOR_TEXT: AnsiString = Chr($1b) + '[36m';        // cyan
   WHITE_COLOR_TEXT: AnsiString = Chr($1b) + '[37m';       // white
   NORMAL_COLOR_TEXT: AnsiString = Chr($1b) + '[0m';       // normal
+
+  { Режим отладки по умолчанию. Позволяет принудительно установить режим в обход параметров из окружения }
+  DEFAULT_DEBUG_MODE: Boolean = True;
+  { Режим журналирования по умолчанию. Позволяет принудительно установить режим в обход параметров из окружения }
+  DEFAULT_LOG_MODE: Boolean = False;
+
+  { Режим журналирования Application.Log. Включается для служб Windows }
+  DEFAULT_APP_LOG_MODE = True;
+
 
 function GetDefaultEncoding(): AnsiString;
 {Определить включен ли режим отладки}
@@ -116,7 +126,7 @@ var
 implementation
 
 uses
-    config, filefunc;
+    filefunc;
 
 {
 Определить актуальную кодировку для вывода текста.
@@ -135,9 +145,13 @@ end;
 }
 function GetDebugMode(): Boolean;
 begin
-    result := config.ENVIRONMENT.HasKey('DEBUG_MODE');
-    if not result then
-       PrintColorTxt('Режим отладки отключен', YELLOW_COLOR_TEXT);
+  if DEFAULT_DEBUG_MODE then
+    Result := True
+  else
+    Result := False; // config.ENVIRONMENT.HasKey('DEBUG_MODE');
+
+  if not Result then
+    PrintColorTxt('Режим отладки отключен', YELLOW_COLOR_TEXT);
 end;
 
 {
@@ -145,9 +159,14 @@ end;
 }
 function GetLogMode(): Boolean;
 begin
-    result := config.ENVIRONMENT.HasKey('LOG_MODE') and IS_OPEN_LOG_FILE;
-    if not config.ENVIRONMENT.HasKey('LOG_MODE') then
-       PrintColorTxt('Режим журналирования отключен', YELLOW_COLOR_TEXT);
+  if DEFAULT_LOG_MODE then
+    Result := IS_OPEN_LOG_FILE
+  else
+    Result := False; // config.ENVIRONMENT.HasKey('LOG_MODE') and IS_OPEN_LOG_FILE;
+
+  if not Result then
+    PrintColorTxt('Режим журналирования отключен', YELLOW_COLOR_TEXT);
+
 end;
 
 {
@@ -193,6 +212,8 @@ begin
     if sysfunc.IsOSLinux() then
         // Добавление цветовой раскраски для Linux систем
         str_txt := sColor + str_txt + NORMAL_COLOR_TEXT;
+
+    // Если журналирование переведено в SysLog, то ничего не делать
     WriteLn(str_txt);
 end;
 
@@ -206,13 +227,13 @@ function OpenLog(sLogFileName: AnsiString): Boolean;
 begin
     Result := False;
 
-    // Если журналирование отключено, то ничего не делать
-    if not GetLogMode() then
-      Exit;
+    // Если журналирование переведено в SysLog, то ничего не делать
+    if DEFAULT_APP_LOG_MODE then
+       Exit;
 
     // Если имя файла не определено, то пробуем его взять из оружения системы
-    if (sLogFileName = '') and config.ENVIRONMENT.HasKey('LOG_FILENAME') then
-       sLogFileName := (config.ENVIRONMENT.GetByName('LOG_FILENAME') As TObjString).Value;
+    //if (sLogFileName = '') and config.ENVIRONMENT.HasKey('LOG_FILENAME') then
+    //   sLogFileName := (config.ENVIRONMENT.GetByName('LOG_FILENAME') As TObjString).Value;
     if sLogFileName = '' then
     begin
        WarningMsg('Не определено имя файла лога регистрации сообщений программы');
@@ -245,6 +266,10 @@ function CloseLog(): Boolean;
 begin
   Result := False;
 
+  // Если журналирование переведено в SysLog, то ничего не делать
+  if DEFAULT_APP_LOG_MODE then
+     Exit;
+
   // Если журналирование отключено, то ничего не делать
   if not GetLogMode() then
     Exit;
@@ -271,20 +296,24 @@ end;
 }
 function LogMsg(sMsg: AnsiString = ''): Boolean;
 var
-    new_msg: AnsiString;
+  new_msg: AnsiString;
 begin
-     result := False;
-     if not IS_OPEN_LOG_FILE then
-        Exit;
+  Result := False;
 
-     new_msg := Format('%s %s', [FormatDateTime('YYYY-MM-DD hh:mm:ss', Now), sMsg]);
-     try
-        writeln(LOG_FILE, new_msg);
-        result := True;
-     except
-        CloseLog();
-        FatalMsg('Ошибка регистрации сообщения в лог файле', True);
-     end;
+  // Если журналирование переведено в SysLog, то ничего не делать
+  if DEFAULT_APP_LOG_MODE then
+    Exit;
+  if not IS_OPEN_LOG_FILE then
+    Exit;
+
+  new_msg := Format('%s %s', [FormatDateTime('YYYY-MM-DD hh:mm:ss', Now), sMsg]);
+  try
+    writeln(LOG_FILE, new_msg);
+    result := True;
+  except
+    CloseLog();
+    FatalMsg('Ошибка регистрации сообщения в лог файле', True);
+  end;
 end;
 
 {
@@ -296,7 +325,10 @@ end;
 procedure DebugMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
     if (GetDebugMode()) or (bForcePrint) then
-      PrintColorTxt('DEBUG. ' + sMsg, BLUE_COLOR_TEXT);
+      if DEFAULT_APP_LOG_MODE then
+        Application.Log(etDebug, EncodeUnicodeString(sMsg, GetDefaultEncoding()))
+      else
+        PrintColorTxt('DEBUG. ' + sMsg, BLUE_COLOR_TEXT);
     if (GetLogMode()) or (bForceLog) then
        LogMsg('DEBUG. ' + sMsg);
 end;
@@ -310,7 +342,10 @@ end;
 procedure InfoMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
     if (GetDebugMode()) or (bForcePrint) then
-      PrintColorTxt('INFO. ' + sMsg, GREEN_COLOR_TEXT);
+      if DEFAULT_APP_LOG_MODE then
+        Application.Log(etInfo, EncodeUnicodeString(sMsg, GetDefaultEncoding()))
+      else
+        PrintColorTxt('INFO. ' + sMsg, GREEN_COLOR_TEXT);
     if (GetLogMode()) or (bForceLog) then
        LogMsg('INFO. ' + sMsg);
 end;
@@ -324,7 +359,10 @@ end;
 procedure ErrorMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
     if (GetDebugMode()) or (bForcePrint) then
-      PrintColorTxt('ERROR. ' + sMsg, RED_COLOR_TEXT);
+      if DEFAULT_APP_LOG_MODE then
+        Application.Log(etError, EncodeUnicodeString(sMsg, GetDefaultEncoding()))
+      else
+        PrintColorTxt('ERROR. ' + sMsg, RED_COLOR_TEXT);
     if (GetLogMode()) or (bForceLog) then
        LogMsg('ERROR. ' + sMsg);
 end;
@@ -338,7 +376,10 @@ end;
 procedure WarningMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
     if (GetDebugMode()) or (bForcePrint) then
-      PrintColorTxt('WARNING. ' + sMsg, YELLOW_COLOR_TEXT);
+      if DEFAULT_APP_LOG_MODE then
+        Application.Log(etWarning, EncodeUnicodeString(sMsg, GetDefaultEncoding()))
+      else
+        PrintColorTxt('WARNING. ' + sMsg, YELLOW_COLOR_TEXT);
     if (GetLogMode()) or (bForceLog) then
        LogMsg('WARNING. ' + sMsg);
 end;
@@ -363,10 +404,13 @@ begin
     except_msg := buf;
 
     if (GetDebugMode()) or (bForcePrint) then
-    begin
-      PrintColorTxt(msg, RED_COLOR_TEXT);
-      PrintColorTxt(except_msg, RED_COLOR_TEXT);
-    end;
+      if DEFAULT_APP_LOG_MODE then
+        Application.Log(etError, EncodeUnicodeString(msg + ' ' + except_msg, GetDefaultEncoding()))
+      else
+      begin
+        PrintColorTxt(msg, RED_COLOR_TEXT);
+        PrintColorTxt(except_msg, RED_COLOR_TEXT);
+      end;
     if (GetLogMode()) or (bForceLog) then
     begin
        LogMsg(msg);
@@ -383,7 +427,10 @@ end;
 procedure ServiceMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
     if (GetDebugMode()) or (bForcePrint) then
-      PrintColorTxt('SERVICE. ' + sMsg, CYAN_COLOR_TEXT);
+      if DEFAULT_APP_LOG_MODE then
+        Application.Log(etCustom, EncodeUnicodeString(sMsg, GetDefaultEncoding()))
+      else
+        PrintColorTxt('SERVICE. ' + sMsg, CYAN_COLOR_TEXT);
     if (GetLogMode()) or (bForceLog) then
        LogMsg('SERVICE. ' + sMsg);
 end;

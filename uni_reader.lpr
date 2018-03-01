@@ -9,5 +9,6 @@ Uses
 
 begin
   Application.Initialize;
+  // Application.Logger := TAppLogger.Create;
   Application.Run;
 end.

@@ -44,10 +44,16 @@ type
     function GetProperties(): TStrDictionary;
     procedure SetProperties(dProperties: TStrDictionary);
 
+    { Установить свойства в виде списка параметров }
+    procedure SetPropertiesArray(aArgs: Array Of Const); virtual;
+
     { Проверка на то что объект не именованный }
     function IsUnknown(): Boolean;
     { Фунция чтения данных }
     function Read(aValues: TStringList): TStringList; virtual;
+    { Чтение значений по адресам }
+    function ReadAddresses(aValues: Array Of Const): TStringList; virtual;
+
     { Фунция записи данных }
     function Write(aValues: TStringList): Boolean; virtual;
     { Зарегистрировать значения переменных в словаре внутренного состояния }
@@ -115,16 +121,16 @@ end;
 
 function TICObjectProto.GetProperties(): TStrDictionary;
 begin
-     result := FProperties;
+  result := FProperties;
 end;
 
 procedure TICObjectProto.SetProperties(dProperties: TStrDictionary);
 begin
-     FProperties := dProperties;
-     if FProperties.HasKey('name') then
-        SetName(FProperties.GetStrValue('name'))
-     else
-        WarningMsg(Format('Не определено имя объекта в свойствах. Класс <%s>', [ClassName]));
+  FProperties := dProperties;
+  if FProperties.HasKey('name') then
+    SetName(FProperties.GetStrValue('name'))
+  //else
+  //  WarningMsg(Format('Не определено имя объекта в свойствах. Класс <%s>', [ClassName]));
 end;
 
 {
@@ -160,6 +166,11 @@ begin
   result := nil;
 end;
 
+function TICObjectProto.ReadAddresses(aValues: Array of Const): TStringList;
+begin
+  result := nil;
+end;
+
 {
 Фунция записи данных
 }
@@ -174,6 +185,14 @@ end;
 function TICObjectProto.Diagnostic(): Boolean;
 begin
   result := False;
+end;
+
+{
+Установить свойства в виде списка параметров
+}
+procedure TICObjectProto.SetPropertiesArray(aArgs: Array Of Const);
+begin
+
 end;
 
 end.
