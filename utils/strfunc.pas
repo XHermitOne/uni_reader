@@ -8,7 +8,8 @@ uses
     {$IFDEF windows}
     Windows,
     {$ENDIF}
-    Classes, SysUtils, StrUtils;
+    Classes, SysUtils, StrUtils,
+    LConvEncoding;
 
 type
     TArrayOfString = Array Of String;
@@ -38,6 +39,15 @@ function ConvertStrListToString(StrList: TStringList): AnsiString;
 
 { Проверка есть ли строка в списке строк }
 function IsStrInList(sString: AnsiString; StringArray: Array of String): Boolean;
+
+{ Перекодировка CP866 -> CP1251 и обратно }
+{$IFDEF windows}
+function StrOemToAnsi(const S: AnsiString): AnsiString;
+function StrAnsiToOem(const S: AnsiString): AnsiString;
+{$ENDIF}
+
+{ Попытка перекодировать строку в UTF8 }
+function ToUTF8(var sStr: AnsiString): AnsiString;
 
 implementation
 
@@ -168,6 +178,43 @@ begin
          result := True;
          exit;
     end;
+end;
+
+{$IFDEF windows}
+function StrOemToAnsi(const S: AnsiString): AnsiString;
+begin
+  if Length(S) = 0 then Result := ''
+  else
+    begin
+      SetLength(Result, Length(S));
+      OemToAnsiBuff(@S[1], @Result[1], Length(S));
+    end;
+end;
+{$ENDIF windows}
+
+//--------------------------------------------------------------------------------------------------
+
+{$IFDEF windows}
+function StrAnsiToOem(const S: AnsiString): AnsiString;
+begin
+  if Length(S) = 0 then Result := ''
+  else
+    begin
+      SetLength(Result, Length(S));
+      AnsiToOemBuff(@S[1], @Result[1], Length(S));
+    end;
+end;
+{$ENDIF windows}
+
+{
+Попытка перекодировать строку в UTF8
+}
+function ToUTF8(var sStr: AnsiString): AnsiString;
+var
+  from: string;
+begin
+  from := GuessEncoding(sStr);
+  Result := ConvertEncoding(sStr, from, EncodingUTF8);
 end;
 
 end.

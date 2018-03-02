@@ -23,6 +23,8 @@ uses
 const
   RESERV_PROPERTIES: Array [1..4] Of String = ('type', 'name', 'description', 'opc_server');
 
+  UNKNOWN_GROUP_NAME: AnsiString = 'UNKNOWN_GROUP';
+
 type
   {
   Класс взаимодействия с OPC сервером.
@@ -172,7 +174,9 @@ var
 begin
   Result := TStringList.Create;
 
-  group_name := ClassName;
+  group_name := UNKNOWN_GROUP_NAME;
+  // if group_name = '' then
+  // group_name := ClassName;
 
   log_tags := LineEnding;
   try
@@ -185,7 +189,7 @@ begin
 
     for i := 0 to Length(aValues) - 1 do
     begin
-      log_tags := log_tags + LineEnding + Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i].vAnsiString);
+      log_tags := log_tags + Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i].vAnsiString) + LineEnding;
       Properties.AddStrValue(Format('tag%d', [i]),
                              { Преобразование элемента списка параметров в AnsiString:}
                              AnsiString(aValues[i].vAnsiString));

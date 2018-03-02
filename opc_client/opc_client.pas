@@ -18,6 +18,33 @@
   along with this library; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 }
+
+{
+Ошибки COM пр работе с OPC серверами:
+Взято из
+https://www.boschrexroth.com/country_units/america/united_states/sub_websites/brus_dcc/documentation_downloads/ProductDocumentation/CurrentProducts/ControlSystems/MTC200/V23/misc/28888001.pdf
+
+The "code" is subdivided into several ranges:
+0x0000 – 0x0200 Reserved Microsoft codes, OPC 1.0 error codes
+0x0200 – 0x7FFF Reserved OPC Foundation
+0x8000 – 0xFFFF OPC server error codes
+
+Fig. 3-3: Structure of the facility codes
+
+The  Indramat  OPC  server  employs  the  Indramat  function  interface  as
+communication  means.  These  errors  are  now  converted  into  HRESULT
+values in the OPC server.
+
+The  Indramat  function  interface  now  has  the  problem  of  routing  onwards
+the errors of employed components. This is done using an enhanced error system.
+
+Since  these  error  numbers  depend  on  the  employed  components,  an
+HRESULT  error  code  is  dynamically  assigned  in  the  Indramat  OPC
+server. This error code is in the range 0xEEEE – 0xFFFF.
+
+The  error  proper  can  be  determined  using  this  HRESULT  value  and  the
+GetErrorString method.
+}
 unit opc_client;
 
 {$mode objfpc}{$H+}
@@ -28,14 +55,15 @@ uses
   Classes, SysUtils,
   LResources, Forms, Controls, Graphics, Dialogs,
   tag_list,
-  OPCDA, ActiveX;
+  OPCDA, ActiveX,
+  LazUtf8;
 
 resourcestring
   msgNoOPCServer  = 'Имя OPC сервера незадано!';
   msgNoConnectOPC = 'Невозможно соединиться с OPC сервером <%s>!';
   msgNoListTag    = 'Нет списка OPC-тэгов!';
   msgNoListTag1   = 'Список OPC-тэгов пустой!';
-  msgErrAddGroup  = 'Ошибка добавления группы %s';
+  msgErrAddGroup  = 'Ошибка добавления группы <%s>. Ошибка [%s]';
   msgNoGrounName  = 'Нет Группы с именем %s в списке тэгов!';
   msgNoTagName    = 'Нет Тэга с именем %s в списке тэгов!';
   msgErrAddItem   = 'Невозможно добавить элементы в OPC-группу %s';
@@ -82,6 +110,7 @@ type
     { Список всех тэгов, которые появятся в OPC сервере }
     FTagList          : TTagList;
     m_pIOPCServer     : IOPCServer;
+    m_pOPCDataCallback : IOPCDataCallback;
     { Изменить имя сервера }
     procedure SetServerName(AValue: String);
     { Процедуры чтения и сохранения списко тэгов в LFM }
@@ -93,10 +122,18 @@ type
     function GetOPC(const aTagPosition: TTagPosition): OleVariant;
     procedure AddGroups;
     procedure AddTags(const Group: TGroup);
+    procedure Advise(const Group : TGroup);
     procedure DeleteGroups;
     procedure DeleteTags(const Group: TGroup);
+    procedure Unadvise(const Group : TGroup);
   protected
     procedure DefineProperties(Filer: TFiler); override;
+
+    { Получить строку ошибки по резльтату взаимодействия с OPC сервером }
+    function GetOPCErrorString(dwError: HResult): AnsiString;
+    { Преобразование стандартных ошибок OPC }
+    function StdOpcErrorToStr(Code: HRESULT; var Res: string): Boolean;
+
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -193,10 +230,40 @@ operator <> (TP1, TP2: TTagPosition) b:Boolean;
 implementation
 
 uses
-  Windows, ComObj, OPCTypes,
-  log;
+  Windows, ComObj,
+  OPCTypes, OPCCOMN, OPCError,
+  log, strfunc;
 
 {$R OPC.RES}
+
+resourcestring
+  S_OPC_E_INVALIDHANDLE = 'The value of the handle is invalid.';
+  S_OPC_E_BADTYPE = 'The server cannot convert the data between the'+#13+
+                    'requested data type and the canonical data type.';
+  S_OPC_E_PUBLIC = 'The requested operation cannot be done on a public group.';
+  S_OPC_E_BADRIGHTS = 'The Items AccessRights do not allow the operation.';
+  S_OPC_E_UNKNOWNITEMID = 'The item is no longer available in the server address space.';
+  S_OPC_E_INVALIDITEMID = 'The item definition doesn''t conform to the server''s syntax.';
+  S_OPC_E_INVALIDFILTER = 'The filter string was not valid.';
+  S_OPC_E_UNKNOWNPATH = 'The item''s access path is not known to the server.';
+  S_OPC_E_RANGE = 'The value was out of range.';
+  S_OPC_E_DUPLICATENAME = 'Duplicate name not allowed.';
+  S_OPC_S_UNSUPPORTEDRATE =  'The server does not support the requested data rate but will use the closest available rate.';
+  S_OPC_S_CLAMP = 'A value passed to WRITE was accepted but the output was clamped.';
+  S_OPC_S_INUSE = 'The operation cannot be completed because the object still has references that exist.';
+  S_OPC_E_INVALIDCONFIGFILE = 'The server''s configuration file is an invalid format.';
+  S_OPC_E_NOTFOUND = 'The server could not locate the requested object.';
+  S_OPC_E_INVALID_PID = 'The server does not recognise the passed property ID.';
+  S_OPC_E_DEADBANDNOTSET = 'The item deadband has not been set for this item.';
+  S_OPC_E_DEADBANDNOTSUPPORTED = 'The item does not support deadband.';
+  S_OPC_E_NOBUFFERING = 'The server does not support buffering of data items that are collected at a faster rate than the group update rate.';
+  S_OPC_E_INVALIDCONTINUATIONPOINT = 'The continuation point is not valid.';
+  S_OPC_S_DATAQUEUEOVERFLOW = 'Data Queue Overflow - Some value transitions were lost.';
+  S_OPC_E_RATENOTSET = 'Server does not support requested rate.';
+  S_OPC_E_NOTSUPPORTED = 'The server does not support writing of quality and/or timestamp.';
+
+  SUnknownError = 'Unknown error code %.8x';
+
 
 operator = (TP1, TP2: TTagPosition)b: Boolean;
 begin
@@ -233,19 +300,31 @@ end;
 
 { Установить связь c OPC сервером }
 procedure TOPCClient.Connect;
+var
+  Hres: HResult;
+
 begin
   if ServerName = '' then
     log.WarningMsg(msgNoOPCServer)
   else
     if not FActive then
     begin
+      { ВНИМАНИЕ! Необходимо производить CoInitialize и CoUnintialize
+      иначе будет возникать искличение:
+      <EOLESysError не был произведен вызов CoInitialize> }
+      HRes := CoInitialize(nil);
+      if Failed(HRes) then
+        log.WarningMsg(GetOPCErrorString(HRes));
+
       try
         m_pIOPCServer := CreateComObject(ProgIDToClassID(ServerName)) as IOPCServer;
       except
+        CoUninitialize;
         m_pIOPCServer := nil;
         log.FatalMsgFmt(msgNoConnectOPC, [ServerName]);
         Exit;
       end;
+
       AddGroups;
       FActive := True;
     end;
@@ -279,7 +358,7 @@ begin
     Group.hSGroup := i + 1;
     myPercentDeadBand := Group.PercentDeadBand;
     // Добавляем группу
-    HRes  := m_pIOPCServer.AddGroup(PWideChar(WideString(Group.GroupName)),
+    HRes := m_pIOPCServer.AddGroup(PWideChar(WideString(Group.GroupName)),
         BOOL(True), Group.UpdateRate, Group.hSGroup, nil,
         @myPercentDeadBand, 0, Group.hSGroupCb, Group.UpdateRate,
         IOPCItemMgt, IUnknown(Group.m_pIOPCItemMgt));
@@ -287,12 +366,15 @@ begin
     begin
       Group.m_pIOPCItemMgt := nil;
       Group.m_pIOPCSyncIO  := nil;
-      log.WarningMsgFmt(msgErrAddGroup, [Group.GroupName]);
+
+      log.WarningMsgFmt(msgErrAddGroup, [Group.GroupName,
+                                         GetOPCErrorString(HRes)]);
     end
     else
     begin
       Group.m_pIOPCSyncIO := Group.m_pIOPCItemMgt as IOPCSyncIO;
       AddTags(Group);
+      Advise(Group);
     end;
   end;
 end;
@@ -360,6 +442,9 @@ begin
   if not FActive then
     Exit;
   DeleteGroups;
+
+  CoUninitialize;
+
   // Уничтожаем OPC сервер
   m_pIOPCServer := nil;
   FActive := False;
@@ -375,6 +460,7 @@ begin
   for j := 0 to FTagList.Count - 1 do
   begin
     Group := FTagList[j];
+    Unadvise(Group);
     DeleteTags(Group);
     // Удаляем группу
     Group.m_pIOPCItemMgt := nil;
@@ -1420,6 +1506,122 @@ procedure TOPCClient.DefineProperties(Filer: TFiler);
 begin
   inherited DefineProperties(Filer);
   Filer.DefineProperty('TagList', @ReadListTag, @WriteListTag, True);
+end;
+
+{
+Получить строку ошибки по резльтату взаимодействия с OPC сервером
+Функцию взял из проекта prOPC (https://github.com/engycz/propc)
+}
+function TOPCClient.GetOPCErrorString(dwError: HResult): AnsiString;
+var
+  Common: IOPCCommon;
+  ppString: PWideChar;
+  Buf: array[0..255] of Char;
+
+begin
+  if not StdOpcErrorToStr(dwError, Result) then
+  begin
+    if Assigned(m_pIOPCServer) and  {ask the server}
+       (m_pIOPCServer.QueryInterface(IOPCCommon, Common) = S_OK) and
+       (Common.GetErrorString(dwError, ppString) = S_OK) then
+    begin
+      Result:= ppString;
+      CoTaskMemFree(ppString)
+    end
+    else
+      if FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM or FORMAT_MESSAGE_ARGUMENT_ARRAY,
+          nil, DWORD(dwError), 0, Buf, SizeOf(Buf), nil) > 0 then
+        Result:= Buf
+      else
+        FmtStr(Result, SUnknownError, [dwError]);
+    { ВНИМАНИЕ! В Просмотре событий Windows отображаются строки в UTF8 кодировке }
+    Result:= ToUTF8(Result);
+  end
+end;
+
+{
+Преобразование стандартных ошибок OPC
+Функцию взял из проекта prOPC (https://github.com/engycz/propc)
+}
+function TOPCClient.StdOpcErrorToStr(Code: HRESULT; var Res: string): Boolean;
+begin
+  Result:= true;
+  case Code of
+    OPC_E_INVALIDHANDLE: Res:= S_OPC_E_INVALIDHANDLE;
+    OPC_E_BADTYPE: Res:= S_OPC_E_BADTYPE;
+    OPC_E_PUBLIC: Res:= S_OPC_E_PUBLIC;
+    OPC_E_BADRIGHTS: Res:= S_OPC_E_BADRIGHTS;
+    OPC_E_UNKNOWNITEMID: Res:= S_OPC_E_UNKNOWNITEMID;
+    OPC_E_INVALIDITEMID: Res:= S_OPC_E_INVALIDITEMID;
+    OPC_E_INVALIDFILTER: Res:= S_OPC_E_INVALIDFILTER;
+    OPC_E_UNKNOWNPATH: Res:= S_OPC_E_UNKNOWNPATH;
+    OPC_E_RANGE: Res:= S_OPC_E_RANGE;
+    OPC_E_DUPLICATENAME: Res:= S_OPC_E_DUPLICATENAME;
+    OPC_S_UNSUPPORTEDRATE: Res:= S_OPC_S_UNSUPPORTEDRATE;
+    OPC_S_CLAMP: Res:= S_OPC_S_CLAMP;
+    OPC_S_INUSE: Res:= S_OPC_S_INUSE;
+    OPC_E_INVALIDCONFIGFILE: Res:= S_OPC_E_INVALIDCONFIGFILE;
+    OPC_E_NOTFOUND: Res:= S_OPC_E_NOTFOUND;
+    OPC_E_INVALID_PID: Res:= S_OPC_E_INVALID_PID;
+    OPC_E_DEADBANDNOTSET: Res:= S_OPC_E_DEADBANDNOTSET;
+    OPC_E_DEADBANDNOTSUPPORTED: Res:= S_OPC_E_DEADBANDNOTSUPPORTED;
+    OPC_E_NOBUFFERING: Res:= S_OPC_E_NOBUFFERING;
+    OPC_E_INVALIDCONTINUATIONPOINT: Res:= S_OPC_E_INVALIDCONTINUATIONPOINT;
+    OPC_S_DATAQUEUEOVERFLOW: Res:= S_OPC_S_DATAQUEUEOVERFLOW;
+    OPC_E_RATENOTSET: Res:= S_OPC_E_RATENOTSET;
+    OPC_E_NOTSUPPORTED: Res:= S_OPC_E_NOTSUPPORTED;
+  else
+    Result:= false
+  end
+end;
+
+{ Добавляем ф-ю обратного вызова }
+procedure TOPCClient.Advise(const Group : TGroup);
+var
+  HRes :    HRESULT;
+  pIConnectionPointContainer : IConnectionPointContainer;
+
+begin
+  try
+    try
+      pIConnectionPointContainer := Group.m_pIOPCItemMgt as IConnectionPointContainer;
+    except
+      //pIConnectionPointContainer := nil;
+      log.FatalMsgFmt(msgErrCallback, [Group.GroupName]);
+      Exit;
+    end;
+    HRes := pIConnectionPointContainer.FindConnectionPoint(IID_IOPCDataCallback,
+                                                           Group.m_pIConnectionPoint);
+    if Failed(HRes) then
+    begin
+      log.WarningMsg(msgNoFindConnectionPoint);
+      Exit;
+    end;
+    HRes := Group.m_pIConnectionPoint.Advise(m_pOPCDataCallback as IUnknown,
+                                                                Group.m_Cookie);
+    if Failed(HRes) then
+    begin
+      Group.m_pIConnectionPoint := nil;
+      log.WarningMsgFmt(msgErrAdvise, [Group.GroupName]);
+    end;
+  finally
+    pIConnectionPointContainer := nil;
+  end;
+end;
+
+{ Удаляем ф-ю обратного вызова }
+procedure TOPCClient.Unadvise(const Group : TGroup);
+var
+  HRes : HRESULT;
+
+begin
+  if Assigned(Group.m_pIConnectionPoint) then
+  begin
+    HRes := Group.m_pIConnectionPoint.UnAdvise(Group.m_Cookie);
+    Group.m_pIConnectionPoint := nil;
+    if Failed(HRes) then
+      log.WarningMsgFmt(msgErrUnadvise,[Group.GroupName]);
+  end;
 end;
 
 end.
