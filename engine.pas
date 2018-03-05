@@ -73,9 +73,9 @@ type
       function DoDiagnostic(lObjects: TStringList): Boolean;
 
       { Прочитать значение из источника данных }
-      function ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddress: AnsiString): AnsiString;
+      function ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; sAddress: AnsiString): AnsiString;
       { Прочитать список значений из источника данных }
-      function ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; const aAddresses : Array Of Const): TStringList;
+      function ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; aAddresses : Array Of String): TStringList;
 
       { Инициализировать методы удаленного вызова }
       procedure RegRpcMethods;
@@ -89,6 +89,9 @@ type
       procedure ReadValueAsStringRpcMethod(Thread: TRpcThread; const sMethodName: string;
                                            List: TList; Return: TRpcReturn);
 
+      { Функция чтения данных из источника удаленного вызова процедур }
+      procedure ReadValuesAsStringsRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                             List: TList; Return: TRpcReturn);
     end;
 
 var
@@ -435,27 +438,56 @@ begin
 end;
 
 { Прочитать значение из источника данных }
-function TICReader.ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddress: AnsiString): AnsiString;
+function TICReader.ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; sAddress: AnsiString): AnsiString;
 var
   ctrl_obj: TICObjectProto;
   str_list: TStringList;
+
 begin
   Result := '';
+  ctrl_obj := nil;
+  str_list := nil;
   try
     ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
     // Result := ctrl_obj.ReadValueAsString([aAddress]);
-    str_list := ctrl_obj.ReadAddresses([aAddress]);
+    str_list := ctrl_obj.ReadAddresses([sAddress]);
     Result := str_list.Strings[0];
-  finally
-    ctrl_obj.Free;
+  except
+    log.FatalMsgFmt('Ошибка чтения значения по адресу <%s>', [sAddress]);
   end;
 
+  // log.DebugMsgFmt('1. Адрес <%s> Значение [%s]', [sAddress, Result]);
+  if str_list <> nil then
+    str_list.Free;
+  //log.DebugMsgFmt('2. Адрес <%s> Значение [%s]', [sAddress, Result]);
+  if ctrl_obj <> nil then
+    ctrl_obj.Free;
+  //log.DebugMsgFmt('3. Адрес <%s> Значение [%s]', [sAddress, Result]);
 end;
 
 { Прочитать список значений из источника данных }
-function TICReader.ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; const aAddresses : Array Of Const): TStringList;
+function TICReader.ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddresses: Array Of String): TStringList;
+var
+  ctrl_obj: TICObjectProto;
+  str_list: TStringList;
+
 begin
   Result := nil;
+  ctrl_obj := nil;
+  str_list := nil;
+  try
+    ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    // Result := ctrl_obj.ReadValueAsString([aAddress]);
+    str_list := ctrl_obj.ReadAddresses(aAddresses);
+    Result := str_list;
+  except
+    log.FatalMsg('Ошибка чтения значений по адресам');
+  end;
+
+  //if str_list <> nil then
+  //  str_list.Free;
+  if ctrl_obj <> nil then
+    ctrl_obj.Free;
 end;
 
 { Инициализировать методы удаленного вызова }
@@ -463,6 +495,7 @@ procedure TICReader.RegRpcMethods;
 var
   EchoTestRpcMethodHandler: TRpcMethodHandler;
   ReadValueAsStringRpcMethodHandler: TRpcMethodHandler;
+  ReadValuesAsStringsRpcMethodHandler: TRpcMethodHandler;
 
 begin
   if not Assigned(FRpcServer) then
@@ -473,6 +506,7 @@ begin
 
     EchoTestRpcMethodHandler := TRpcMethodHandler.Create;
     ReadValueAsStringRpcMethodHandler := TRpcMethodHandler.Create;
+    ReadValuesAsStringsRpcMethodHandler := TRpcMethodHandler.Create;
 
     try
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
@@ -495,11 +529,21 @@ begin
       ReadValueAsStringRpcMethodHandler := nil;
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+      // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+      ReadValuesAsStringsRpcMethodHandler.Name := 'sources.ReadValuesAsStrings';
+      ReadValuesAsStringsRpcMethodHandler.Method := @ReadValuesAsStringsRpcMethod;
+      ReadValuesAsStringsRpcMethodHandler.Signature := 'string (string myval)';
+      ReadValuesAsStringsRpcMethodHandler.Help := 'Read values as strings from data source';
+      FRpcServer.RegisterMethodHandler(ReadValuesAsStringsRpcMethodHandler);
+      ReadValuesAsStringsRpcMethodHandler := nil;
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
       FRpcServer.Active := True;
       // ShowMessage('xml-rpc hello server has been started');
     finally
       EchoTestRpcMethodHandler.Free;
       ReadValueAsStringRpcMethodHandler.Free;
+      ReadValuesAsStringsRpcMethodHandler.Free;
     end;
   end;
 end;
@@ -520,7 +564,7 @@ begin
   {grab the sent string}
   Msg := TRpcParameter(List[0]).AsString;
 
-  //log.DebugMsgFmt('Test echo. You just sent: <%s>', [Msg]);
+  log.DebugMsgFmt('Test echo. You just sent: <%s>', [Msg]);
 
   {return a message showing what was sent}
   Return.AddItem('You just sent: ' + Msg);
@@ -540,10 +584,51 @@ begin
   opc_server_name := TRpcParameter(List[1]).AsString;
   address := TRpcParameter(List[2]).AsString;
 
+  memfunc.InitStatusMemory();
   opc_result := ReadValueAsString(src_type_name, [opc_server_name], address);
+  memfunc.PrintLostMemory();
 
+  // log.DebugMsgFmt('2. Адрес: <%s> Значение: "%s"', [address, opc_result]);
   {return a message showing what was sent}
   Return.AddItem(opc_result);
+end;
+
+{ Функция чтения данных из источника удаленного вызова процедур }
+procedure TICReader.ReadValuesAsStringsRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                                 List: TList; Return: TRpcReturn);
+var
+  src_type_name: AnsiString;
+  opc_server_name: AnsiString;
+  //addresses_array: IRpcArray;
+  addresses: Array of String;
+  opc_result: TStringList;
+  i: Integer;
+
+begin
+  src_type_name := TRpcParameter(List[0]).AsString;
+  opc_server_name := TRpcParameter(List[1]).AsString;
+  //addresses_array := TRpcParameter(List[2]).AsArray;
+  SetLength(addresses, List.Count-2);
+  for i := 2 to List.Count - 1 do
+    try
+      addresses[i] := TRpcParameter(List[1]).AsString;
+    except
+      log.FatalMsgFmt('Ошибка типа аргумента <%d>', [i]);
+      addresses[i] := '';
+    end;
+
+  memfunc.InitStatusMemory();
+  opc_result := ReadValuesAsStrings(src_type_name, [opc_server_name], addresses);
+  memfunc.PrintLostMemory();
+
+  // log.DebugMsgFmt('2. Адрес: <%s> Значение: "%s"', [address, opc_result]);
+  {return a message showing what was sent}
+  if opc_result <> nil then
+    for i := 0 to opc_result.Count - 1 do
+    begin
+      Return.AddItem(opc_result.Strings[i]);
+    end;
+    opc_result.Free;
 end;
 
 begin

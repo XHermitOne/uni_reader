@@ -164,8 +164,11 @@ begin
   else
     Result := False; // config.ENVIRONMENT.HasKey('LOG_MODE') and IS_OPEN_LOG_FILE;
 
-  if not Result then
+  if not Result and not DEFAULT_APP_LOG_MODE then
     PrintColorTxt('Режим журналирования отключен', YELLOW_COLOR_TEXT);
+  //if not Result and DEFAULT_APP_LOG_MODE then
+  //  Application.Log(etInfo, EncodeUnicodeString('Режим журналирования отключен',
+  //                          GetDefaultEncoding()));
 
 end;
 
@@ -308,8 +311,8 @@ begin
 
   new_msg := Format('%s %s', [FormatDateTime('YYYY-MM-DD hh:mm:ss', Now), sMsg]);
   try
-    writeln(LOG_FILE, new_msg);
-    result := True;
+    WriteLn(LOG_FILE, new_msg);
+    Result := True;
   except
     CloseLog();
     FatalMsg('Ошибка регистрации сообщения в лог файле', True);
@@ -329,8 +332,9 @@ begin
         Application.Log(etDebug, EncodeUnicodeString(sMsg, GetDefaultEncoding()))
       else
         PrintColorTxt('DEBUG. ' + sMsg, BLUE_COLOR_TEXT);
+
     if (GetLogMode()) or (bForceLog) then
-       LogMsg('DEBUG. ' + sMsg);
+      LogMsg('DEBUG. ' + sMsg);
 end;
 
 {

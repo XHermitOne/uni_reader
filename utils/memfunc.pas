@@ -54,9 +54,9 @@ var
 begin
   lost_memory := GetLostMemory;
   if lost_memory > 0 then
-     WarningMsg(Format('Обнаружена утечка памяти <%d>', [lost_memory]), True)
+     log.WarningMsg(Format('Обнаружена утечка памяти <%d>', [lost_memory]), True)
   else
-     ServiceMsg('Утечек памяти не обнаружено', True);
+     log.ServiceMsg('Утечек памяти не обнаружено', True);
 end;
 
 end.

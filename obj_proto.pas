@@ -33,7 +33,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure Free;
+    //procedure Free;
 
     function GetName(): AnsiString;
     procedure SetName(sName: AnsiString);
@@ -52,7 +52,7 @@ type
     { Фунция чтения данных }
     function Read(aValues: TStringList): TStringList; virtual;
     { Чтение значений по адресам }
-    function ReadAddresses(aValues: Array Of Const): TStringList; virtual;
+    function ReadAddresses(aValues: Array Of String): TStringList; virtual;
 
     { Фунция записи данных }
     function Write(aValues: TStringList): Boolean; virtual;
@@ -86,32 +86,43 @@ end;
 
 destructor TICObjectProto.Destroy;
 begin
-     FReadValues.Free;
-     FState.Free;
-     inherited Destroy;
+  if FReadValues <> nil then
+  begin
+    FReadValues.Free;
+    FReadValues := nil;
+  end;
+  if FState <> nil then
+  begin
+    FState.Free;
+    FState := nil;
+  end;
+
+  if FProperties <> nil then
+  begin
+    FProperties.Free;
+    FProperties := nil;
+  end;
+  inherited Destroy;
 end;
 
-procedure TICObjectProto.Free;
-begin
-  FReadValues.Free;
-  FState.Free;
-  FProperties.Free;
-  inherited Free;
-end;
+//procedure TICObjectProto.Free;
+//begin
+//  inherited Free;
+//end;
 
 function TICObjectProto.GetName(): AnsiString;
 begin
-     result := FName;
+  Result := FName;
 end;
 
 procedure TICObjectProto.SetName(sName: AnsiString);
 begin
-     FName := sName;
+  FName := sName;
 end;
 
 function TICObjectProto.GetParent(): TObject;
 begin
-     result := FParent;
+  Result := FParent;
 end;
 
 procedure TICObjectProto.SetParent(oParent: TObject);
@@ -147,7 +158,7 @@ end;
 }
 function TICObjectProto.RegState(aValues: TStrDictionary): Boolean;
 begin
-    result := FState.Update(aValues);
+  Result := FState.Update(aValues);
 end;
 
 {
@@ -155,7 +166,7 @@ end;
 }
 function TICObjectProto.GetReadValues(): TStringList;
 begin
-     result := FReadValues;
+  Result := FReadValues;
 end;
 
 {
@@ -163,12 +174,12 @@ end;
 }
 function TICObjectProto.Read(aValues: TStringList): TStringList;
 begin
-  result := nil;
+  Result := nil;
 end;
 
-function TICObjectProto.ReadAddresses(aValues: Array of Const): TStringList;
+function TICObjectProto.ReadAddresses(aValues: Array of String): TStringList;
 begin
-  result := nil;
+  Result := nil;
 end;
 
 {
@@ -176,7 +187,7 @@ end;
 }
 function TICObjectProto.Write(aValues: TStringList): Boolean;
 begin
-  result := False;
+  Result := False;
 end;
 
 {
@@ -184,7 +195,7 @@ end;
 }
 function TICObjectProto.Diagnostic(): Boolean;
 begin
-  result := False;
+  Result := False;
 end;
 
 {

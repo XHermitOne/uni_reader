@@ -73,10 +73,8 @@ resourcestring
 
   msgNoFindConnectionPoint =
                     'Нет сервиса FindConnectionPoint в сервере OPC (IOPCDataCallback)';
-  msgErrAdvise    = 'Ошибка вызова Advise' + {#13#10} LineEnding
-                    + 'для группы %s';
-  msgErrUnadvise  = 'Ошибка вызова Unadvise' + {#13#10} LineEnding
-                    + 'Для группы %s';
+  msgErrAdvise    = 'Ошибка вызова Advise для группы <%s>. Ошибка [%s]';
+  msgErrUnadvise  = 'Ошибка вызова Unadvise для группы %s. Ошибка [%s]';
   msgErrDelTag    = 'Ошибка при удалении OPC-группы %s';
   msgErrDelItem   = 'Ошибка при удалении элемента %s';
   msgErrDelGroup  = 'Ошибка при удалении группы %s';
@@ -110,7 +108,7 @@ type
     { Список всех тэгов, которые появятся в OPC сервере }
     FTagList          : TTagList;
     m_pIOPCServer     : IOPCServer;
-    m_pOPCDataCallback : IOPCDataCallback;
+    // m_pOPCDataCallback : IOPCDataCallback;
     { Изменить имя сервера }
     procedure SetServerName(AValue: String);
     { Процедуры чтения и сохранения списко тэгов в LFM }
@@ -122,10 +120,10 @@ type
     function GetOPC(const aTagPosition: TTagPosition): OleVariant;
     procedure AddGroups;
     procedure AddTags(const Group: TGroup);
-    procedure Advise(const Group : TGroup);
+    // procedure Advise(const Group : TGroup);
     procedure DeleteGroups;
     procedure DeleteTags(const Group: TGroup);
-    procedure Unadvise(const Group : TGroup);
+    // procedure Unadvise(const Group : TGroup);
   protected
     procedure DefineProperties(Filer: TFiler); override;
 
@@ -141,6 +139,9 @@ type
     procedure Connect;
     { Отключить клиент от сервера }
     procedure Disconnect;
+    { Вызвать обработчик изменения тега }
+    //procedure TagChange(const aTagPosition : TTagPosition ;const aTag : TTagItem);
+
     property TagList : TTagList read FTagList;
     property Active : Boolean read FActive {write SetActive};
     {Поиск номера Группы и Тэга, сначала надо найти группу и сохранить номер,
@@ -231,7 +232,7 @@ implementation
 
 uses
   Windows, ComObj,
-  OPCTypes, OPCCOMN, OPCError,
+  OPCTypes, OPCCOMN, OPCError, //OPCCallback,
   log, strfunc;
 
 {$R OPC.RES}
@@ -284,6 +285,8 @@ begin
   // Application.Initialize;
   inherited Create(AOwner);
   // Создать объект для возврата данных
+  //m_pOPCDataCallback := TOPCDataCallback.Create(Self);
+
   FActive       := False;
   FServerName   := '';
   m_pIOPCServer := nil;
@@ -293,6 +296,9 @@ end;
 destructor TOPCClient.Destroy;
 begin
   Disconnect;
+  // Уничтожить объект для возврата данных
+  // m_pOPCDataCallback._Release;
+  // m_pOPCDataCallback := nil;
   m_pIOPCServer      := nil;
   FTagList.Free;
   inherited Destroy;
@@ -374,7 +380,7 @@ begin
     begin
       Group.m_pIOPCSyncIO := Group.m_pIOPCItemMgt as IOPCSyncIO;
       AddTags(Group);
-      Advise(Group);
+      // Advise(Group);
     end;
   end;
 end;
@@ -450,6 +456,13 @@ begin
   FActive := False;
 end;
 
+//procedure TOPCClient.TagChange(const aTagPosition : TTagPosition;
+//                               const aTag : TTagItem);
+//begin
+//  if Assigned(FOnChangeTag) then
+//     FOnChangeTag(Self, aTagPosition, aTag);
+//end;
+
 { Удалить группы }
 procedure TOPCClient.DeleteGroups;
 var
@@ -460,7 +473,7 @@ begin
   for j := 0 to FTagList.Count - 1 do
   begin
     Group := FTagList[j];
-    Unadvise(Group);
+    //Unadvise(Group);
     DeleteTags(Group);
     // Удаляем группу
     Group.m_pIOPCItemMgt := nil;
@@ -1576,52 +1589,55 @@ begin
 end;
 
 { Добавляем ф-ю обратного вызова }
-procedure TOPCClient.Advise(const Group : TGroup);
-var
-  HRes :    HRESULT;
-  pIConnectionPointContainer : IConnectionPointContainer;
-
-begin
-  try
-    try
-      pIConnectionPointContainer := Group.m_pIOPCItemMgt as IConnectionPointContainer;
-    except
-      //pIConnectionPointContainer := nil;
-      log.FatalMsgFmt(msgErrCallback, [Group.GroupName]);
-      Exit;
-    end;
-    HRes := pIConnectionPointContainer.FindConnectionPoint(IID_IOPCDataCallback,
-                                                           Group.m_pIConnectionPoint);
-    if Failed(HRes) then
-    begin
-      log.WarningMsg(msgNoFindConnectionPoint);
-      Exit;
-    end;
-    HRes := Group.m_pIConnectionPoint.Advise(m_pOPCDataCallback as IUnknown,
-                                                                Group.m_Cookie);
-    if Failed(HRes) then
-    begin
-      Group.m_pIConnectionPoint := nil;
-      log.WarningMsgFmt(msgErrAdvise, [Group.GroupName]);
-    end;
-  finally
-    pIConnectionPointContainer := nil;
-  end;
-end;
+//procedure TOPCClient.Advise(const Group : TGroup);
+//var
+//  HRes :    HRESULT;
+//  pIConnectionPointContainer : IConnectionPointContainer;
+//
+//begin
+//  try
+//    try
+//      pIConnectionPointContainer := Group.m_pIOPCItemMgt as IConnectionPointContainer;
+//    except
+//      //pIConnectionPointContainer := nil;
+//      log.FatalMsgFmt(msgErrCallback, [Group.GroupName]);
+//      Exit;
+//    end;
+//    HRes := pIConnectionPointContainer.FindConnectionPoint(IID_IOPCDataCallback,
+//                                                           Group.m_pIConnectionPoint);
+//    if Failed(HRes) then
+//    begin
+//      log.WarningMsg(msgNoFindConnectionPoint);
+//      Exit;
+//    end;
+//
+//    HRes := Group.m_pIConnectionPoint.Advise(m_pOPCDataCallback as IUnknown,
+//                                                                Group.m_Cookie);
+//    if Failed(HRes) then
+//    begin
+//      Group.m_pIConnectionPoint := nil;
+//      log.WarningMsgFmt(msgErrAdvise, [Group.GroupName,
+//                                       GetOPCErrorString(HRes)]);
+//    end;
+//  finally
+//    pIConnectionPointContainer := nil;
+//  end;
+//end;
 
 { Удаляем ф-ю обратного вызова }
-procedure TOPCClient.Unadvise(const Group : TGroup);
-var
-  HRes : HRESULT;
-
-begin
-  if Assigned(Group.m_pIConnectionPoint) then
-  begin
-    HRes := Group.m_pIConnectionPoint.UnAdvise(Group.m_Cookie);
-    Group.m_pIConnectionPoint := nil;
-    if Failed(HRes) then
-      log.WarningMsgFmt(msgErrUnadvise,[Group.GroupName]);
-  end;
-end;
+//procedure TOPCClient.Unadvise(const Group : TGroup);
+//var
+//  HRes : HRESULT;
+//
+//begin
+//  if Assigned(Group.m_pIConnectionPoint) then
+//  begin
+//    HRes := Group.m_pIConnectionPoint.UnAdvise(Group.m_Cookie);
+//    Group.m_pIConnectionPoint := nil;
+//    if Failed(HRes) then
+//      log.WarningMsgFmt(msgErrUnadvise, [Group.GroupName,
+//                                         GetOPCErrorString(HRes)]);
+//  end;
+//end;
 
 end.

@@ -40,7 +40,8 @@ type
 
   public
     constructor Create;
-    procedure Free;
+    destructor Destroy; override;
+    //procedure Free;
 
     { Установить наименование OPC сервера }
     procedure SetOPCServerName(sName: AnsiString);
@@ -51,7 +52,7 @@ type
     { Фунция чтения данных }
     function Read(aValues: TStringList): TStringList; override;
     { Функция чтения данных по адресам }
-    function ReadAddresses(aValues: Array Of Const): TStringList; override;
+    function ReadAddresses(aValues: Array Of String): TStringList; override;
     { Фунция записи данных }
     function Write(aValues: TStringList): Boolean; override;
     { Функция диагностики контроллера данных }
@@ -74,11 +75,19 @@ begin
      FOPCClient := nil;
 end;
 
-procedure TICOPCServerNode.Free;
+//procedure TICOPCServerNode.Free;
+//begin
+//  inherited Free;
+//end;
+
+destructor TICOPCServerNode.Destroy;
 begin
   if FOPCClient <> nil then
+  begin
      FOPCClient.Destroy;
-  inherited Free;
+     FOPCClient := nil;
+  end;
+  inherited Destroy;
 end;
 
 { Установить наименование OPC сервера }
@@ -160,7 +169,7 @@ begin
   end;
 end;
 
-function TICOPCServerNode.ReadAddresses(aValues: Array Of Const): TStringList;
+function TICOPCServerNode.ReadAddresses(aValues: Array Of String): TStringList;
 var
   i: Integer;
   log_tags: AnsiString;
@@ -189,10 +198,10 @@ begin
 
     for i := 0 to Length(aValues) - 1 do
     begin
-      log_tags := log_tags + Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i].vAnsiString) + LineEnding;
+      log_tags := log_tags + Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i]) + LineEnding;
       Properties.AddStrValue(Format('tag%d', [i]),
                              { Преобразование элемента списка параметров в AnsiString:}
-                             AnsiString(aValues[i].vAnsiString));
+                             AnsiString(aValues[i]));
     end;
 
     // Сначала адреса указать в свойствах
