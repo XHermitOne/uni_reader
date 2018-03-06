@@ -31,7 +31,7 @@ var
 implementation
 
 uses
-  log, filefunc, engine;
+  log, engine;
 
 procedure RegisterDaemon;
 begin
@@ -62,41 +62,19 @@ end;
 
 procedure TUniReaderDaemon.DataModuleStart(Sender: TCustomDaemon;
   var OK: Boolean);
-//var
-//  log_filename: AnsiString;
 
 begin
-  //InitStatusMemory();
-
-  // ENVIRONMENT.PrintContent;
-  //log_filename := filefunc.JoinPath([filefunc.GetHomeDir(), '.uni_reader',
-  //                                   Format('uni_reader_%s.log', [FormatDateTime('YYYY_MM_DD', Now)])]);
-  //log_filename := 'c:\tmp\debug.log';
-  //Application.FileName := log_filename;
-
-  // log.OpenLog(log_filename);
-  //Application.Log(etDebug, '>>> ' + Name);
-  READER_ENGINE := TICReader.Create(nil);
-  READER_ENGINE.RegRpcMethods;
-  //READER_ENGINE.Run('diagnostic');
-
-  //CloseLog();
-  // ENVIRONMENT.Clear();
-  // PrintLostMemory();
-
-  // WriteLn('The ' + Name + ' service is running');
+  engine.READER_ENGINE := TICReader.Create(nil);
+  //engine.READER_ENGINE.RegRpcMethods;
+  engine.READER_ENGINE.StartServer;
 end;
 
 procedure TUniReaderDaemon.DataModuleStop(Sender: TCustomDaemon; var OK: Boolean
   );
 begin
-  READER_ENGINE.Free;
-  //Application.Log(etDebug, '<<< ' + Name);
-  //log.CloseLog();
-  // WriteLn('The ' + Name + ' service is not running');
-  // PrintLostMemory();
-  //config.ENVIRONMENT.Free;
-  //config.ENVIRONMENT := nil;
+  engine.READER_ENGINE.StopServer;
+  engine.READER_ENGINE.Free;
+  engine.READER_ENGINE := nil;
 end;
 
 

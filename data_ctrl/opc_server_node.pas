@@ -174,7 +174,6 @@ var
   i: Integer;
   log_tags: AnsiString;
   group_name: AnsiString;
-  //result_list: TStringList;
   tags: TStrDictionary;
   grp: TGroup;
   tag_item: TTagItem;
@@ -184,8 +183,6 @@ begin
   Result := TStringList.Create;
 
   group_name := UNKNOWN_GROUP_NAME;
-  // if group_name = '' then
-  // group_name := ClassName;
 
   log_tags := LineEnding;
   try
@@ -194,11 +191,11 @@ begin
       Properties.Clear
     else
       Properties := TStrDictionary.Create;
-    // Properties.AddStrValue('name', ClassName);
 
     for i := 0 to Length(aValues) - 1 do
     begin
       log_tags := log_tags + Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i]) + LineEnding;
+      // log.DebugMsg(Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i]));
       Properties.AddStrValue(Format('tag%d', [i]),
                              { Преобразование элемента списка параметров в AnsiString:}
                              AnsiString(aValues[i]));

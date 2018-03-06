@@ -14,6 +14,7 @@ object UniReaderDaemonMapper: TUniReaderDaemonMapper
       WinBindings.ErrorSeverity = esIgnore
       LogStatusReport = True
     end>
+  OnInstall = UniReaderDaemonMapperInstall
   left = 385
   top = 350
 end

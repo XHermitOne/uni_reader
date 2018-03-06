@@ -66,8 +66,8 @@ resourcestring
   msgErrAddGroup  = 'Ошибка добавления группы <%s>. Ошибка [%s]';
   msgNoGrounName  = 'Нет Группы с именем %s в списке тэгов!';
   msgNoTagName    = 'Нет Тэга с именем %s в списке тэгов!';
-  msgErrAddItem   = 'Невозможно добавить элементы в OPC-группу %s';
-  msgErrAddTag    = 'Ошибка при добавлении элемента %s';
+  msgErrAddItem   = 'Невозможно добавить элементы в OPC-группу %s. Ошибка [%s]';
+  msgErrAddTag    = 'Ошибка при добавлении элемента %s. Ошибка [%s]';
   msgErrCallback  = 'Ошибка при создании функции обратного вызова.' + {#13#10} LineEnding
                     + 'Для группы %s';
 
@@ -75,9 +75,9 @@ resourcestring
                     'Нет сервиса FindConnectionPoint в сервере OPC (IOPCDataCallback)';
   msgErrAdvise    = 'Ошибка вызова Advise для группы <%s>. Ошибка [%s]';
   msgErrUnadvise  = 'Ошибка вызова Unadvise для группы %s. Ошибка [%s]';
-  msgErrDelTag    = 'Ошибка при удалении OPC-группы %s';
-  msgErrDelItem   = 'Ошибка при удалении элемента %s';
-  msgErrDelGroup  = 'Ошибка при удалении группы %s';
+  msgErrDelTag    = 'Ошибка при удалении OPC-группы %s. Ошибка [%s]';
+  msgErrDelItem   = 'Ошибка при удалении элемента %s. Ошибка [%s]';
+  msgErrDelGroup  = 'Ошибка при удалении группы %s. Ошибка [%s]';
   msgErrNoTag     = 'Неверно уназан номер Группы или Тэга!!!';
   msgErrRecOPCTag = 'Ошибка записи Тэга в сервер!';
   msgNoOPC        = 'Ни один OPC-сервер не установлен' + {#13#10} LineEnding
@@ -418,12 +418,14 @@ begin
         end;
       HRes := Group.m_pIOPCItemMgt.AddItems(Group.Count, @ItemDef[0], Results, Errors);
       if Failed(HRes) then
-        log.WarningMsgFmt(msgErrAddItem, [Group.GroupName])
+        log.WarningMsgFmt(msgErrAddItem, [Group.GroupName,
+                                         GetOPCErrorString(HRes)])
       else
         for j := 0 to Group.Count - 1 do
           if Failed(Errors^[j]) then
           begin
-            log.WarningMsgFmt(msgErrAddTag, [Group[j].TagName]);
+            log.WarningMsgFmt(msgErrAddTag, [Group[j].TagName,
+                                             GetOPCErrorString(Errors^[j])]);
             Group[j].hClientCb := 0;
           end
           else
@@ -479,7 +481,8 @@ begin
     Group.m_pIOPCItemMgt := nil;
     HRes := m_pIOPCServer.RemoveGroup(Group.hSGroupCb, True);
     if Failed(HRes) then
-      log.WarningMsgFmt(msgErrDelGroup, [Group.GroupName]);
+      log.WarningMsgFmt(msgErrDelGroup, [Group.GroupName,
+                                        GetOPCErrorString(HRes)]);
   end;
 end;
 
@@ -500,10 +503,12 @@ begin
       m_hSItems[i] := Group[i].hClientCb;
     HRes := Group.m_pIOPCItemMgt.RemoveItems(Group.Count, @m_hSItems[0], Errors);
     if Failed(HRes) then
-      log.WarningMsgFmt(msgErrDelTag, [Group.GroupName]);
+      log.WarningMsgFmt(msgErrDelTag, [Group.GroupName,
+                                      GetOPCErrorString(HRes)]);
     for i := 0 to Group.Count - 1 do
       if Failed(Errors^[i]) then
-        log.WarningMsgFmt(msgErrDelItem, [Group[i].TagName]);
+        log.WarningMsgFmt(msgErrDelItem, [Group[i].TagName,
+                                         GetOPCErrorString(Errors^[i])]);
     CoTaskMemFree(Errors);
   finally
     SetLength(m_hSItems, 0);
