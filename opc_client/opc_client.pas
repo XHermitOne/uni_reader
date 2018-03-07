@@ -401,7 +401,7 @@ begin
   SetLength(ItemIDs, Group.Count);
   try
     for j := 0 to Group.Count - 1 do
-      ItemIDs[j] := Group[j].TagPath;
+      ItemIDs[j] := WideString(Group[j].TagPath);
     SetLength(ItemDef, Group.Count);
     try
       for j := 0 to Group.Count - 1 do

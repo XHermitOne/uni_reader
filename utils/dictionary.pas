@@ -94,15 +94,6 @@ type
 
     end;
 
-    {
-    Класс объектов строк для хранения в словаре
-    }
-    //TObjStrDictionary = class(TObject)
-    //public
-    //   { Значение }
-    //   Value: TStrDictionary;
-    //end;
-
 
 implementation
 
@@ -156,7 +147,6 @@ begin
              if item_obj <> nil then
              begin
                 item_class := item_obj.ClassName;
-                // DebugMsg(Format('Item class <%s>', [item_class]));
                 if item_class = 'TObjString' then
                    item_class := (item_obj As TObjString).Value
                 else

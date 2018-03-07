@@ -46,7 +46,7 @@ unit log;
 46 	голубой
 47 	белый
 
-Версия: 0.0.5.2
+Версия: 0.0.5.3
 
 ВНИМАНИЕ! Вывод сообщений под Linux проверять только в терминале.
 Только он выводит корректно сообщения.
@@ -60,7 +60,7 @@ uses
     { Для функций перекодировки UTF8ToWinCP }
     LazUTF8,
     DaemonApp,
-    dictionary, sysfunc;
+    sysfunc;
 
 const
   DEFAULT_LOG_FILENAME: AnsiString = 'uni_reader.log';
@@ -166,9 +166,6 @@ begin
 
   if not Result and not DEFAULT_APP_LOG_MODE then
     PrintColorTxt('Режим журналирования отключен', YELLOW_COLOR_TEXT);
-  //if not Result and DEFAULT_APP_LOG_MODE then
-  //  Application.Log(etInfo, EncodeUnicodeString('Режим журналирования отключен',
-  //                          GetDefaultEncoding()));
 
 end;
 

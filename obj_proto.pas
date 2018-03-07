@@ -60,8 +60,6 @@ type
     function RegState(aValues: TStrDictionary): Boolean;
     { Получить имена записываемых значений в контроллер данных }
     function GetReadValues(): TStringList;
-    { Функция диагностики контроллера данных }
-    function Diagnostic(): Boolean; virtual;
 
   published
     property Properties: TStrDictionary read GetProperties write SetProperties;
@@ -186,14 +184,6 @@ end;
 Фунция записи данных
 }
 function TICObjectProto.Write(aValues: TStringList): Boolean;
-begin
-  Result := False;
-end;
-
-{
-Функция диагностики контроллера данных
-}
-function TICObjectProto.Diagnostic(): Boolean;
 begin
   Result := False;
 end;

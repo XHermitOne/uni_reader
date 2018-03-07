@@ -33,8 +33,6 @@ type
     function Read(aValues: TStringList): TStringList; override;
     { Фунция записи данных }
     function Write(aValues: TStringList): Boolean; override;
-    { Функция диагностики контроллера данных }
-    function Diagnostic(): Boolean; override;
 
 
 end;
@@ -71,62 +69,6 @@ end;
 }
 function TICRemouteOPCNode.Write(aValues: TStringList): Boolean;
 begin
-  result := False;
-end;
-
-{
-Функция диагностики контроллера данных
-}
-function TICRemouteOPCNode.Diagnostic(): Boolean;
-var
-  i, j: Integer;
-  tags: TStrDictionary;
-  grp: TGroup;
-  tag_item: TTagItem;
-  start_dt, stop_dt: DWORD;
-begin
-  log.InfoMsg(Format('Диагностика объекта <%s> класса <%s>', [GetName(), ClassName]));
-
-  FOPCClient := TOPCClient.Create(nil);
-  // ВНИМАНИЕ! В Lazarus необходимо указывать @ для связки события с обработчиком
-  //                        V
-  // FOPCClient.OnChangeTag := @OPCClientChangeTag;
-
-  FOPCClient.ServerName := 'RSLinx OPC Server';
-
-  tags := CreateTags;
-  log.DebugMsg(Format('Создание группы <%s>', [GetName()]));
-
-  grp := TGroup.Create(GetName(), 500, 0);
-  for i := 0 to tags.Count - 1 do
-  begin
-    log.ServiceMsg(Format('Добавление тега в OPC клиент <%s> : <%s>', [tags.GetKey(i), tags.GetStrValue(tags.GetKey(i))]));
-    tag_item := TTagItem.Create(tags.GetKey(i), tags.GetStrValue(tags.GetKey(i)), VT_BSTR, acRead);
-    grp.AddTag(tag_item);
-  end;
-  FOPCClient.TagList.AddGroup(grp);
-
-  FOPCClient.Connect;
-
-  // Чтение списка тегов
-  for j := 0 to 10 do
-  begin
-    start_dt :=  GetTickCount();
-    for i := 0 to tags.Count - 1 do
-    begin
-      log.DebugMsgFmt('Tag [%s] Value [%s]', [tags.GetKey(i),
-                      FOPCClient.GetTagString(FOPCClient.FindSGroupSTag('RSLINX_01700_1',
-                      tags.GetKey(i)))]);
-    end;
-    stop_dt :=  GetTickCount() - start_dt;
-    log.DebugMsgFmt('Время выполнения %d мсек', [stop_dt]);
-    Sleep(5000); //Задержка в 5 сек
-  end;
-
-  log.DebugMsg('---');
-  FOPCClient.Disconnect;
-
-  tags.Destroy;
   result := False;
 end;
 
