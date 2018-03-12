@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: filefunc</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль filefunc</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section">Классы, интерфейсы и объекты</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section">Типы</div><div class="one_section">Константы</div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+Функции работы с файлами.</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#GetHomeDir">GetHomeDir</a></b>(): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#GetOSLinuxHomeDir">GetOSLinuxHomeDir</a></b>(): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#GetOSWindowsHomeDir">GetOSWindowsHomeDir</a></b>(): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#JoinPath">JoinPath</a></b>(PathParts: Array Of String): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#SplitPath">SplitPath</a></b>(sPath: AnsiString): <a  href="strfunc.html#TArrayOfString">TArrayOfString</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#CreateDirPath">CreateDirPath</a></b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#CreateDirPathTree">CreateDirPathTree</a></b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#CreateEmptyFile">CreateEmptyFile</a></b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#CreateEmptyFileIfNotExists">CreateEmptyFileIfNotExists</a></b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="filefunc.html#NormalPathFileName">NormalPathFileName</a></b>(sPath: AnsiString): AnsiString;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetHomeDir"></span><code>function <b>GetHomeDir</b>(): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Определить папку домашней директории</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetOSLinuxHomeDir"></span><code>function <b>GetOSLinuxHomeDir</b>(): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Домашняя папка в Linux системах</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetOSWindowsHomeDir"></span><code>function <b>GetOSWindowsHomeDir</b>(): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Домашняя папка в Windows системах</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="JoinPath"></span><code>function <b>JoinPath</b>(PathParts: Array Of String): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Функция соединяет пути с учётом особенностей операционной системы</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="SplitPath"></span><code>function <b>SplitPath</b>(sPath: AnsiString): <a  href="strfunc.html#TArrayOfString">TArrayOfString</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Функция разделяет путь на составляющие</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateDirPath"></span><code>function <b>CreateDirPath</b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Создать весь путь папки</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateDirPathTree"></span><code>function <b>CreateDirPathTree</b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Создать весь путь папки. Путь должен быть нормализован.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateEmptyFile"></span><code>function <b>CreateEmptyFile</b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Создать пустой файл</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CreateEmptyFileIfNotExists"></span><code>function <b>CreateEmptyFileIfNotExists</b>(sPath: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Создать пустой файл если он не существует</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="NormalPathFileName"></span><code>function <b>NormalPathFileName</b>(sPath: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Нормализовать путь до файла</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

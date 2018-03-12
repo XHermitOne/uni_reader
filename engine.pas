@@ -1,4 +1,9 @@
+{
+Модуль классов движка
+}
+
 unit engine;
+
 
 {$mode objfpc}{$H+}
 
@@ -22,7 +27,6 @@ type
     TICReaderProto - абстрактный тип движка
     ЧИТАТЕЛЯ ДАННЫХ из различных источников
     }
-
     TICReaderProto = class(TObject)
     private
       { Менеджер настроек }
@@ -37,16 +41,35 @@ type
       destructor Destroy; override;
       procedure Free;
 
-      { Проинициализировать конфигурационные переменные в соответствии с настройками }
+      {
+      Проинициализировать конфигурационные переменные в соответствии с настройками
+      @return True/False
+      }
       function InitSettings(): Boolean;
-      { Регистрация нового объекта в словаре внутренних объектов. Регистрация производиться по имени объекта. }
+      {
+      Регистрация нового объекта в словаре внутренних объектов. Регистрация производиться по имени объекта.
+      @param Obj Регистрируемый объект
+      @return True -  регистрация прошла успешно / False - ошибка
+      }
       function RegObject(Obj: TICObjectProto): Boolean;
-      { Поиск объекта в зарегистрированных по имени }
+      {
+      Поиск объекта в зарегистрированных по имени
+      @param sObjName Наименование объекта
+      @return Найденный объект или nil если объект не найден среди зарегистрированных
+      }
       function FindObject(sObjName: AnsiString): TICObjectProto;
-      { Метод создания объекта контроллера данных с инициализацией его свойств }
+      {
+      Метод создания объекта контроллера данных с инициализацией его свойств
+      @param Properties Словаряь свойств объекта
+      @return Созданный объект или nil в случае ошибки
+      }
       function CreateDataCtrl(Properties: TStrDictionary): TICObjectProto;
 
-      { Создание объектов по именам }
+      {
+      Создание объектов по именам
+      @param ObjectNames Список имен объектов
+      @return Список созданных объектов
+      }
       function CreateDataControllers(ObjectNames: TStringList=nil): TList;
 
     end;
@@ -54,24 +77,35 @@ type
     {
     TICReader - Движок ЧИТАТЕЛЯ ДАННЫХ из различных источников
     }
-
     TICReader = class(TICReaderProto)
     private
-      { Основная процедура запуска }
-      //function DoRun(sMode: AnsiString): Boolean;
 
     public
+      { Конструктор }
       constructor Create(TheOwner: TComponent);
       destructor Destroy; override;
       procedure Free;
 
-      { Прочитать значение из источника данных }
+      {
+      Прочитать значение из источника данных
+      @param sSrcTypeName Наименование типа источника
+      @param aArgs Массив дополнительных аргументов
+      @param sAddress Адрес значения в источнике данных в строковом виде
+      @return Строка прочитанного значения
+      }
       function ReadValueAsString(sSrcTypeName: AnsiString; const aArgs: Array Of Const; sAddress: AnsiString): AnsiString;
-      { Прочитать список значений из источника данных }
+      {
+      Прочитать список значений из источника данных
+      @param sSrcTypeName Наименование типа источника
+      @param aArgs Массив дополнительных аргументов
+      @param aAddresses Массив строк читаемых адресов
+      @return Список строк прочитанных значений
+      }
       function ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; aAddresses : Array Of String): TStringList;
 
-      { Инициализировать методы удаленного вызова }
+      { Запуск сервера движка/Инициализировать методы удаленного вызова }
       procedure StartServer;
+      { Останов сервера движка }
       procedure StopServer;
 
       { --- Используемые процедуры удаленного вызова --- }
@@ -136,7 +170,7 @@ end;
 
 {
 Проинициализировать конфигурационные переменные в соответствии с настройками.
-@return (True/False)
+@return True/False
 }
 function TICReaderProto.InitSettings():Boolean;
 var
@@ -164,8 +198,8 @@ end;
 {
 Регистрация нового объекта в словаре внутренних объектов.
 Регистрация производиться по имени объекта.
-@param (Obj Регистрируемый объект)
-@return (True -  регистрация прошла успешно / False - ошибка)
+@param Obj Регистрируемый объект
+@return True -  регистрация прошла успешно / False - ошибка
 }
 function TICReaderProto.RegObject(Obj: TICObjectProto): Boolean;
 var
@@ -186,8 +220,6 @@ end;
 
 {
 Поиск объекта в зарегистрированных по имени.
-@param obj_name: Имя объекта.
-@return: Объект или None если объект с таким именем не найден.
 }
 function TICReaderProto.FindObject(sObjName: AnsiString): TICObjectProto;
 begin

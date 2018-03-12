@@ -1,3 +1,6 @@
+{
+Модуль поддержки словарей
+}
 unit dictionary;
 
 {$mode objfpc}{$H+}
@@ -38,6 +41,7 @@ type
        { Значение }
        FValue: TStringList;
     public
+       { Значение. Свойство }
        property Value: TStringList read FValue write FValue;
     end;
 
@@ -52,44 +56,97 @@ type
 
        {Распечатать содержимое словаря}
        procedure PrintContent();
-       {Проверка на существование переменной окружения с таким именем}
+       {
+       Проверка на существование переменной окружения с таким именем
+       @param sKey Проверяемый ключ словаря
+       }
        function HasKey(sKey: AnsiString): Boolean;
-       { Получить ключ по индексу }
+       {
+       Получить ключ по индексу
+       @param iIndex Индекс
+       }
        function GetKey(iIndex: Integer): AnsiString;
        { Список ключей }
        function GetKeys(): TStringList;
+       { Список ключей }
        function GetKeysStr(): AnsiString;
-       {Получить объект по имени}
+       {
+       Получить объект по имени/ключу
+       @param sKey Ключ
+       }
        function GetByName(sKey: AnsiString): TObject;
-       {Установить объект в словаре}
+       {
+       Установить объект в словаре
+       @param sKey Ключ
+       @param oObject Устанавливаемый объект
+       }
        function SetObject(sKey: AnsiString; oObject: TObject): Boolean;
 
        { Проверка на тустой словарь }
        function IsEmpty(): Boolean;
-       { Функция обновления словаря по другому словарю }
+       {
+       Функция обновления словаря по другому словарю
+       @param Dictionary Объект словаря
+       }
        function Update(Dictionary: TStrDictionary): Boolean;
-       { Функция удаления элемента словаря }
+       {
+       Функция удаления элемента словаря по ключу
+       @param sKey Ключ
+       }
        function DelItem(sKey: AnsiString): Boolean;
 
-       { Добавить строку в словарь }
+       {
+       Добавить строку в словарь
+       @param sKey Ключ
+       @param sValue Строковое значение
+       }
        function AddStrValue(sKey: AnsiString; sValue: AnsiString): LongInt;
-       { Получить строку из словаря }
+       {
+       Получить строку из словаря по ключу
+       @param sKey Ключ
+       }
        function GetStrValue(sKey: AnsiString): AnsiString;
-       { Установить строку в словарь }
+       {
+       Установить строку в словарь
+       @param sKey Ключ
+       @param sValue Строковое значение
+       }
        function SetStrValue(sKey: AnsiString; sValue: AnsiString): Boolean;
 
-       { Добавить дату-время в словарь }
+       {
+       Добавить дату-время в словарь
+       @param sKey Ключ
+       @param dtValue Значение TDateTime
+       }
        function AddDateTimeValue(sKey: AnsiString; dtValue: TDateTime): LongInt;
-       { Получить дату-время из словаря }
+       {
+       Получить дату-время из словаря
+       @param sKey Ключ
+       }
        function GetDateTimeValue(sKey: AnsiString): TDateTime;
-       { Установить дату-время в словарь }
+       {
+       Установить дату-время в словарь
+       @param sKey Ключ
+       @param dtValue Значение TDateTime
+       }
        function SetDateTimeValue(sKey: AnsiString; dtValue: TDateTime): Boolean;
 
-       { Добавить список строк в словарь }
+       {
+       Добавить список строк в словарь
+       @param sKey Ключ
+       @param slValue Значение TStringList
+       }
        function AddStrList(sKey: AnsiString; slValue: TStringList): LongInt;
-       { Получить список строк из словаря }
+       {
+       Получить список строк из словаря
+       @param sKey Ключ
+       }
        function GetStrList(sKey: AnsiString): TStringList;
-       { Установить список строк в словарь }
+       {
+       Установить список строк в словарь
+       @param sKey Ключ
+       @param slValue Значение TStringList
+       }
        function SetStrList(sKey: AnsiString; slValue: TStringList): Boolean;
 
     end;
@@ -229,7 +286,7 @@ begin
 end;
 
 
-{ Получить строку из словаря}
+{ Получить строку из словаря }
 function TStrDictionary.GetStrValue(sKey: AnsiString): AnsiString;
 var
    obj: TObjString;

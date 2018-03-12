@@ -1,3 +1,6 @@
+{
+Модуль поддержки настроек программы
+}
 unit settings;
 
 {$mode objfpc}{$H+}
@@ -15,7 +18,6 @@ type
     {
     TICSettingsManager - Менеджер управления настройками программы
     }
-
     TICSettingsManager = class(TObject)
     private
       { Полное наименование INI файла }
@@ -33,14 +35,31 @@ type
       function GenIniFileName(): AnsiString;
       { Вывод на экран текущих настроек для отладки. }
       procedure PrintSettings();
-      { Загрузка параметров изи INI файла }
+      {
+      Загрузка параметров из INI файла
+      @param sINIFileName Полное наименование INI Файла
+      @return True/False
+      }
       function LoadSettings(sINIFileName: AnsiString): Boolean;
-      { Проверка существования файла настройки}
+      {
+      Проверка существования файла настройки
+      @param sINIFileName Полное наименование INI Файла
+      @return True/False
+      }
       function ExistsIniFile(sINIFileName: AnsiString): Boolean;
-      { Собрать полное описание секции с учетом ключа parent }
+      {
+      Собрать полное описание секции с учетом ключа parent
+      @param sSectionName Наименование секции
+      @return Словарь описания
+      }
       function BuildSection(sSectionName: Ansistring): TStrDictionary;
 
-      { Получить значение опции }
+      {
+      Получить значение опции
+      @param sSectionName Наименование секции
+      @param sOptionName Наименование параметра
+      @return Значение параметра в виде строки
+      }
       function GetOptionValue(sSectionName: Ansistring; sOptionName: Ansistring): AnsiString;
     end;
 

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: engine: Класс TICReaderProto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TICReaderProto"></span><h1 class="cio">Класс TICReaderProto</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section">Свойства</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="engine.html">engine</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TICReaderProto = class(TObject)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+TICReaderProto - абстрактный тип движка ЧИТАТЕЛЯ ДАННЫХ из различных источников</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TICReaderProto</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="engine.TICReaderProto.html#Create">Create</a></b>(TheOwner: TComponent);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="engine.TICReaderProto.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReaderProto.html#Free">Free</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReaderProto.html#InitSettings">InitSettings</a></b>(): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReaderProto.html#RegObject">RegObject</a></b>(Obj: <a  href="obj_proto.TICObjectProto.html">TICObjectProto</a>): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReaderProto.html#FindObject">FindObject</a></b>(sObjName: AnsiString): <a  href="obj_proto.TICObjectProto.html">TICObjectProto</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReaderProto.html#CreateDataCtrl">CreateDataCtrl</a></b>(Properties: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>): <a  href="obj_proto.TICObjectProto.html">TICObjectProto</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReaderProto.html#CreateDataControllers">CreateDataControllers</a></b>(ObjectNames: TStringList=nil): TList;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(TheOwner: TComponent);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Free"></span><code>procedure <b>Free</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="InitSettings"></span><code>function <b>InitSettings</b>(): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Проинициализировать конфигурационные переменные в соответствии с настройками </p>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">True/False</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RegObject"></span><code>function <b>RegObject</b>(Obj: <a  href="obj_proto.TICObjectProto.html">TICObjectProto</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Регистрация нового объекта в словаре внутренних объектов. Регистрация производиться по имени объекта.  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>Obj</dt>
+<dd>Регистрируемый объект</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">True - регистрация прошла успешно / False - ошибка</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindObject"></span><code>function <b>FindObject</b>(sObjName: AnsiString): <a  href="obj_proto.TICObjectProto.html">TICObjectProto</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Поиск объекта в зарегистрированных по имени  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sObjName</dt>
+<dd>Наименование объекта</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Найденный объект или nil если объект не найден среди зарегистрированных</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateDataCtrl"></span><code>function <b>CreateDataCtrl</b>(Properties: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>): <a  href="obj_proto.TICObjectProto.html">TICObjectProto</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Метод создания объекта контроллера данных с инициализацией его свойств  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>Properties</dt>
+<dd>Словаряь свойств объекта</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Созданный объект или nil в случае ошибки</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateDataControllers"></span><code>function <b>CreateDataControllers</b>(ObjectNames: TStringList=nil): TList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Создание объектов по именам  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>ObjectNames</dt>
+<dd>Список имен объектов</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Список созданных объектов</p></td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

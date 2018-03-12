@@ -1,3 +1,6 @@
+{
+Модуль маппера демона/службы
+}
 unit uni_daemonmapperunit;
 
 {$mode objfpc}{$H+}
@@ -10,9 +13,21 @@ uses
 
 type
 
-  { TUniReaderDaemonMapper }
-
+  { TUniReaderDaemonMapper  — это компонент, отвечающий за управление работой сервисов.
+  Особенно актуален он в случае включения в один исполняемый модуль нескольких сервисов.}
   TUniReaderDaemonMapper = class(TDaemonMapper)
+    {
+    Обработчик выполнения инсталяции демона/службы
+
+    ВНИМАНИЕ! Здесь добавляем ключи для запуска прослушки не стандартного порта
+    Прослушиваемый порт указывается при инсталляции службы:
+
+    uni_reader.exe --port=8081 --install
+
+    с помощью RunArguments этот ключ переносится в комманду запуска службы:
+
+    uni_reader.exe --run --port=8081
+    }
     procedure UniReaderDaemonMapperInstall(Sender: TObject);
   private
 

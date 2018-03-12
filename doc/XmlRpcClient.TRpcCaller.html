@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: XmlRpcClient: Класс TRpcCaller</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TRpcCaller"></span><h1 class="cio">Класс TRpcCaller</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Свойства</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="XmlRpcClient.html">XmlRpcClient</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TRpcCaller = class(<a class="normal" href="XmlRpcClient.TRpcClientParser.html">TRpcClientParser</a>)</code></p>
+<h2 class="description">Описание</h2>
+<div class="nodescription">No description available, ancestor TRpcClientParser description follows</div><span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal" href="XmlRpcClient.TRpcClientParser.html">TRpcClientParser</a></li>
+<li class="thisitem">TRpcCaller</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="XmlRpcClient.TRpcCaller.html#Create">Create</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="XmlRpcClient.TRpcCaller.html#Execute">Execute</a></b>(RpcFunction: <a  href="XmlRpcTypes.IRpcFunction.html">IRpcFunction</a>; Ttl: Integer): <a  href="XmlRpcTypes.IRpcResult.html">IRpcResult</a>; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="XmlRpcClient.TRpcCaller.html#Execute">Execute</a></b>(const XmlRequest: string): <a  href="XmlRpcTypes.IRpcResult.html">IRpcResult</a>; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="XmlRpcClient.TRpcCaller.html#Execute">Execute</a></b>(Value: <a  href="XmlRpcTypes.IRpcFunction.html">IRpcFunction</a>): <a  href="XmlRpcTypes.IRpcResult.html">IRpcResult</a>; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="XmlRpcClient.TRpcCaller.html#DeleteOldCache">DeleteOldCache</a></b>(Ttl: Integer);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Свойства</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#EndPoint">EndPoint</a></b>: string read FEndPoint write FEndPoint;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#HostName">HostName</a></b>: string read FHostName write FHostName;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#HostPort">HostPort</a></b>: Integer read FHostPort write FHostPort;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#ProxyName">ProxyName</a></b>: string read FProxyName write FProxyName;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#ProxyPort">ProxyPort</a></b>: Integer read FProxyPort write FProxyPort;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#ProxyUserName">ProxyUserName</a></b>: string read FProxyUserName write FProxyUserName;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#ProxyPassword">ProxyPassword</a></b>: string read FProxyPassword write FProxyPassword;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#ProxyBasicAuth">ProxyBasicAuth</a></b>: Boolean read FProxyBasicAuth write FProxyBasicAuth;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#SSLEnable">SSLEnable</a></b>: Boolean read FSSLEnable write FSSLEnable;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#SSLRootCertFile">SSLRootCertFile</a></b>: string read FSSLRootCertFile write
+      FSSLRootCertFile;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#SSLCertFile">SSLCertFile</a></b>: string read FSSLCertFile write FSSLCertFile;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="XmlRpcClient.TRpcCaller.html#SSLKeyFile">SSLKeyFile</a></b>: string read FSSLKeyFile write FSSLKeyFile;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Execute"></span><code>function <b>Execute</b>(RpcFunction: <a  href="XmlRpcTypes.IRpcFunction.html">IRpcFunction</a>; Ttl: Integer): <a  href="XmlRpcTypes.IRpcResult.html">IRpcResult</a>; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Execute"></span><code>function <b>Execute</b>(const XmlRequest: string): <a  href="XmlRpcTypes.IRpcResult.html">IRpcResult</a>; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Execute"></span><code>function <b>Execute</b>(Value: <a  href="XmlRpcTypes.IRpcFunction.html">IRpcFunction</a>): <a  href="XmlRpcTypes.IRpcResult.html">IRpcResult</a>; overload;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DeleteOldCache"></span><code>procedure <b>DeleteOldCache</b>(Ttl: Integer);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Свойства</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="EndPoint"></span><code>property <b>EndPoint</b>: string read FEndPoint write FEndPoint;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HostName"></span><code>property <b>HostName</b>: string read FHostName write FHostName;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HostPort"></span><code>property <b>HostPort</b>: Integer read FHostPort write FHostPort;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ProxyName"></span><code>property <b>ProxyName</b>: string read FProxyName write FProxyName;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ProxyPort"></span><code>property <b>ProxyPort</b>: Integer read FProxyPort write FProxyPort;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ProxyUserName"></span><code>property <b>ProxyUserName</b>: string read FProxyUserName write FProxyUserName;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ProxyPassword"></span><code>property <b>ProxyPassword</b>: string read FProxyPassword write FProxyPassword;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ProxyBasicAuth"></span><code>property <b>ProxyBasicAuth</b>: Boolean read FProxyBasicAuth write FProxyBasicAuth;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SSLEnable"></span><code>property <b>SSLEnable</b>: Boolean read FSSLEnable write FSSLEnable;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SSLRootCertFile"></span><code>property <b>SSLRootCertFile</b>: string read FSSLRootCertFile write
+      FSSLRootCertFile;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SSLCertFile"></span><code>property <b>SSLCertFile</b>: string read FSSLCertFile write FSSLCertFile;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SSLKeyFile"></span><code>property <b>SSLKeyFile</b>: string read FSSLKeyFile write FSSLKeyFile;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

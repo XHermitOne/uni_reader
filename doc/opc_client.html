@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: opc_client</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль opc_client</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Классы, интерфейсы и объекты</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Типы</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Константы</a></div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+OPCClient - это компонент. Предназначен для написания систем сбора и управления данными, других программ, или превращения Lazarus в программу для создания SCADA систем.
+
+<p>Copyright (C) 2013 Чигрин В.Н. vchigrin@mail.ru
+
+<p>This library is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License for more details.
+
+<p>You should have received a copy of the GNU Library General Public License along with this library; if not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+<p>Ошибки COM пр работе с OPC серверами: Взято из <a  href="https://www.boschrexroth.com/country_units/america/united_states/sub_websites/brus_dcc/documentation_downloads/ProductDocumentation/CurrentProducts/ControlSystems/MTC200/V23/misc/28888001.pdf">https://www.boschrexroth.com/country_units/america/united_states/sub_websites/brus_dcc/documentation_downloads/ProductDocumentation/CurrentProducts/ControlSystems/MTC200/V23/misc/28888001.pdf</a>
+
+<p>The &quot;code&quot; is subdivided into several ranges: 0x0000 – 0x0200 Reserved Microsoft codes, OPC 1.0 error codes 0x0200 – 0x7FFF Reserved OPC Foundation 0x8000 – 0xFFFF OPC server error codes
+
+<p>Fig. 3-3: Structure of the facility codes
+
+<p>The Indramat OPC server employs the Indramat function interface as communication means. These errors are now converted into HRESULT values in the OPC server.
+
+<p>The Indramat function interface now has the problem of routing onwards the errors of employed components. This is done using an enhanced error system.
+
+<p>Since these error numbers depend on the employed components, an HRESULT error code is dynamically assigned in the Indramat OPC server. This error code is in the range 0xEEEE – 0xFFFF.
+
+<p>The error proper can be determined using this HRESULT value and the GetErrorString method.</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Классы, интерфейсы и объекты</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Имя</th>
+<th class="itemdesc">Описание</th>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="opc_client.EOPCError.html"><code>EOPCError</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Record&nbsp;<a class="bold" href="opc_client.TTagPosition.html"><code>TTagPosition</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="opc_client.TOPCClient.html"><code>TOPCClient</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>operator = (TP1, TP2: <a  href="opc_client.TTagPosition.html">TTagPosition</a>) b:Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>operator &lt;&gt; (TP1, TP2: <a  href="opc_client.TTagPosition.html">TTagPosition</a>) b:Boolean;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Типы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#TArrayOfTagPosition">TArrayOfTagPosition</a></b> = Array Of <a  href="opc_client.TTagPosition.html">TTagPosition</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Константы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoOPCServer">msgNoOPCServer</a></b>  = 'Имя OPC сервера незадано!';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoConnectOPC">msgNoConnectOPC</a></b> = 'Невозможно соединиться с OPC сервером &lt;%s&gt;!';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoListTag">msgNoListTag</a></b>    = 'Нет списка OPC-тэгов!';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoListTag1">msgNoListTag1</a></b>   = 'Список OPC-тэгов пустой!';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrAddGroup">msgErrAddGroup</a></b>  = 'Ошибка добавления группы &lt;%s&gt;. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoGrounName">msgNoGrounName</a></b>  = 'Нет Группы с именем %s в списке тэгов!';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoTagName">msgNoTagName</a></b>    = 'Нет Тэга с именем %s в списке тэгов!';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrAddItem">msgErrAddItem</a></b>   = 'Невозможно добавить элементы в OPC-группу %s. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrAddTag">msgErrAddTag</a></b>    = 'Ошибка при добавлении элемента %s. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrCallback">msgErrCallback</a></b>  = 'Ошибка при создании функции обратного вызова.' +  LineEnding
+                    + 'Для группы %s';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoFindConnectionPoint">msgNoFindConnectionPoint</a></b> =
+                    'Нет сервиса FindConnectionPoint в сервере OPC (IOPCDataCallback)';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrAdvise">msgErrAdvise</a></b>    = 'Ошибка вызова Advise для группы &lt;%s&gt;. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrUnadvise">msgErrUnadvise</a></b>  = 'Ошибка вызова Unadvise для группы %s. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrDelTag">msgErrDelTag</a></b>    = 'Ошибка при удалении OPC-группы %s. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrDelItem">msgErrDelItem</a></b>   = 'Ошибка при удалении элемента %s. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrDelGroup">msgErrDelGroup</a></b>  = 'Ошибка при удалении группы %s. Ошибка [%s]';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrNoTag">msgErrNoTag</a></b>     = 'Неверно уназан номер Группы или Тэга!!!';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgErrRecOPCTag">msgErrRecOPCTag</a></b> = 'Ошибка записи Тэга в сервер!';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="opc_client.html#msgNoOPC">msgNoOPC</a></b>        = 'Ни один OPC-сервер не установлен' +  LineEnding
+                     + ' В системе!';</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="="></span><code>operator = (TP1, TP2: <a  href="opc_client.TTagPosition.html">TTagPosition</a>) b:Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Для работы с позицией Тэга (TTagPosition)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="<"></span><code>operator &lt;&gt; (TP1, TP2: <a  href="opc_client.TTagPosition.html">TTagPosition</a>) b:Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Типы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TArrayOfTagPosition"></span><code><b>TArrayOfTagPosition</b> = Array Of <a  href="opc_client.TTagPosition.html">TTagPosition</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Константы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoOPCServer"></span><code><b>msgNoOPCServer</b>  = 'Имя OPC сервера незадано!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoConnectOPC"></span><code><b>msgNoConnectOPC</b> = 'Невозможно соединиться с OPC сервером &lt;%s&gt;!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoListTag"></span><code><b>msgNoListTag</b>    = 'Нет списка OPC-тэгов!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoListTag1"></span><code><b>msgNoListTag1</b>   = 'Список OPC-тэгов пустой!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrAddGroup"></span><code><b>msgErrAddGroup</b>  = 'Ошибка добавления группы &lt;%s&gt;. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoGrounName"></span><code><b>msgNoGrounName</b>  = 'Нет Группы с именем %s в списке тэгов!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoTagName"></span><code><b>msgNoTagName</b>    = 'Нет Тэга с именем %s в списке тэгов!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrAddItem"></span><code><b>msgErrAddItem</b>   = 'Невозможно добавить элементы в OPC-группу %s. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrAddTag"></span><code><b>msgErrAddTag</b>    = 'Ошибка при добавлении элемента %s. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrCallback"></span><code><b>msgErrCallback</b>  = 'Ошибка при создании функции обратного вызова.' +  LineEnding
+                    + 'Для группы %s';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoFindConnectionPoint"></span><code><b>msgNoFindConnectionPoint</b> =
+                    'Нет сервиса FindConnectionPoint в сервере OPC (IOPCDataCallback)';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+#13#10</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrAdvise"></span><code><b>msgErrAdvise</b>    = 'Ошибка вызова Advise для группы &lt;%s&gt;. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrUnadvise"></span><code><b>msgErrUnadvise</b>  = 'Ошибка вызова Unadvise для группы %s. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrDelTag"></span><code><b>msgErrDelTag</b>    = 'Ошибка при удалении OPC-группы %s. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrDelItem"></span><code><b>msgErrDelItem</b>   = 'Ошибка при удалении элемента %s. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrDelGroup"></span><code><b>msgErrDelGroup</b>  = 'Ошибка при удалении группы %s. Ошибка [%s]';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrNoTag"></span><code><b>msgErrNoTag</b>     = 'Неверно уназан номер Группы или Тэга!!!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgErrRecOPCTag"></span><code><b>msgErrRecOPCTag</b> = 'Ошибка записи Тэга в сервер!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="msgNoOPC"></span><code><b>msgNoOPC</b>        = 'Ни один OPC-сервер не установлен' +  LineEnding
+                     + ' В системе!';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

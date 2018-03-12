@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: dictionary: Класс TStrDictionary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TStrDictionary"></span><h1 class="cio">Класс TStrDictionary</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section">Свойства</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="dictionary.html">dictionary</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TStrDictionary = class(TStringList)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+TStrDictionary - Простой словарь в качастве ключей у которого строки.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TStringList</li>
+<li class="thisitem">TStrDictionary</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="dictionary.TStrDictionary.html#Create">Create</a></b>();</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="dictionary.TStrDictionary.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="dictionary.TStrDictionary.html#Free">Free</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="dictionary.TStrDictionary.html#PrintContent">PrintContent</a></b>();</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#HasKey">HasKey</a></b>(sKey: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetKey">GetKey</a></b>(iIndex: Integer): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetKeys">GetKeys</a></b>(): TStringList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetKeysStr">GetKeysStr</a></b>(): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetByName">GetByName</a></b>(sKey: AnsiString): TObject;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#SetObject">SetObject</a></b>(sKey: AnsiString; oObject: TObject): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#IsEmpty">IsEmpty</a></b>(): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#Update">Update</a></b>(Dictionary: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#DelItem">DelItem</a></b>(sKey: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#AddStrValue">AddStrValue</a></b>(sKey: AnsiString; sValue: AnsiString): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetStrValue">GetStrValue</a></b>(sKey: AnsiString): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#SetStrValue">SetStrValue</a></b>(sKey: AnsiString; sValue: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#AddDateTimeValue">AddDateTimeValue</a></b>(sKey: AnsiString; dtValue: TDateTime): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetDateTimeValue">GetDateTimeValue</a></b>(sKey: AnsiString): TDateTime;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#SetDateTimeValue">SetDateTimeValue</a></b>(sKey: AnsiString; dtValue: TDateTime): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#AddStrList">AddStrList</a></b>(sKey: AnsiString; slValue: TStringList): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#GetStrList">GetStrList</a></b>(sKey: AnsiString): TStringList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="dictionary.TStrDictionary.html#SetStrList">SetStrList</a></b>(sKey: AnsiString; slValue: TStringList): Boolean;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>();</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Free"></span><code>procedure <b>Free</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="PrintContent"></span><code>procedure <b>PrintContent</b>();</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Распечатать содержимое словаря</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="HasKey"></span><code>function <b>HasKey</b>(sKey: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Проверка на существование переменной окружения с таким именем </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Проверяемый ключ словаря</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetKey"></span><code>function <b>GetKey</b>(iIndex: Integer): AnsiString;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить ключ по индексу </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>iIndex</dt>
+<dd>Индекс</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetKeys"></span><code>function <b>GetKeys</b>(): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Список ключей</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetKeysStr"></span><code>function <b>GetKeysStr</b>(): AnsiString;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Список ключей</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetByName"></span><code>function <b>GetByName</b>(sKey: AnsiString): TObject;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить объект по имени/ключу </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetObject"></span><code>function <b>SetObject</b>(sKey: AnsiString; oObject: TObject): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить объект в словаре  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>oObject</dt>
+<dd>Устанавливаемый объект</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="IsEmpty"></span><code>function <b>IsEmpty</b>(): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Проверка на тустой словарь</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Update"></span><code>function <b>Update</b>(Dictionary: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Функция обновления словаря по другому словарю </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>Dictionary</dt>
+<dd>Объект словаря</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DelItem"></span><code>function <b>DelItem</b>(sKey: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Функция удаления элемента словаря по ключу </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddStrValue"></span><code>function <b>AddStrValue</b>(sKey: AnsiString; sValue: AnsiString): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Добавить строку в словарь  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>sValue</dt>
+<dd>Строковое значение</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetStrValue"></span><code>function <b>GetStrValue</b>(sKey: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить строку из словаря по ключу </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetStrValue"></span><code>function <b>SetStrValue</b>(sKey: AnsiString; sValue: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить строку в словарь  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>sValue</dt>
+<dd>Строковое значение</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddDateTimeValue"></span><code>function <b>AddDateTimeValue</b>(sKey: AnsiString; dtValue: TDateTime): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Добавить дату-время в словарь  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>dtValue</dt>
+<dd>Значение TDateTime</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetDateTimeValue"></span><code>function <b>GetDateTimeValue</b>(sKey: AnsiString): TDateTime;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить дату-время из словаря </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetDateTimeValue"></span><code>function <b>SetDateTimeValue</b>(sKey: AnsiString; dtValue: TDateTime): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить дату-время в словарь  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>dtValue</dt>
+<dd>Значение TDateTime</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddStrList"></span><code>function <b>AddStrList</b>(sKey: AnsiString; slValue: TStringList): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Добавить список строк в словарь  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>slValue</dt>
+<dd>Значение TStringList</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetStrList"></span><code>function <b>GetStrList</b>(sKey: AnsiString): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить список строк из словаря </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetStrList"></span><code>function <b>SetStrList</b>(sKey: AnsiString; slValue: TStringList): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить список строк в словарь  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sKey</dt>
+<dd>Ключ</dd>
+<dt>slValue</dt>
+<dd>Значение TStringList</dd>
+</dl>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

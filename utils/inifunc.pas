@@ -1,3 +1,6 @@
+{
+Классы работы с INI файлами
+}
 unit inifunc;
 
 {$mode objfpc}{$H+}
@@ -20,9 +23,18 @@ type
       destructor Destroy; override;
       procedure Free;
 
-      { Загрузить содержимое INI файла }
+      {
+      Загрузить содержимое INI файла
+      @param sINIFileName Полное наименование INI файла
+      @return True - загрузка прошла успешно / False - ошибка
+      }
       function LoadIniFile(sINIFileName: AnsiString): Boolean;
-      { Получить значение параметра }
+      {
+      Получить значение параметра
+      @param sSectionName Наименование секции
+      @param sOptionName Наименование параметра
+      @return Строка значения указанного параметра. Если параметр не существует то возвращает пустую строку
+      }
       function GetOptionValue(sSectionName: AnsiString; sOptionName: AnsiString): AnsiString;
 
     end;

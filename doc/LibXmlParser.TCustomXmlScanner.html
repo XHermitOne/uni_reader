@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: LibXmlParser: Класс TCustomXmlScanner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TCustomXmlScanner"></span><h1 class="cio">Класс TCustomXmlScanner</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Поля</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Свойства</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="LibXmlParser.html">LibXmlParser</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TCustomXmlScanner = class(TComponent)</code></p>
+<h2 class="description">Описание</h2>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
+<li class="thisitem">TCustomXmlScanner</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Поля</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FXmlParser">FXmlParser</a></b>: <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnXmlProlog">FOnXmlProlog</a></b>: <a  href="LibXmlParser.html#TXmlPrologEvent">TXmlPrologEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnComment">FOnComment</a></b>: <a  href="LibXmlParser.html#TCommentEvent">TCommentEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnPI">FOnPI</a></b>: <a  href="LibXmlParser.html#TPIEvent">TPIEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdRead">FOnDtdRead</a></b>: <a  href="LibXmlParser.html#TDtdEvent">TDtdEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnStartTag">FOnStartTag</a></b>: <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnEmptyTag">FOnEmptyTag</a></b>: <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnEndTag">FOnEndTag</a></b>: <a  href="LibXmlParser.html#TEndTagEvent">TEndTagEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnContent">FOnContent</a></b>: <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnCData">FOnCData</a></b>: <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnElement">FOnElement</a></b>: <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnAttList">FOnAttList</a></b>: <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnEntity">FOnEntity</a></b>: <a  href="LibXmlParser.html#TEntityEvent">TEntityEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnNotation">FOnNotation</a></b>: <a  href="LibXmlParser.html#TNotationEvent">TNotationEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdError">FOnDtdError</a></b>: <a  href="LibXmlParser.html#TErrorEvent">TErrorEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnLoadExternal">FOnLoadExternal</a></b>: <a  href="LibXmlParser.html#TExternalEvent">TExternalEvent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FOnTranslateEncoding">FOnTranslateEncoding</a></b>: <a  href="LibXmlParser.html#TEncodingEvent">TEncodingEvent</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TCustomXmlScanner.html#FStopParser">FStopParser</a></b>: BOOLEAN;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TCustomXmlScanner.html#GetNormalize">GetNormalize</a></b> : BOOLEAN;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#SetNormalize">SetNormalize</a></b> (Value : BOOLEAN);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenXmlProlog">WhenXmlProlog</a></b>(XmlVersion, Encoding: STRING; Standalone : BOOLEAN); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenComment">WhenComment</a></b> (Comment : STRING); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenPI">WhenPI</a></b> (Target, Content: STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenDtdRead">WhenDtdRead</a></b> (RootElementName : STRING); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenStartTag">WhenStartTag</a></b> (TagName : STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenEmptyTag">WhenEmptyTag</a></b> (TagName : STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenEndTag">WhenEndTag</a></b> (TagName : STRING); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenContent">WhenContent</a></b> (Content : STRING); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenCData">WhenCData</a></b> (Content : STRING); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenElement">WhenElement</a></b> (ElemDef : <a  href="LibXmlParser.TElemDef.html">TElemDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenAttList">WhenAttList</a></b> (ElemDef : <a  href="LibXmlParser.TElemDef.html">TElemDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenEntity">WhenEntity</a></b> (EntityDef : <a  href="LibXmlParser.TEntityDef.html">TEntityDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenNotation">WhenNotation</a></b> (NotationDef : <a  href="LibXmlParser.TNotationDef.html">TNotationDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#WhenDtdError">WhenDtdError</a></b> (ErrorPos : PChar); VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>CONSTRUCTOR <b><a  href="LibXmlParser.TCustomXmlScanner.html#Create">Create</a></b> (AOwner: TComponent); OVERRIDE;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>DESTRUCTOR <b><a  href="LibXmlParser.TCustomXmlScanner.html#Destroy">Destroy</a></b>; OVERRIDE;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#LoadFromFile">LoadFromFile</a></b> (Filename : TFilename);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#LoadFromBuffer">LoadFromBuffer</a></b> (Buffer : PChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#SetBuffer">SetBuffer</a></b> (Buffer : PChar);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TCustomXmlScanner.html#GetFilename">GetFilename</a></b> : TFilename;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TCustomXmlScanner.html#Execute">Execute</a></b>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Свойства</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#XmlParser">XmlParser</a></b>           : <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>        READ <a  href="LibXmlParser.TCustomXmlScanner.html#FXmlParser">FXmlParser</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#StopParser">StopParser</a></b>          : BOOLEAN           READ <a  href="LibXmlParser.TCustomXmlScanner.html#FStopParser">FStopParser</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FStopParser">FStopParser</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#Filename">Filename</a></b>            : TFilename         READ <a  href="LibXmlParser.TCustomXmlScanner.html#GetFilename">GetFilename</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#LoadFromFile">LoadFromFile</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#Normalize">Normalize</a></b>           : BOOLEAN           READ <a  href="LibXmlParser.TCustomXmlScanner.html#GetNormalize">GetNormalize</a>         WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#SetNormalize">SetNormalize</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnXmlProlog">OnXmlProlog</a></b>         : <a  href="LibXmlParser.html#TXmlPrologEvent">TXmlPrologEvent</a>   READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnXmlProlog">FOnXmlProlog</a>         WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnXmlProlog">FOnXmlProlog</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnComment">OnComment</a></b>           : <a  href="LibXmlParser.html#TCommentEvent">TCommentEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnComment">FOnComment</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnComment">FOnComment</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnPI">OnPI</a></b>                : <a  href="LibXmlParser.html#TPIEvent">TPIEvent</a>          READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnPI">FOnPI</a>                WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnPI">FOnPI</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnDtdRead">OnDtdRead</a></b>           : <a  href="LibXmlParser.html#TDtdEvent">TDtdEvent</a>         READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdRead">FOnDtdRead</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdRead">FOnDtdRead</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnStartTag">OnStartTag</a></b>          : <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnStartTag">FOnStartTag</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnStartTag">FOnStartTag</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnEmptyTag">OnEmptyTag</a></b>          : <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEmptyTag">FOnEmptyTag</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEmptyTag">FOnEmptyTag</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnEndTag">OnEndTag</a></b>            : <a  href="LibXmlParser.html#TEndTagEvent">TEndTagEvent</a>      READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEndTag">FOnEndTag</a>            WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEndTag">FOnEndTag</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnContent">OnContent</a></b>           : <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnContent">FOnContent</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnContent">FOnContent</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnCData">OnCData</a></b>             : <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnCData">FOnCData</a>             WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnCData">FOnCData</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnElement">OnElement</a></b>           : <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnElement">FOnElement</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnElement">FOnElement</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnAttList">OnAttList</a></b>           : <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnAttList">FOnAttList</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnAttList">FOnAttList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnEntity">OnEntity</a></b>            : <a  href="LibXmlParser.html#TEntityEvent">TEntityEvent</a>      READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEntity">FOnEntity</a>            WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEntity">FOnEntity</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnNotation">OnNotation</a></b>          : <a  href="LibXmlParser.html#TNotationEvent">TNotationEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnNotation">FOnNotation</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnNotation">FOnNotation</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnDtdError">OnDtdError</a></b>          : <a  href="LibXmlParser.html#TErrorEvent">TErrorEvent</a>       READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdError">FOnDtdError</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdError">FOnDtdError</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnLoadExternal">OnLoadExternal</a></b>      : <a  href="LibXmlParser.html#TExternalEvent">TExternalEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnLoadExternal">FOnLoadExternal</a>      WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnLoadExternal">FOnLoadExternal</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TCustomXmlScanner.html#OnTranslateEncoding">OnTranslateEncoding</a></b> : <a  href="LibXmlParser.html#TEncodingEvent">TEncodingEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnTranslateEncoding">FOnTranslateEncoding</a> WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnTranslateEncoding">FOnTranslateEncoding</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Поля</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FXmlParser"></span><code><b>FXmlParser</b>: <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnXmlProlog"></span><code><b>FOnXmlProlog</b>: <a  href="LibXmlParser.html#TXmlPrologEvent">TXmlPrologEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnComment"></span><code><b>FOnComment</b>: <a  href="LibXmlParser.html#TCommentEvent">TCommentEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnPI"></span><code><b>FOnPI</b>: <a  href="LibXmlParser.html#TPIEvent">TPIEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnDtdRead"></span><code><b>FOnDtdRead</b>: <a  href="LibXmlParser.html#TDtdEvent">TDtdEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnStartTag"></span><code><b>FOnStartTag</b>: <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnEmptyTag"></span><code><b>FOnEmptyTag</b>: <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnEndTag"></span><code><b>FOnEndTag</b>: <a  href="LibXmlParser.html#TEndTagEvent">TEndTagEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnContent"></span><code><b>FOnContent</b>: <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnCData"></span><code><b>FOnCData</b>: <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnElement"></span><code><b>FOnElement</b>: <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnAttList"></span><code><b>FOnAttList</b>: <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnEntity"></span><code><b>FOnEntity</b>: <a  href="LibXmlParser.html#TEntityEvent">TEntityEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnNotation"></span><code><b>FOnNotation</b>: <a  href="LibXmlParser.html#TNotationEvent">TNotationEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnDtdError"></span><code><b>FOnDtdError</b>: <a  href="LibXmlParser.html#TErrorEvent">TErrorEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnLoadExternal"></span><code><b>FOnLoadExternal</b>: <a  href="LibXmlParser.html#TExternalEvent">TExternalEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FOnTranslateEncoding"></span><code><b>FOnTranslateEncoding</b>: <a  href="LibXmlParser.html#TEncodingEvent">TEncodingEvent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FStopParser"></span><code><b>FStopParser</b>: BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetNormalize"></span><code>FUNCTION <b>GetNormalize</b> : BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="SetNormalize"></span><code>PROCEDURE <b>SetNormalize</b> (Value : BOOLEAN);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenXmlProlog"></span><code>PROCEDURE <b>WhenXmlProlog</b>(XmlVersion, Encoding: STRING; Standalone : BOOLEAN); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenComment"></span><code>PROCEDURE <b>WhenComment</b> (Comment : STRING); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenPI"></span><code>PROCEDURE <b>WhenPI</b> (Target, Content: STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenDtdRead"></span><code>PROCEDURE <b>WhenDtdRead</b> (RootElementName : STRING); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenStartTag"></span><code>PROCEDURE <b>WhenStartTag</b> (TagName : STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenEmptyTag"></span><code>PROCEDURE <b>WhenEmptyTag</b> (TagName : STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenEndTag"></span><code>PROCEDURE <b>WhenEndTag</b> (TagName : STRING); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenContent"></span><code>PROCEDURE <b>WhenContent</b> (Content : STRING); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenCData"></span><code>PROCEDURE <b>WhenCData</b> (Content : STRING); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenElement"></span><code>PROCEDURE <b>WhenElement</b> (ElemDef : <a  href="LibXmlParser.TElemDef.html">TElemDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenAttList"></span><code>PROCEDURE <b>WhenAttList</b> (ElemDef : <a  href="LibXmlParser.TElemDef.html">TElemDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenEntity"></span><code>PROCEDURE <b>WhenEntity</b> (EntityDef : <a  href="LibXmlParser.TEntityDef.html">TEntityDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenNotation"></span><code>PROCEDURE <b>WhenNotation</b> (NotationDef : <a  href="LibXmlParser.TNotationDef.html">TNotationDef</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="WhenDtdError"></span><code>PROCEDURE <b>WhenDtdError</b> (ErrorPos : PChar); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>CONSTRUCTOR <b>Create</b> (AOwner: TComponent); OVERRIDE;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>DESTRUCTOR <b>Destroy</b>; OVERRIDE;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="LoadFromFile"></span><code>PROCEDURE <b>LoadFromFile</b> (Filename : TFilename);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="LoadFromBuffer"></span><code>PROCEDURE <b>LoadFromBuffer</b> (Buffer : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Load XML Document from file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetBuffer"></span><code>PROCEDURE <b>SetBuffer</b> (Buffer : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Load XML Document from buffer</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetFilename"></span><code>FUNCTION <b>GetFilename</b> : TFilename;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Refer to Buffer</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Execute"></span><code>PROCEDURE <b>Execute</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Свойства</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="XmlParser"></span><code>property <b>XmlParser</b>           : <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>        READ <a  href="LibXmlParser.TCustomXmlScanner.html#FXmlParser">FXmlParser</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Perform scanning</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="StopParser"></span><code>property <b>StopParser</b>          : BOOLEAN           READ <a  href="LibXmlParser.TCustomXmlScanner.html#FStopParser">FStopParser</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FStopParser">FStopParser</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Filename"></span><code>property <b>Filename</b>            : TFilename         READ <a  href="LibXmlParser.TCustomXmlScanner.html#GetFilename">GetFilename</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#LoadFromFile">LoadFromFile</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="Normalize"></span><code>property <b>Normalize</b>           : BOOLEAN           READ <a  href="LibXmlParser.TCustomXmlScanner.html#GetNormalize">GetNormalize</a>         WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#SetNormalize">SetNormalize</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnXmlProlog"></span><code>property <b>OnXmlProlog</b>         : <a  href="LibXmlParser.html#TXmlPrologEvent">TXmlPrologEvent</a>   READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnXmlProlog">FOnXmlProlog</a>         WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnXmlProlog">FOnXmlProlog</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnComment"></span><code>property <b>OnComment</b>           : <a  href="LibXmlParser.html#TCommentEvent">TCommentEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnComment">FOnComment</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnComment">FOnComment</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnPI"></span><code>property <b>OnPI</b>                : <a  href="LibXmlParser.html#TPIEvent">TPIEvent</a>          READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnPI">FOnPI</a>                WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnPI">FOnPI</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnDtdRead"></span><code>property <b>OnDtdRead</b>           : <a  href="LibXmlParser.html#TDtdEvent">TDtdEvent</a>         READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdRead">FOnDtdRead</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdRead">FOnDtdRead</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnStartTag"></span><code>property <b>OnStartTag</b>          : <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnStartTag">FOnStartTag</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnStartTag">FOnStartTag</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnEmptyTag"></span><code>property <b>OnEmptyTag</b>          : <a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEmptyTag">FOnEmptyTag</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEmptyTag">FOnEmptyTag</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnEndTag"></span><code>property <b>OnEndTag</b>            : <a  href="LibXmlParser.html#TEndTagEvent">TEndTagEvent</a>      READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEndTag">FOnEndTag</a>            WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEndTag">FOnEndTag</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnContent"></span><code>property <b>OnContent</b>           : <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnContent">FOnContent</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnContent">FOnContent</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnCData"></span><code>property <b>OnCData</b>             : <a  href="LibXmlParser.html#TContentEvent">TContentEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnCData">FOnCData</a>             WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnCData">FOnCData</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnElement"></span><code>property <b>OnElement</b>           : <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnElement">FOnElement</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnElement">FOnElement</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnAttList"></span><code>property <b>OnAttList</b>           : <a  href="LibXmlParser.html#TElementEvent">TElementEvent</a>     READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnAttList">FOnAttList</a>           WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnAttList">FOnAttList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnEntity"></span><code>property <b>OnEntity</b>            : <a  href="LibXmlParser.html#TEntityEvent">TEntityEvent</a>      READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEntity">FOnEntity</a>            WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnEntity">FOnEntity</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnNotation"></span><code>property <b>OnNotation</b>          : <a  href="LibXmlParser.html#TNotationEvent">TNotationEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnNotation">FOnNotation</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnNotation">FOnNotation</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnDtdError"></span><code>property <b>OnDtdError</b>          : <a  href="LibXmlParser.html#TErrorEvent">TErrorEvent</a>       READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdError">FOnDtdError</a>          WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnDtdError">FOnDtdError</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnLoadExternal"></span><code>property <b>OnLoadExternal</b>      : <a  href="LibXmlParser.html#TExternalEvent">TExternalEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnLoadExternal">FOnLoadExternal</a>      WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnLoadExternal">FOnLoadExternal</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="OnTranslateEncoding"></span><code>property <b>OnTranslateEncoding</b> : <a  href="LibXmlParser.html#TEncodingEvent">TEncodingEvent</a>    READ <a  href="LibXmlParser.TCustomXmlScanner.html#FOnTranslateEncoding">FOnTranslateEncoding</a> WRITE <a  href="LibXmlParser.TCustomXmlScanner.html#FOnTranslateEncoding">FOnTranslateEncoding</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

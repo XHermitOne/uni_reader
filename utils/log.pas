@@ -1,5 +1,3 @@
-unit log;
-
 {
 Функции журналирования.
 
@@ -19,31 +17,53 @@ unit log;
 перечислить через точку с запятой.
 
 атрибуты
+
 0 	нормальный режим
+
 1 	жирный
+
 4 	подчеркнутый
+
 5 	мигающий
+
 7 	инвертированные цвета
+
 8 	невидимый
 
 цвет текста
+
 30 	черный
+
 31 	красный
+
 32 	зеленый
+
 33 	желтый
+
 34 	синий
+
 35 	пурпурный
+
 36 	голубой
+
 37 	белый
 
 цвет фона
+
 40 	черный
+
 41 	красный
+
 42 	зеленый
+
 43 	желтый
+
 44 	синий
+
 45 	пурпурный
+
 46 	голубой
+
 47 	белый
 
 Версия: 0.0.5.3
@@ -51,6 +71,9 @@ unit log;
 ВНИМАНИЕ! Вывод сообщений под Linux проверять только в терминале.
 Только он выводит корректно сообщения.
 }
+
+unit log;
+
 {$mode objfpc}{$H+}
 
 interface
@@ -84,31 +107,134 @@ const
   DEFAULT_APP_LOG_MODE = True;
 
 
+{
+Определить актуальную кодировку для вывода текста.
+@return Актуальная кодировка для вывода текста
+}
 function GetDefaultEncoding(): AnsiString;
 {Определить включен ли режим отладки}
 function GetDebugMode(): Boolean;
 {Определить включен ли режим журналирования}
 function GetLogMode(): Boolean;
 
+{
+Перекодирование AnsiString строки в AnsiString.
+@param sTxt Текст в AnsiString
+@param sCodePage Указание кодировки
+@return Перекодированный текст
+}
 function EncodeUnicodeString(sTxt: AnsiString; sCodePage: AnsiString = 'utf-8'): AnsiString;
+{
+Печать цветового текста
+@param sTxt Печатаемый текст
+@param sColor Дополнительное указание цветовой раскраски
+}
 procedure PrintColorTxt(sTxt: AnsiString; sColor: AnsiString);
 
+{
+Инициализация файла лога.
+@param sLogFileName Имя файла лога. Если имя файла не определено, то пробуем его взять из оружения системы: Ключ LOG_FILENAME
+}
 function OpenLog(sLogFileName: AnsiString = ''): boolean;
+{ Закрыть файл лога. }
 function CloseLog(): boolean;
+{
+Регистрация сообщения в файле лога.
+@param sMsg Регистрируемое сообщение
+@param bForceLog Признак принудительной регистрации
+}
 function LogMsg(sMsg: AnsiString = ''): boolean;
 
+{
+Вывести ОТЛАДОЧНУЮ информацию.
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure DebugMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+{
+Вывести ТЕКСТОВУЮ информацию.
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure InfoMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+{
+Вывести информацию об ОШИБКЕ.
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure ErrorMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+{
+Вывести ПРЕДУПРЕЖДЕНИЕ.
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure WarningMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+{
+Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ.
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure FatalMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
+{
+Вывести СЕРВИСНУЮ информацию.
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure ServiceMsg(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);
 
+{
+Вывести ОТЛАДОЧНУЮ информацию с форматированным текстовым сообщением.
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure DebugMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+{
+Вывести текстовую ИНФОРМАЦИЮ с форматированным текстовым сообщением.
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure InfoMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+{
+Вывести СЕРВИСНУЮ информацию с форматированным текстовым сообщением.
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure ServiceMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+{
+Вывести информацию об ОШИБКЕ с форматированным текстовым сообщением.
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure ErrorMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+{
+Вывести ПРЕДУПРЕЖДЕНИЕ с форматированным текстовым сообщением.
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure WarningMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
+{
+Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ с форматированным текстовым сообщением.
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
+}
 procedure FatalMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);
 
 var
@@ -130,7 +256,7 @@ uses
 
 {
 Определить актуальную кодировку для вывода текста.
-@return (Актуальная кодировка для вывода текста)
+@return Актуальная кодировка для вывода текста
 }
 function GetDefaultEncoding(): AnsiString;
 begin
@@ -171,9 +297,9 @@ end;
 
 {
 Перекодирование AnsiString строки в AnsiString.
-@param (sTxt Текст в AnsiString)
-@param (sCodePage Указание кодировки)
-@return (Перекодированный текст)
+@param sTxt Текст в AnsiString
+@param sCodePage Указание кодировки
+@return Перекодированный текст
 }
 function EncodeUnicodeString(sTxt: AnsiString; sCodePage: AnsiString): AnsiString;
 begin
@@ -200,8 +326,8 @@ end;
 
 {
 Печать цветового текста
-@param (sTxt Печатаемый текст)
-@param (sColor Дополнительное указание цветовой раскраски)
+@param sTxt Печатаемый текст
+@param sColor Дополнительное указание цветовой раскраски
 }
 procedure PrintColorTxt(sTxt: AnsiString; sColor: AnsiString);
 var
@@ -219,9 +345,7 @@ end;
 
 {
 Инициализация файла лога.
-@param (sLogFileName Имя файла лога.
-        Если имя файла не определено, то пробуем его взять из оружения системы
-        Ключ LOG_FILENAME)
+@param sLogFileName Имя файла лога. Если имя файла не определено, то пробуем его взять из оружения системы: Ключ LOG_FILENAME
 }
 function OpenLog(sLogFileName: AnsiString): Boolean;
 begin
@@ -291,8 +415,8 @@ end;
 
 {
 Регистрация сообщения в файле лога.
-@param (sMsg Регистрируемое сообщение)
-@param (bForceLog Признак принудительной регистрации)
+@param sMsg Регистрируемое сообщение
+@param bForceLog Признак принудительной регистрации
 }
 function LogMsg(sMsg: AnsiString = ''): Boolean;
 var
@@ -318,9 +442,9 @@ end;
 
 {
 Вывести ОТЛАДОЧНУЮ информацию.
-@param (sMsg Текстовое сообщение)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure DebugMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -336,9 +460,9 @@ end;
 
 {
 Вывести ТЕКСТОВУЮ информацию.
-@param (sMsg Текстовое сообщение)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure InfoMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -353,9 +477,9 @@ end;
 
 {
 Вывести информацию об ОШИБКЕ.
-@param (sMsg Текстовое сообщение)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure ErrorMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -370,9 +494,9 @@ end;
 
 {
 Вывести ПРЕДУПРЕЖДЕНИЕ.
-@param (sMsg Текстовое сообщение)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure WarningMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -388,9 +512,9 @@ end;
 
 {
 Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ.
-@param (sMsg Текстовое сообщение)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure FatalMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 var
@@ -421,9 +545,9 @@ end;
 
 {
 Вывести СЕРВИСНУЮ информацию.
-@param (sMsg Текстовое сообщение)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsg Текстовое сообщение
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure ServiceMsg(sMsg: AnsiString; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -438,10 +562,10 @@ end;
 
 {
 Вывести ОТЛАДОЧНУЮ информацию с форматированным текстовым сообщением.
-@param (sMsgFmt Формат текстового сообщения)
-@param (aArgs Аргументы текстового сообщения)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure DebugMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -450,10 +574,10 @@ end;
 
 {
 Вывести текстовую ИНФОРМАЦИЮ с форматированным текстовым сообщением.
-@param (sMsgFmt Формат текстового сообщения)
-@param (aArgs Аргументы текстового сообщения)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure InfoMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -462,10 +586,10 @@ end;
 
 {
 Вывести СЕРВИСНУЮ информацию с форматированным текстовым сообщением.
-@param (sMsgFmt Формат текстового сообщения)
-@param (aArgs Аргументы текстового сообщения)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure ServiceMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -474,10 +598,10 @@ end;
 
 {
 Вывести информацию об ОШИБКЕ с форматированным текстовым сообщением.
-@param (sMsgFmt Формат текстового сообщения)
-@param (aArgs Аргументы текстового сообщения)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure ErrorMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -486,10 +610,10 @@ end;
 
 {
 Вывести ПРЕДУПРЕЖДЕНИЕ с форматированным текстовым сообщением.
-@param (sMsgFmt Формат текстового сообщения)
-@param (aArgs Аргументы текстового сообщения)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure WarningMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
 begin
@@ -498,10 +622,10 @@ end;
 
 {
 Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ с форматированным текстовым сообщением.
-@param (sMsgFmt Формат текстового сообщения)
-@param (aArgs Аргументы текстового сообщения)
-@param (bForcePrint Принудительно вывести на экран)
-@param (bForceLog Принудительно записать в журнале)
+@param sMsgFmt Формат текстового сообщения
+@param aArgs Аргументы текстового сообщения
+@param bForcePrint Принудительно вывести на экран
+@param bForceLog Принудительно записать в журнале
 }
 procedure FatalMsgFmt(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean; bForceLog: Boolean);
 begin

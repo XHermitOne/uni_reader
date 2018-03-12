@@ -1,3 +1,6 @@
+{
+Модуль абстрактного объекта системы
+}
 unit obj_proto;
 
 {$mode objfpc}{$H+}
@@ -35,13 +38,19 @@ type
     destructor Destroy; override;
     //procedure Free;
 
+    { Получить наименование объекта }
     function GetName(): AnsiString;
+    { Установить наименование объекта }
     procedure SetName(sName: AnsiString);
 
+    { Получить родительский объект }
     function GetParent(): TObject;
+    { Установить родительский объект }
     procedure SetParent(oParent: TObject);
 
+    { Получить словарь свойств объекта }
     function GetProperties(): TStrDictionary;
+    { Установить свойства объекта в виде словаря }
     procedure SetProperties(dProperties: TStrDictionary);
 
     { Установить свойства в виде списка параметров }

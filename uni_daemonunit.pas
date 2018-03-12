@@ -1,3 +1,6 @@
+{
+Модуль обработчиков демона/службы
+}
 unit uni_daemonunit;
 
 {$mode objfpc}{$H+}
@@ -10,14 +13,18 @@ uses
 
 type
 
-  { TUniReaderDaemon }
-
+  { TUniReaderDaemon  непосредственно экземпляр сервиса.
+  Именно этот объект реализует сам сервис (его мы видим в Windows в «Управление компьютерами/Сервисы»).}
   TUniReaderDaemon = class(TDaemon)
+    { Обработчик после инсталяции }
     procedure DataModuleAfterInstall(Sender: TCustomDaemon);
+    { Обработчик после деинсталяции }
     procedure DataModuleAfterUnInstall(Sender: TCustomDaemon);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    { Обработчик запуска демона/службы }
     procedure DataModuleStart(Sender: TCustomDaemon; var OK: Boolean);
+    { Обработчик останова демона/службы }
     procedure DataModuleStop(Sender: TCustomDaemon; var OK: Boolean);
   private
 

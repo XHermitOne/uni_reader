@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: LibXmlParser: Класс TXmlParser</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TXmlParser"></span><h1 class="cio">Класс TXmlParser</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section"><a class="section" href="#PasDoc-Fields">Поля</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Свойства</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="LibXmlParser.html">LibXmlParser</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TXmlParser = class(TObject)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+Error deComment : ((No additional fields here)); // &lt;!&ndash; Comment &ndash;&gt;</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TXmlParser</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Поля</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FBuffer">FBuffer</a></b>: PChar;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FBufferSize">FBufferSize</a></b>: INTEGER;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FSource">FSource</a></b>: STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FXmlVersion">FXmlVersion</a></b>: STRING;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FEncoding">FEncoding</a></b>: STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FStandalone">FStandalone</a></b>: BOOLEAN;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FRootName">FRootName</a></b>: STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FDtdcFinal">FDtdcFinal</a></b>: PChar;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FNormalize">FNormalize</a></b>: BOOLEAN;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#EntityStack">EntityStack</a></b>: <a  href="LibXmlParser.TEntityStack.html">TEntityStack</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#FCurEncoding">FCurEncoding</a></b>: STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#Elements">Elements</a></b>: <a  href="LibXmlParser.TElemList.html">TElemList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#Entities">Entities</a></b>: <a  href="LibXmlParser.TNvpList.html">TNvpList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#ParEntities">ParEntities</a></b>: <a  href="LibXmlParser.TNvpList.html">TNvpList</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#Notations">Notations</a></b>: <a  href="LibXmlParser.TNvpList.html">TNvpList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#CurPartType">CurPartType</a></b>: <a  href="LibXmlParser.html#TPartType">TPartType</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#CurName">CurName</a></b>: STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#CurContent">CurContent</a></b>: STRING;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#CurStart">CurStart</a></b>: PChar;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#CurFinal">CurFinal</a></b>: PChar;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code><b><a  href="LibXmlParser.TXmlParser.html#CurAttr">CurAttr</a></b>: <a  href="LibXmlParser.TAttrList.html">TAttrList</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeProlog">AnalyzeProlog</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeComment">AnalyzeComment</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzePI">AnalyzePI</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeDtdc">AnalyzeDtdc</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeDtdElements">AnalyzeDtdElements</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeTag">AnalyzeTag</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeCData">AnalyzeCData</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeText">AnalyzeText</a></b> (VAR IsDone : BOOLEAN);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeElementDecl">AnalyzeElementDecl</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeAttListDecl">AnalyzeAttListDecl</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeEntityDecl">AnalyzeEntityDecl</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#AnalyzeNotationDecl">AnalyzeNotationDecl</a></b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#PushPE">PushPE</a></b> (VAR Start : PChar);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#ReplaceCharacterEntities">ReplaceCharacterEntities</a></b> (VAR Str : STRING);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#ReplaceParameterEntities">ReplaceParameterEntities</a></b> (VAR Str : STRING);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#ReplaceGeneralEntities">ReplaceGeneralEntities</a></b> (VAR Str : STRING);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TXmlParser.html#GetDocBuffer">GetDocBuffer</a></b> : PChar;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>CONSTRUCTOR <b><a  href="LibXmlParser.TXmlParser.html#Create">Create</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>DESTRUCTOR <b><a  href="LibXmlParser.TXmlParser.html#Destroy">Destroy</a></b>; OVERRIDE;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TXmlParser.html#LoadFromFile">LoadFromFile</a></b> (Filename : STRING; FileMode : INTEGER = fmOpenRead OR fmShareDenyNone) : BOOLEAN;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TXmlParser.html#LoadFromBuffer">LoadFromBuffer</a></b> (Buffer : PChar) : BOOLEAN;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#SetBuffer">SetBuffer</a></b> (Buffer : PChar);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#Clear">Clear</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#StartScan">StartScan</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TXmlParser.html#Scan">Scan</a></b> : BOOLEAN;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TXmlParser.html#LoadExternalEntity">LoadExternalEntity</a></b> (SystemId, PublicId, Notation : STRING) : <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>; VIRTUAL;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.TXmlParser.html#TranslateEncoding">TranslateEncoding</a></b> (CONST sSource : STRING) : STRING; VIRTUAL;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.TXmlParser.html#DtdElementFound">DtdElementFound</a></b> (DtdElementRec : <a  href="LibXmlParser.TDtdElementRec.html">TDtdElementRec</a>); VIRTUAL;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Свойства</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#XmlVersion">XmlVersion</a></b> : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FXmlVersion">FXmlVersion</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#Encoding">Encoding</a></b>   : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FEncoding">FEncoding</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#Standalone">Standalone</a></b> : BOOLEAN READ <a  href="LibXmlParser.TXmlParser.html#FStandalone">FStandalone</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#RootName">RootName</a></b>   : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FRootName">FRootName</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#Normalize">Normalize</a></b>  : BOOLEAN READ <a  href="LibXmlParser.TXmlParser.html#FNormalize">FNormalize</a> WRITE <a  href="LibXmlParser.TXmlParser.html#FNormalize">FNormalize</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#Source">Source</a></b>     : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FSource">FSource</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#DocBuffer">DocBuffer</a></b>  : PChar   READ <a  href="LibXmlParser.TXmlParser.html#GetDocBuffer">GetDocBuffer</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="LibXmlParser.TXmlParser.html#CurEncoding">CurEncoding</a></b> : STRING READ <a  href="LibXmlParser.TXmlParser.html#FCurEncoding">FCurEncoding</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Поля</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FBuffer"></span><code><b>FBuffer</b>: PChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash; Internal Properties and Methods</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FBufferSize"></span><code><b>FBufferSize</b>: INTEGER;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+NIL if there is no buffer available</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FSource"></span><code><b>FSource</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+0 if the buffer is not owned by the Document instance</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FXmlVersion"></span><code><b>FXmlVersion</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Name of Source of document. Filename for Documents loaded with LoadFromFile</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FEncoding"></span><code><b>FEncoding</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+XML version from Document header. Default is '1.0'</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FStandalone"></span><code><b>FStandalone</b>: BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Encoding from Document header. Default is 'UTF-8'</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FRootName"></span><code><b>FRootName</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Standalone declaration from Document header. Default is 'yes'</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FDtdcFinal"></span><code><b>FDtdcFinal</b>: PChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Name of the Root Element (= DTD name)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FNormalize"></span><code><b>FNormalize</b>: BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Pointer to the '&gt;' character terminating the DTD declaration</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="EntityStack"></span><code><b>EntityStack</b>: <a  href="LibXmlParser.TEntityStack.html">TEntityStack</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+If true: Pack Whitespace and don't return empty contents</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="FCurEncoding"></span><code><b>FCurEncoding</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Entity Stack for Parameter and General Entities</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Elements"></span><code><b>Elements</b>: <a  href="LibXmlParser.TElemList.html">TElemList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns document buffer &mdash; DTD Objects</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Entities"></span><code><b>Entities</b>: <a  href="LibXmlParser.TNvpList.html">TNvpList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Elements: List of TElemDef (contains Attribute Definitions)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ParEntities"></span><code><b>ParEntities</b>: <a  href="LibXmlParser.TNvpList.html">TNvpList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+General Entities: List of TEntityDef</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Notations"></span><code><b>Notations</b>: <a  href="LibXmlParser.TNvpList.html">TNvpList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Parameter Entities: List of TEntityDef</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurPartType"></span><code><b>CurPartType</b>: <a  href="LibXmlParser.html#TPartType">TPartType</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Clear Document &mdash; Scanning through the document</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurName"></span><code><b>CurName</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Type</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurContent"></span><code><b>CurContent</b>: STRING;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Name</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurStart"></span><code><b>CurStart</b>: PChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Normalized Content</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurFinal"></span><code><b>CurFinal</b>: PChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current First character</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurAttr"></span><code><b>CurAttr</b>: <a  href="LibXmlParser.TAttrList.html">TAttrList</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Last character</p>
+</td></tr>
+</table>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeProlog"></span><code>PROCEDURE <b>AnalyzeProlog</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Encoding during parsing (always uppercase)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeComment"></span><code>PROCEDURE <b>AnalyzeComment</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze XML Prolog or Text Declaration</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzePI"></span><code>PROCEDURE <b>AnalyzePI</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze Comments</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeDtdc"></span><code>PROCEDURE <b>AnalyzeDtdc</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze Processing Instructions (PI)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeDtdElements"></span><code>PROCEDURE <b>AnalyzeDtdElements</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze Document Type Declaration</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeTag"></span><code>PROCEDURE <b>AnalyzeTag</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze DTD declarations</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeCData"></span><code>PROCEDURE <b>AnalyzeCData</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze Start/End/Empty-Element Tags</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeText"></span><code>PROCEDURE <b>AnalyzeText</b> (VAR IsDone : BOOLEAN);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze CDATA Sections</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeElementDecl"></span><code>PROCEDURE <b>AnalyzeElementDecl</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Analyze Text Content between Tags</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeAttListDecl"></span><code>PROCEDURE <b>AnalyzeAttListDecl</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeEntityDecl"></span><code>PROCEDURE <b>AnalyzeEntityDecl</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="AnalyzeNotationDecl"></span><code>PROCEDURE <b>AnalyzeNotationDecl</b> (Start : PChar; VAR Final : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="PushPE"></span><code>PROCEDURE <b>PushPE</b> (VAR Start : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ReplaceCharacterEntities"></span><code>PROCEDURE <b>ReplaceCharacterEntities</b> (VAR Str : STRING);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ReplaceParameterEntities"></span><code>PROCEDURE <b>ReplaceParameterEntities</b> (VAR Str : STRING);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="ReplaceGeneralEntities"></span><code>PROCEDURE <b>ReplaceGeneralEntities</b> (VAR Str : STRING);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetDocBuffer"></span><code>FUNCTION <b>GetDocBuffer</b> : PChar;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>CONSTRUCTOR <b>Create</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Notations: List of TNotationDef</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>DESTRUCTOR <b>Destroy</b>; OVERRIDE;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="LoadFromFile"></span><code>FUNCTION <b>LoadFromFile</b> (Filename : STRING; FileMode : INTEGER = fmOpenRead OR fmShareDenyNone) : BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash; Document Handling</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="LoadFromBuffer"></span><code>FUNCTION <b>LoadFromBuffer</b> (Buffer : PChar) : BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Loads Document from given file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetBuffer"></span><code>PROCEDURE <b>SetBuffer</b> (Buffer : PChar);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Loads Document from another buffer</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Clear"></span><code>PROCEDURE <b>Clear</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+References another buffer</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StartScan"></span><code>PROCEDURE <b>StartScan</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Encoding</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Scan"></span><code>FUNCTION <b>Scan</b> : BOOLEAN;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="LoadExternalEntity"></span><code>FUNCTION <b>LoadExternalEntity</b> (SystemId, PublicId, Notation : STRING) : <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>; VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+&mdash; Events / Callbacks</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="TranslateEncoding"></span><code>FUNCTION <b>TranslateEncoding</b> (CONST sSource : STRING) : STRING; VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DtdElementFound"></span><code>PROCEDURE <b>DtdElementFound</b> (DtdElementRec : <a  href="LibXmlParser.TDtdElementRec.html">TDtdElementRec</a>); VIRTUAL;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Свойства</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="XmlVersion"></span><code>property <b>XmlVersion</b> : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FXmlVersion">FXmlVersion</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Returns FBuffer or a pointer to a NUL char if Buffer is empty &mdash; Document Properties</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Encoding"></span><code>property <b>Encoding</b>   : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FEncoding">FEncoding</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+XML version from the Document Prolog</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Standalone"></span><code>property <b>Standalone</b> : BOOLEAN READ <a  href="LibXmlParser.TXmlParser.html#FStandalone">FStandalone</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Document Encoding from Prolog</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RootName"></span><code>property <b>RootName</b>   : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FRootName">FRootName</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Standalone Declaration from Prolog</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Normalize"></span><code>property <b>Normalize</b>  : BOOLEAN READ <a  href="LibXmlParser.TXmlParser.html#FNormalize">FNormalize</a> WRITE <a  href="LibXmlParser.TXmlParser.html#FNormalize">FNormalize</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Name of the Root Element</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Source"></span><code>property <b>Source</b>     : STRING  READ <a  href="LibXmlParser.TXmlParser.html#FSource">FSource</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+True if Content is to be normalized</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="DocBuffer"></span><code>property <b>DocBuffer</b>  : PChar   READ <a  href="LibXmlParser.TXmlParser.html#GetDocBuffer">GetDocBuffer</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Name of Document Source (Filename)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CurEncoding"></span><code>property <b>CurEncoding</b> : STRING READ <a  href="LibXmlParser.TXmlParser.html#FCurEncoding">FCurEncoding</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Current Attribute List</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

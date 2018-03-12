@@ -1,9 +1,7 @@
-unit filefunc;
-
 {
 Функции работы с файлами.
-
 }
+unit filefunc;
 
 {$mode objfpc}{$H+}
 

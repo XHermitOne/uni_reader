@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: OPCError</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль OPCError</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section">Классы, интерфейсы и объекты</div><div class="one_section">Процедуры и функции</div><div class="one_section">Типы</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Константы</a></div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+*******************************************************</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Constants"></span><h3 class="summary">Константы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDHANDLE">OPC_E_INVALIDHANDLE</a></b> = HResult($C0040001);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_BADTYPE">OPC_E_BADTYPE</a></b> = HResult($C0040004);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_PUBLIC">OPC_E_PUBLIC</a></b> = HResult($C0040005);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_BADRIGHTS">OPC_E_BADRIGHTS</a></b> = HResult($C0040006);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_UNKNOWNITEMID">OPC_E_UNKNOWNITEMID</a></b> = HResult($C0040007);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDITEMID">OPC_E_INVALIDITEMID</a></b> = HResult($C0040008);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDFILTER">OPC_E_INVALIDFILTER</a></b> = HResult($C0040009);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_UNKNOWNPATH">OPC_E_UNKNOWNPATH</a></b> = HResult($C004000A);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_RANGE">OPC_E_RANGE</a></b> = HResult($C004000B);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_DUPLICATENAME">OPC_E_DUPLICATENAME</a></b> = HResult($C004000C);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_UNSUPPORTEDRATE">OPC_S_UNSUPPORTEDRATE</a></b> = HResult($0004000D);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_CLAMP">OPC_S_CLAMP</a></b> = HResult($0004000E);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_INUSE">OPC_S_INUSE</a></b> = HResult($0004000F);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDCONFIGFILE">OPC_E_INVALIDCONFIGFILE</a></b> = HResult($C0040010);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_NOTFOUND">OPC_E_NOTFOUND</a></b> = HResult($C0040011);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALID_PID">OPC_E_INVALID_PID</a></b> = HResult($C0040203);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_DEADBANDNOTSET">OPC_E_DEADBANDNOTSET</a></b> = HResult($C0040400);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_DEADBANDNOTSUPPORTED">OPC_E_DEADBANDNOTSUPPORTED</a></b> = HResult($C0040401);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_NOBUFFERING">OPC_E_NOBUFFERING</a></b> = HResult($C0040402);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDCONTINUATIONPOINT">OPC_E_INVALIDCONTINUATIONPOINT</a></b> = HResult($C0040403);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_DATAQUEUEOVERFLOW">OPC_S_DATAQUEUEOVERFLOW</a></b> = HResult($00040404);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_RATENOTSET">OPC_E_RATENOTSET</a></b> = HResult($C0040405);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_NOTSUPPORTED">OPC_E_NOTSUPPORTED</a></b> = HResult($C0040406);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPCCPX_E_TYPE_CHANGED">OPCCPX_E_TYPE_CHANGED</a></b> = HResult($C0040407);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPCCPX_E_FILTER_DUPLICATE">OPCCPX_E_FILTER_DUPLICATE</a></b> = HResult($C0040408);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPCCPX_E_FILTER_INVALID">OPCCPX_E_FILTER_INVALID</a></b> = HResult($C0040409);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPCCPX_E_FILTER_ERROR">OPCCPX_E_FILTER_ERROR</a></b> = HResult($C004040A);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPCCPX_S_FILTER_NO_DATA">OPCCPX_S_FILTER_NO_DATA</a></b> = HResult($0004040B);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_ALREADYACKED">OPC_S_ALREADYACKED</a></b> = HResult($00040200);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_INVALIDBUFFERTIME">OPC_S_INVALIDBUFFERTIME</a></b> = HResult($00040201);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_INVALIDMAXSIZE">OPC_S_INVALIDMAXSIZE</a></b> = HResult($00040202);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_INVALIDKEEPALIVETIME">OPC_S_INVALIDKEEPALIVETIME</a></b> = HResult($00040203);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDBRANCHNAME">OPC_E_INVALIDBRANCHNAME</a></b> = HResult($C0040203);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDTIME">OPC_E_INVALIDTIME</a></b> = HResult($C0040204);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_BUSY">OPC_E_BUSY</a></b> = HResult($C0040205);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_NOINFO">OPC_E_NOINFO</a></b> = HResult($C0040206);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_MAXEXCEEDED">OPC_E_MAXEXCEEDED</a></b> = HResult($C0041001);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_NODATA">OPC_S_NODATA</a></b> = HResult($40041002);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_MOREDATA">OPC_S_MOREDATA</a></b> = HResult($40041003);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDAGGREGATE">OPC_E_INVALIDAGGREGATE</a></b> = HResult($C0041004);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_CURRENTVALUE">OPC_S_CURRENTVALUE</a></b> = HResult($40041005);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_EXTRADATA">OPC_S_EXTRADATA</a></b> = HResult($40041006);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_W_NOFILTER">OPC_W_NOFILTER</a></b> = HResult($80041007);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_UNKNOWNATTRID">OPC_E_UNKNOWNATTRID</a></b> = HResult($C0041008);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_NOT_AVAIL">OPC_E_NOT_AVAIL</a></b> = HResult($C0041009);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDDATATYPE">OPC_E_INVALIDDATATYPE</a></b> = HResult($C004100A);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_DATAEXISTS">OPC_E_DATAEXISTS</a></b> = HResult($C004100B);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_INVALIDATTRID">OPC_E_INVALIDATTRID</a></b> = HResult($C004100C);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_NODATAEXISTS">OPC_E_NODATAEXISTS</a></b> = HResult($C004100D);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_INSERTED">OPC_S_INSERTED</a></b> = HResult($4004100E);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_REPLACED">OPC_S_REPLACED</a></b> = HResult($4004100F);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_PRIVATE_ACTIVE">OPC_E_PRIVATE_ACTIVE</a></b> = HResult($C0040301);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_E_LOW_IMPERS_LEVEL">OPC_E_LOW_IMPERS_LEVEL</a></b> = HResult($C0040302);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCError.html#OPC_S_LOW_AUTHN_LEVEL">OPC_S_LOW_AUTHN_LEVEL</a></b> = HResult($00040303);</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Константы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDHANDLE"></span><code><b>OPC_E_INVALIDHANDLE</b> = HResult($C0040001);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Values are 32 bit values laid out as follows:
+
+<p>3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 +&mdash;+-+-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-+ |Sev|C|R| Facility | Code | +&mdash;+-+-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-+
+
+<p>where
+
+<p>Sev - is the severity code
+
+<p>00 - Success 01 - Informational 10 - Warning 11 - Error
+
+<p>C - is the Customer code flag
+
+<p>R - is a reserved bit
+
+<p>Facility - is the facility code
+
+<p>Code - is the facility's status code
+
+<p>OPC Data Access
+
+<p>MessageId: OPC_E_INVALIDHANDLE
+
+<p>MessageText:
+
+<p>The value of the handle is invalid.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_BADTYPE"></span><code><b>OPC_E_BADTYPE</b> = HResult($C0040004);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_BADTYPE
+
+<p>MessageText:
+
+<p>The server cannot convert the data between the requested data type and the canonical data type.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_PUBLIC"></span><code><b>OPC_E_PUBLIC</b> = HResult($C0040005);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_PUBLIC
+
+<p>MessageText:
+
+<p>The requested operation cannot be done on a public group.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_BADRIGHTS"></span><code><b>OPC_E_BADRIGHTS</b> = HResult($C0040006);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_BADRIGHTS
+
+<p>MessageText:
+
+<p>The Items AccessRights do not allow the operation.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_UNKNOWNITEMID"></span><code><b>OPC_E_UNKNOWNITEMID</b> = HResult($C0040007);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_UNKNOWNITEMID
+
+<p>MessageText:
+
+<p>The item is no longer available in the server address space.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDITEMID"></span><code><b>OPC_E_INVALIDITEMID</b> = HResult($C0040008);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDITEMID
+
+<p>MessageText:
+
+<p>The item definition doesn't conform to the server's syntax.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDFILTER"></span><code><b>OPC_E_INVALIDFILTER</b> = HResult($C0040009);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDFILTER
+
+<p>MessageText:
+
+<p>The filter string was not valid.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_UNKNOWNPATH"></span><code><b>OPC_E_UNKNOWNPATH</b> = HResult($C004000A);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_UNKNOWNPATH
+
+<p>MessageText:
+
+<p>The item's access path is not known to the server.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_RANGE"></span><code><b>OPC_E_RANGE</b> = HResult($C004000B);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_RANGE
+
+<p>MessageText:
+
+<p>The value was out of range.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_DUPLICATENAME"></span><code><b>OPC_E_DUPLICATENAME</b> = HResult($C004000C);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_DUPLICATENAME
+
+<p>MessageText:
+
+<p>Duplicate name not allowed.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_UNSUPPORTEDRATE"></span><code><b>OPC_S_UNSUPPORTEDRATE</b> = HResult($0004000D);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_UNSUPPORTEDRATE
+
+<p>MessageText:
+
+<p>The server does not support the requested data rate but will use the closest available rate.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_CLAMP"></span><code><b>OPC_S_CLAMP</b> = HResult($0004000E);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_CLAMP
+
+<p>MessageText:
+
+<p>A value passed to WRITE was accepted but the output was clamped.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_INUSE"></span><code><b>OPC_S_INUSE</b> = HResult($0004000F);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_INUSE
+
+<p>MessageText:
+
+<p>The operation cannot be completed because the object still has references that exist.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDCONFIGFILE"></span><code><b>OPC_E_INVALIDCONFIGFILE</b> = HResult($C0040010);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDCONFIGFILE
+
+<p>MessageText:
+
+<p>The server's configuration file is an invalid format.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_NOTFOUND"></span><code><b>OPC_E_NOTFOUND</b> = HResult($C0040011);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_NOTFOUND
+
+<p>MessageText:
+
+<p>The server could not locate the requested object.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALID_PID"></span><code><b>OPC_E_INVALID_PID</b> = HResult($C0040203);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALID_PID
+
+<p>MessageText:
+
+<p>The server does not recognise the passed property ID.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_DEADBANDNOTSET"></span><code><b>OPC_E_DEADBANDNOTSET</b> = HResult($C0040400);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_DEADBANDNOTSET
+
+<p>MessageText:
+
+<p>The item deadband has not been set for this item.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_DEADBANDNOTSUPPORTED"></span><code><b>OPC_E_DEADBANDNOTSUPPORTED</b> = HResult($C0040401);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_DEADBANDNOTSUPPORTED
+
+<p>MessageText:
+
+<p>The item does not support deadband.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_NOBUFFERING"></span><code><b>OPC_E_NOBUFFERING</b> = HResult($C0040402);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_NOBUFFERING
+
+<p>MessageText:
+
+<p>The server does not support buffering of data items that are collected at a faster rate than the group update rate.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDCONTINUATIONPOINT"></span><code><b>OPC_E_INVALIDCONTINUATIONPOINT</b> = HResult($C0040403);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDCONTINUATIONPOINT
+
+<p>MessageText:
+
+<p>The continuation point is not valid.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_DATAQUEUEOVERFLOW"></span><code><b>OPC_S_DATAQUEUEOVERFLOW</b> = HResult($00040404);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_DATAQUEUEOVERFLOW
+
+<p>MessageText:
+
+<p>Data Queue Overflow - Some value transitions were lost.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_RATENOTSET"></span><code><b>OPC_E_RATENOTSET</b> = HResult($C0040405);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_RATENOTSET
+
+<p>MessageText:
+
+<p>Server does not support requested rate.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_NOTSUPPORTED"></span><code><b>OPC_E_NOTSUPPORTED</b> = HResult($C0040406);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_NOTSUPPORTED
+
+<p>MessageText:
+
+<p>The server does not support writing of quality and/or timestamp.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPCCPX_E_TYPE_CHANGED"></span><code><b>OPCCPX_E_TYPE_CHANGED</b> = HResult($C0040407);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPCCPX_E_TYPE_CHANGED
+
+<p>MessageText:
+
+<p>The dictionary and/or type description for the item has changed.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPCCPX_E_FILTER_DUPLICATE"></span><code><b>OPCCPX_E_FILTER_DUPLICATE</b> = HResult($C0040408);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPCCPX_E_FILTER_DUPLICATE
+
+<p>MessageText:
+
+<p>A data filter item with the specified name already exists.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPCCPX_E_FILTER_INVALID"></span><code><b>OPCCPX_E_FILTER_INVALID</b> = HResult($C0040409);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPCCPX_E_FILTER_INVALID
+
+<p>MessageText:
+
+<p>The data filter value does not conform to the server's syntax.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPCCPX_E_FILTER_ERROR"></span><code><b>OPCCPX_E_FILTER_ERROR</b> = HResult($C004040A);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPCCPX_E_FILTER_ERROR
+
+<p>MessageText:
+
+<p>An error occurred when the filter value was applied to the source data.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPCCPX_S_FILTER_NO_DATA"></span><code><b>OPCCPX_S_FILTER_NO_DATA</b> = HResult($0004040B);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPCCPX_S_FILTER_NO_DATA
+
+<p>MessageText:
+
+<p>The item value is empty because the data filter has excluded all fields.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_ALREADYACKED"></span><code><b>OPC_S_ALREADYACKED</b> = HResult($00040200);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+OPC Alarms &amp; Events
+
+<p>MessageId: OPC_S_ALREADYACKED
+
+<p>MessageText:
+
+<p>The condition has already been acknowleged</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_INVALIDBUFFERTIME"></span><code><b>OPC_S_INVALIDBUFFERTIME</b> = HResult($00040201);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_INVALIDBUFFERTIME
+
+<p>MessageText:
+
+<p>The buffer time parameter was invalid</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_INVALIDMAXSIZE"></span><code><b>OPC_S_INVALIDMAXSIZE</b> = HResult($00040202);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_INVALIDMAXSIZE
+
+<p>MessageText:
+
+<p>The max size parameter was invalid</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_INVALIDKEEPALIVETIME"></span><code><b>OPC_S_INVALIDKEEPALIVETIME</b> = HResult($00040203);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_INVALIDKEEPALIVETIME
+
+<p>MessageText:
+
+<p>The KeepAliveTime parameter was invalid</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDBRANCHNAME"></span><code><b>OPC_E_INVALIDBRANCHNAME</b> = HResult($C0040203);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDBRANCHNAME
+
+<p>MessageText:
+
+<p>The string was not recognized as an area name</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDTIME"></span><code><b>OPC_E_INVALIDTIME</b> = HResult($C0040204);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDTIME
+
+<p>MessageText:
+
+<p>The time does not match the latest active time</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_BUSY"></span><code><b>OPC_E_BUSY</b> = HResult($C0040205);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_BUSY
+
+<p>MessageText:
+
+<p>A refresh is currently in progress</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_NOINFO"></span><code><b>OPC_E_NOINFO</b> = HResult($C0040206);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_NOINFO
+
+<p>MessageText:
+
+<p>Information is not available</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_MAXEXCEEDED"></span><code><b>OPC_E_MAXEXCEEDED</b> = HResult($C0041001);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+OPC Historical Data Access
+
+<p>MessageId: OPC_E_MAXEXCEEDED
+
+<p>MessageText:
+
+<p>The maximum number of values requested exceeds the server's limit.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_NODATA"></span><code><b>OPC_S_NODATA</b> = HResult($40041002);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_NODATA
+
+<p>MessageText:
+
+<p>There is no data within the specified parameters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_MOREDATA"></span><code><b>OPC_S_MOREDATA</b> = HResult($40041003);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_MOREDATA
+
+<p>MessageText:
+
+<p>There is more data satisfying the query than was returned</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDAGGREGATE"></span><code><b>OPC_E_INVALIDAGGREGATE</b> = HResult($C0041004);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDAGGREGATE
+
+<p>MessageText:
+
+<p>The aggregate requested is not valid.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_CURRENTVALUE"></span><code><b>OPC_S_CURRENTVALUE</b> = HResult($40041005);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_CURRENTVALUE
+
+<p>MessageText:
+
+<p>The server only returns current values for the requested item attributes.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_EXTRADATA"></span><code><b>OPC_S_EXTRADATA</b> = HResult($40041006);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_EXTRADATA
+
+<p>MessageText:
+
+<p>Additional data satisfying the query was found.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_W_NOFILTER"></span><code><b>OPC_W_NOFILTER</b> = HResult($80041007);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_W_NOFILTER
+
+<p>MessageText:
+
+<p>The server does not support this filter.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_UNKNOWNATTRID"></span><code><b>OPC_E_UNKNOWNATTRID</b> = HResult($C0041008);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_UNKNOWNATTRID
+
+<p>MessageText:
+
+<p>The server does not support this attribute.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_NOT_AVAIL"></span><code><b>OPC_E_NOT_AVAIL</b> = HResult($C0041009);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_NOT_AVAIL
+
+<p>MessageText:
+
+<p>The requested aggregate is not available for the specified item.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDDATATYPE"></span><code><b>OPC_E_INVALIDDATATYPE</b> = HResult($C004100A);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDDATATYPE
+
+<p>MessageText:
+
+<p>The supplied value for the attribute is not a correct data type.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_DATAEXISTS"></span><code><b>OPC_E_DATAEXISTS</b> = HResult($C004100B);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_DATAEXISTS
+
+<p>MessageText:
+
+<p>Unable to insert - data already present.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_INVALIDATTRID"></span><code><b>OPC_E_INVALIDATTRID</b> = HResult($C004100C);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_INVALIDATTRID
+
+<p>MessageText:
+
+<p>The supplied attribute ID is not valid.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_NODATAEXISTS"></span><code><b>OPC_E_NODATAEXISTS</b> = HResult($C004100D);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_NODATAEXISTS
+
+<p>MessageText:
+
+<p>The server has no value for the specified time and item ID.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_INSERTED"></span><code><b>OPC_S_INSERTED</b> = HResult($4004100E);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_INSERTED
+
+<p>MessageText:
+
+<p>The requested insert occurred.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_REPLACED"></span><code><b>OPC_S_REPLACED</b> = HResult($4004100F);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_REPLACED
+
+<p>MessageText:
+
+<p>The requested replace occurred.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_PRIVATE_ACTIVE"></span><code><b>OPC_E_PRIVATE_ACTIVE</b> = HResult($C0040301);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+OPC Security
+
+<p>MessageId: OPC_E_PRIVATE_ACTIVE
+
+<p>MessageText:
+
+<p>OPC Security: A session using private OPC credentials is already active.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_E_LOW_IMPERS_LEVEL"></span><code><b>OPC_E_LOW_IMPERS_LEVEL</b> = HResult($C0040302);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_E_LOW_IMPERS_LEVEL
+
+<p>MessageText:
+
+<p>OPC Security: Server requires higher impersonation level to access secured data.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OPC_S_LOW_AUTHN_LEVEL"></span><code><b>OPC_S_LOW_AUTHN_LEVEL</b> = HResult($00040303);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+MessageId: OPC_S_LOW_AUTHN_LEVEL
+
+<p>MessageText:
+
+<p>OPC Security: Server expected higher level of package privacy.</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

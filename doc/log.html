@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: log</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль log</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section">Классы, интерфейсы и объекты</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section">Типы</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Константы</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Переменные</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+Функции журналирования.
+
+<p>Цветовая расскраска сообщений в коммандной оболочке производиться только под Linux. Для Windows систем цветовая раскраска отключена.
+
+<p>Шаблон для использования в современных командных оболочках и языках программирования таков: \x1b[...m. Это ESCAPE-последовательность, где \x1b обозначает символ ESC (десятичный ASCII код 27), а вместо &quot;...&quot; подставляются значения из таблицы, приведенной ниже, причем они могут комбинироваться, тогда нужно их перечислить через точку с запятой.
+
+<p>атрибуты
+
+<p>0 нормальный режим
+
+<p>1 жирный
+
+<p>4 подчеркнутый
+
+<p>5 мигающий
+
+<p>7 инвертированные цвета
+
+<p>8 невидимый
+
+<p>цвет текста
+
+<p>30 черный
+
+<p>31 красный
+
+<p>32 зеленый
+
+<p>33 желтый
+
+<p>34 синий
+
+<p>35 пурпурный
+
+<p>36 голубой
+
+<p>37 белый
+
+<p>цвет фона
+
+<p>40 черный
+
+<p>41 красный
+
+<p>42 зеленый
+
+<p>43 желтый
+
+<p>44 синий
+
+<p>45 пурпурный
+
+<p>46 голубой
+
+<p>47 белый
+
+<p>Версия: 0.0.5.3
+
+<p>ВНИМАНИЕ! Вывод сообщений под Linux проверять только в терминале. Только он выводит корректно сообщения.</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="log.html#GetDefaultEncoding">GetDefaultEncoding</a></b>(): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="log.html#GetDebugMode">GetDebugMode</a></b>(): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="log.html#GetLogMode">GetLogMode</a></b>(): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="log.html#EncodeUnicodeString">EncodeUnicodeString</a></b>(sTxt: AnsiString; sCodePage: AnsiString = 'utf-8'): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#PrintColorTxt">PrintColorTxt</a></b>(sTxt: AnsiString; sColor: AnsiString);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="log.html#OpenLog">OpenLog</a></b>(sLogFileName: AnsiString = ''): boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="log.html#CloseLog">CloseLog</a></b>(): boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="log.html#LogMsg">LogMsg</a></b>(sMsg: AnsiString = ''): boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#DebugMsg">DebugMsg</a></b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="log.html#InfoMsg">InfoMsg</a></b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#ErrorMsg">ErrorMsg</a></b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="log.html#WarningMsg">WarningMsg</a></b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#FatalMsg">FatalMsg</a></b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="log.html#ServiceMsg">ServiceMsg</a></b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#DebugMsgFmt">DebugMsgFmt</a></b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="log.html#InfoMsgFmt">InfoMsgFmt</a></b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#ServiceMsgFmt">ServiceMsgFmt</a></b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="log.html#ErrorMsgFmt">ErrorMsgFmt</a></b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="log.html#WarningMsgFmt">WarningMsgFmt</a></b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="log.html#FatalMsgFmt">FatalMsgFmt</a></b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Константы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#DEFAULT_LOG_FILENAME">DEFAULT_LOG_FILENAME</a></b>: AnsiString = 'uni_reader.log';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#RED_COLOR_TEXT">RED_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[31;1m';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#GREEN_COLOR_TEXT">GREEN_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[32m';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#YELLOW_COLOR_TEXT">YELLOW_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[33;1m';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#BLUE_COLOR_TEXT">BLUE_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[34m';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#PURPLE_COLOR_TEXT">PURPLE_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[35m';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#CYAN_COLOR_TEXT">CYAN_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[36m';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#WHITE_COLOR_TEXT">WHITE_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[37m';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#NORMAL_COLOR_TEXT">NORMAL_COLOR_TEXT</a></b>: AnsiString = Chr($1b) + '[0m';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#DEFAULT_DEBUG_MODE">DEFAULT_DEBUG_MODE</a></b>: Boolean = True;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#DEFAULT_LOG_MODE">DEFAULT_LOG_MODE</a></b>: Boolean = False;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#DEFAULT_APP_LOG_MODE">DEFAULT_APP_LOG_MODE</a></b> = True;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Переменные</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="log.html#LOG_FILE">LOG_FILE</a></b>: Text;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="log.html#IS_OPEN_LOG_FILE">IS_OPEN_LOG_FILE</a></b>: Boolean = False;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetDefaultEncoding"></span><code>function <b>GetDefaultEncoding</b>(): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Определить актуальную кодировку для вывода текста. </p>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Актуальная кодировка для вывода текста</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetDebugMode"></span><code>function <b>GetDebugMode</b>(): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Определить включен ли режим отладки</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetLogMode"></span><code>function <b>GetLogMode</b>(): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Определить включен ли режим журналирования</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="EncodeUnicodeString"></span><code>function <b>EncodeUnicodeString</b>(sTxt: AnsiString; sCodePage: AnsiString = 'utf-8'): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Перекодирование AnsiString строки в AnsiString.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sTxt</dt>
+<dd>Текст в AnsiString</dd>
+<dt>sCodePage</dt>
+<dd>Указание кодировки</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Перекодированный текст</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PrintColorTxt"></span><code>procedure <b>PrintColorTxt</b>(sTxt: AnsiString; sColor: AnsiString);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Печать цветового текста  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sTxt</dt>
+<dd>Печатаемый текст</dd>
+<dt>sColor</dt>
+<dd>Дополнительное указание цветовой раскраски</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="OpenLog"></span><code>function <b>OpenLog</b>(sLogFileName: AnsiString = ''): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Инициализация файла лога. </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sLogFileName</dt>
+<dd>Имя файла лога. Если имя файла не определено, то пробуем его взять из оружения системы: Ключ LOG_FILENAME</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CloseLog"></span><code>function <b>CloseLog</b>(): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Закрыть файл лога.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="LogMsg"></span><code>function <b>LogMsg</b>(sMsg: AnsiString = ''): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Регистрация сообщения в файле лога.  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Регистрируемое сообщение</dd>
+<dt>bForceLog</dt>
+<dd>Признак принудительной регистрации</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DebugMsg"></span><code>procedure <b>DebugMsg</b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести ОТЛАДОЧНУЮ информацию.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Текстовое сообщение</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="InfoMsg"></span><code>procedure <b>InfoMsg</b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести ТЕКСТОВУЮ информацию.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Текстовое сообщение</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ErrorMsg"></span><code>procedure <b>ErrorMsg</b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести информацию об ОШИБКЕ.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Текстовое сообщение</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="WarningMsg"></span><code>procedure <b>WarningMsg</b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести ПРЕДУПРЕЖДЕНИЕ.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Текстовое сообщение</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="FatalMsg"></span><code>procedure <b>FatalMsg</b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Текстовое сообщение</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ServiceMsg"></span><code>procedure <b>ServiceMsg</b>(sMsg: AnsiString; bForcePrint: boolean = False; bForceLog: boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести СЕРВИСНУЮ информацию.   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsg</dt>
+<dd>Текстовое сообщение</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DebugMsgFmt"></span><code>procedure <b>DebugMsgFmt</b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести ОТЛАДОЧНУЮ информацию с форматированным текстовым сообщением.    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsgFmt</dt>
+<dd>Формат текстового сообщения</dd>
+<dt>aArgs</dt>
+<dd>Аргументы текстового сообщения</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="InfoMsgFmt"></span><code>procedure <b>InfoMsgFmt</b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести текстовую ИНФОРМАЦИЮ с форматированным текстовым сообщением.    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsgFmt</dt>
+<dd>Формат текстового сообщения</dd>
+<dt>aArgs</dt>
+<dd>Аргументы текстового сообщения</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ServiceMsgFmt"></span><code>procedure <b>ServiceMsgFmt</b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести СЕРВИСНУЮ информацию с форматированным текстовым сообщением.    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsgFmt</dt>
+<dd>Формат текстового сообщения</dd>
+<dt>aArgs</dt>
+<dd>Аргументы текстового сообщения</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ErrorMsgFmt"></span><code>procedure <b>ErrorMsgFmt</b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести информацию об ОШИБКЕ с форматированным текстовым сообщением.    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsgFmt</dt>
+<dd>Формат текстового сообщения</dd>
+<dt>aArgs</dt>
+<dd>Аргументы текстового сообщения</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="WarningMsgFmt"></span><code>procedure <b>WarningMsgFmt</b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести ПРЕДУПРЕЖДЕНИЕ с форматированным текстовым сообщением.    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsgFmt</dt>
+<dd>Формат текстового сообщения</dd>
+<dt>aArgs</dt>
+<dd>Аргументы текстового сообщения</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="FatalMsgFmt"></span><code>procedure <b>FatalMsgFmt</b>(sMsgFmt: AnsiString; const aArgs : Array Of Const; bForcePrint: Boolean = False; bForceLog: Boolean = False);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Вывести СООБЩЕНИЕ об ИСКЛЮЧИТЕЛЬНОЙ СИТУАЦИИ с форматированным текстовым сообщением.    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sMsgFmt</dt>
+<dd>Формат текстового сообщения</dd>
+<dt>aArgs</dt>
+<dd>Аргументы текстового сообщения</dd>
+<dt>bForcePrint</dt>
+<dd>Принудительно вывести на экран</dd>
+<dt>bForceLog</dt>
+<dd>Принудительно записать в журнале</dd>
+</dl>
+</td></tr>
+</table>
+<h3 class="detail">Константы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DEFAULT_LOG_FILENAME"></span><code><b>DEFAULT_LOG_FILENAME</b>: AnsiString = 'uni_reader.log';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Для функций перекодировки UTF8ToWinCP</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="RED_COLOR_TEXT"></span><code><b>RED_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[31;1m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Цвета в консоли Linux</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GREEN_COLOR_TEXT"></span><code><b>GREEN_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[32m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+red</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="YELLOW_COLOR_TEXT"></span><code><b>YELLOW_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[33;1m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+green</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="BLUE_COLOR_TEXT"></span><code><b>BLUE_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[34m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+yellow</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PURPLE_COLOR_TEXT"></span><code><b>PURPLE_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[35m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+blue</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CYAN_COLOR_TEXT"></span><code><b>CYAN_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[36m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+purple</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="WHITE_COLOR_TEXT"></span><code><b>WHITE_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[37m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+cyan</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="NORMAL_COLOR_TEXT"></span><code><b>NORMAL_COLOR_TEXT</b>: AnsiString = Chr($1b) + '[0m';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+white</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DEFAULT_DEBUG_MODE"></span><code><b>DEFAULT_DEBUG_MODE</b>: Boolean = True;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Режим отладки по умолчанию. Позволяет принудительно установить режим в обход параметров из окружения</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DEFAULT_LOG_MODE"></span><code><b>DEFAULT_LOG_MODE</b>: Boolean = False;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Режим журналирования по умолчанию. Позволяет принудительно установить режим в обход параметров из окружения</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DEFAULT_APP_LOG_MODE"></span><code><b>DEFAULT_APP_LOG_MODE</b> = True;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Режим журналирования Application.Log. Включается для служб Windows</p>
+</td></tr>
+</table>
+<h3 class="detail">Переменные</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="LOG_FILE"></span><code><b>LOG_FILE</b>: Text;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Объявление глобального объекта файла журнала регистрации сообщений программы
+
+<p>ВНИМАНИЕ! Глобальные переменные описываются в секции interface. Переменные определенные в секции implementation являются статическими для модуля.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IS_OPEN_LOG_FILE"></span><code><b>IS_OPEN_LOG_FILE</b>: Boolean = False;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

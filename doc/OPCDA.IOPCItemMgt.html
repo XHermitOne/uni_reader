@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: OPCDA: Интерфейс IOPCItemMgt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="IOPCItemMgt"></span><h1 class="cio">Интерфейс IOPCItemMgt</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section">Свойства</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="OPCDA.html">OPCDA</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type IOPCItemMgt = interface(IUnknown)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+*********************************************************************// Interface: IOPCItemMgt GUID: {39C13A54-011E-11D0-9675-0020AFD8ADB3} *********************************************************************//</p>
+<h6 class="description_section">Attributes</h6>
+<dl class="attributes">
+  <dt>GUID['{39C13A54-011E-11D0-9675-0020AFD8ADB3}']</dt>
+  <dd></dd>
+</dl>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">IUnknown</li>
+<li class="thisitem">IOPCItemMgt</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#AddItems">AddItems</a></b>(dwCount : DWORD; pItemArray : <a  href="OPCDA.html#POPCITEMDEFARRAY">POPCITEMDEFARRAY</a>; out ppAddResults : <a  href="OPCDA.html#POPCITEMRESULTARRAY">POPCITEMRESULTARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#ValidateItems">ValidateItems</a></b>(dwCount : DWORD; pItemArray : <a  href="OPCDA.html#POPCITEMDEFARRAY">POPCITEMDEFARRAY</a>; bBlobUpdate : BOOL; out ppValidationResults : <a  href="OPCDA.html#POPCITEMRESULTARRAY">POPCITEMRESULTARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#RemoveItems">RemoveItems</a></b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#SetActiveState">SetActiveState</a></b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; bActive : BOOL; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#SetClientHandles">SetClientHandles</a></b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; phClient : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#SetDatatypes">SetDatatypes</a></b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; pRequestedDatatypes : <a  href="OPCTypes.html#PVarTypeList">PVarTypeList</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="OPCDA.IOPCItemMgt.html#CreateEnumerator">CreateEnumerator</a></b>(const riid : TIID; out ppUnk : IUnknown) : HResult; stdcall;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="AddItems"></span><code>function <b>AddItems</b>(dwCount : DWORD; pItemArray : <a  href="OPCDA.html#POPCITEMDEFARRAY">POPCITEMDEFARRAY</a>; out ppAddResults : <a  href="OPCDA.html#POPCITEMRESULTARRAY">POPCITEMRESULTARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ValidateItems"></span><code>function <b>ValidateItems</b>(dwCount : DWORD; pItemArray : <a  href="OPCDA.html#POPCITEMDEFARRAY">POPCITEMDEFARRAY</a>; bBlobUpdate : BOOL; out ppValidationResults : <a  href="OPCDA.html#POPCITEMRESULTARRAY">POPCITEMRESULTARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RemoveItems"></span><code>function <b>RemoveItems</b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetActiveState"></span><code>function <b>SetActiveState</b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; bActive : BOOL; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetClientHandles"></span><code>function <b>SetClientHandles</b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; phClient : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetDatatypes"></span><code>function <b>SetDatatypes</b>(dwCount : DWORD; phServer : <a  href="OPCTypes.html#POPCHANDLEARRAY">POPCHANDLEARRAY</a>; pRequestedDatatypes : <a  href="OPCTypes.html#PVarTypeList">PVarTypeList</a>; out ppErrors : PResultList) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="CreateEnumerator"></span><code>function <b>CreateEnumerator</b>(const riid : TIID; out ppUnk : IUnknown) : HResult; stdcall;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

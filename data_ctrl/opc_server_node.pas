@@ -1,6 +1,6 @@
-unit opc_server_node;
-
 {
+Модуль узла OPC сервера
+
 ВНИМАНИЕ! Для удаленного использования на компьютере с OPC сервером
 необходимо разрешить удаленный доступ к COM серверам (для Windows 7):
 Панель управления -> Администрирование -> Службы компонентов ->
@@ -10,6 +10,8 @@ unit opc_server_node;
 Выставить галки <Удаленный доступ>, <Удаленный запуск>, <Локальная активация>, <Удаленная активация> ->
 OK
 }
+
+unit opc_server_node;
 
 {$mode objfpc}{$H+}
 
@@ -42,17 +44,32 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    { Установить наименование OPC сервера }
+    {
+    Установить наименование OPC сервера
+    @param sName Наменование OPC сервера
+    }
     procedure SetOPCServerName(sName: AnsiString);
 
     { Выбрать описания тегов из свойств }
     function CreateTags(): TStrDictionary;
 
-    { Фунция чтения данных }
+    {
+    Фунция чтения данных
+    @param sValues Список строк адресов читаемых значений
+    @param Список строк прочитанных значений
+    }
     function Read(aValues: TStringList): TStringList; override;
-    { Функция чтения данных по адресам }
+    {
+    Функция чтения данных по адресам
+    @param sValues Массив адресов читаемых значений
+    @param Список строк прочитанных значений
+    }
     function ReadAddresses(aValues: Array Of String): TStringList; override;
-    { Фунция записи данных }
+    {
+    Фунция записи данных
+    @param aValues Список записываемых значений
+    @return True - запись прошла успешно / False - ошибка записи
+    }
     function Write(aValues: TStringList): Boolean; override;
 
     { Установить свойства в виде списка параметров }

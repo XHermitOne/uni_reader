@@ -1,8 +1,8 @@
-unit memfunc;
-
 {
 Функции отладки утечек памяти.
 }
+unit memfunc;
+
 {$mode objfpc}{$H+}
 
 interface

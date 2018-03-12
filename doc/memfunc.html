@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: memfunc</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль memfunc</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section">Классы, интерфейсы и объекты</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section">Типы</div><div class="one_section">Константы</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Переменные</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+Функции отладки утечек памяти.</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="memfunc.html#InitStatusMemory">InitStatusMemory</a></b>(): LongInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="memfunc.html#GetLostMemory">GetLostMemory</a></b>(): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="memfunc.html#PrintLostMemory">PrintLostMemory</a></b>();</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Переменные</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="memfunc.html#HPStart">HPStart</a></b>: THeapStatus;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="memfunc.html#HPEnd">HPEnd</a></b>: THeapStatus;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="memfunc.html#Lost">Lost</a></b>: Integer;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="InitStatusMemory"></span><code>function <b>InitStatusMemory</b>(): LongInt;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Инициализировать состояние памяти на данный момент</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="GetLostMemory"></span><code>function <b>GetLostMemory</b>(): LongInt;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Подсчитать количество утерянной памяти с момента инициализации состояния</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PrintLostMemory"></span><code>procedure <b>PrintLostMemory</b>();</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Распечатать количество утерянной памяти</p>
+</td></tr>
+</table>
+<h3 class="detail">Переменные</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HPStart"></span><code><b>HPStart</b>: THeapStatus;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="HPEnd"></span><code><b>HPEnd</b>: THeapStatus;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Lost"></span><code><b>Lost</b>: Integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

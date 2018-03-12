@@ -1,21 +1,21 @@
-Program uni_reader;
-
 {
-Поиск утечек памяти
---------------------
+@bold(Поиск утечек памяти)
 
 Включение поиска утечек:
 Параметры проекта -> Отладка -> Выставить галки для ключей -gl и -gh
 
-Вывод делаем в текстовый файл *.mem в :
+Вывод делаем в текстовый файл *.mem в:
+
+@longcode(#
 ***********************************************************
-  {$if declared(UseHeapTrace)}
-  if UseHeapTrace then // Test if reporting is on
-     SetHeapTraceOutput(ChangeFileExt(ParamStr(0), '.mem'));
-  {$ifend}
+if UseHeapTrace then     // Test if reporting is on
+   SetHeapTraceOutput(ChangeFileExt(ParamStr(0), '.mem'));
 ***********************************************************
+#)
 
 Допустим, имеем код, который заведомо без утечек:
+
+@longcode(#
 ***********************************************************
 uses heaptrc;
 var
@@ -33,8 +33,11 @@ begin
   freemem(p1);
 end.
 ***********************************************************
+#)
 
 , после запуска и завершения работы программы, в консоли наблюдаем отчет:
+
+@longcode(#
 ***********************************************************
 Running "f:\programs\pascal\tst.exe "
 Heap dump by heaptrc unit
@@ -44,9 +47,12 @@ Heap dump by heaptrc unit
 True heap size : 163840 (80 used in System startup)
 True free heap : 163760
 ***********************************************************
+#)
 
 Утечек нет, раз "0 unfreed memory blocks"
 Теперь внесем утечку, "забудем" вернуть память выделенную под p2:
+
+@longcode(#
 ***********************************************************
 uses heaptrc;
 var
@@ -64,8 +70,11 @@ begin
   freemem(p1);
 end.
 ***********************************************************
+#)
 
 и смотрим на результат:
+
+@longcode(#
 ***********************************************************
 Running "f:\programs\pascal\tst.exe "
 Heap dump by heaptrc unit
@@ -78,6 +87,7 @@ Should be : 163496
 Call trace for block $0005D210 size 200
   $00408231
 ***********************************************************
+#)
 
 200 байт - утечка...
 Если будешь компилировать еще и с ключом -gl,
@@ -85,9 +95,11 @@ Call trace for block $0005D210 size 200
 
 ВНИМАНИЕ! Если происходят утечки памяти в модулях Indy
 необходимо в C:\lazarus\fpc\3.0.4\source\packages\indy\IdCompilerDefines.inc
-добавить {$DEFINE IDFREEONFINAL} в секции FPC (2+)
+добавить @code($DEFINE IDFREEONFINAL) в секции FPC (2+)
 и перекомпилировать проект.
 }
+
+Program uni_reader;
 
 Uses
 {$IFDEF UNIX}{$IFDEF UseCThreads}

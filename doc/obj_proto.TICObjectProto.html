@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: obj_proto: Класс TICObjectProto</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TICObjectProto"></span><h1 class="cio">Класс TICObjectProto</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Свойства</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="obj_proto.html">obj_proto</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TICObjectProto = class(TObject)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+Абстрактный объект системы. Реализует общие функции для всех объектов.</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="thisitem">TICObjectProto</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="obj_proto.TICObjectProto.html#Create">Create</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="obj_proto.TICObjectProto.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#GetName">GetName</a></b>(): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="obj_proto.TICObjectProto.html#SetName">SetName</a></b>(sName: AnsiString);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#GetParent">GetParent</a></b>(): TObject;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="obj_proto.TICObjectProto.html#SetParent">SetParent</a></b>(oParent: TObject);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#GetProperties">GetProperties</a></b>(): <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="obj_proto.TICObjectProto.html#SetProperties">SetProperties</a></b>(dProperties: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="obj_proto.TICObjectProto.html#SetPropertiesArray">SetPropertiesArray</a></b>(aArgs: Array Of Const); virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#IsUnknown">IsUnknown</a></b>(): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#Read">Read</a></b>(aValues: TStringList): TStringList; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#ReadAddresses">ReadAddresses</a></b>(aValues: Array Of String): TStringList; virtual;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#Write">Write</a></b>(aValues: TStringList): Boolean; virtual;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#RegState">RegState</a></b>(aValues: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="obj_proto.TICObjectProto.html#GetReadValues">GetReadValues</a></b>(): TStringList;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Свойства</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="obj_proto.TICObjectProto.html#Properties">Properties</a></b>: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a> <a  href="obj_proto.TICObjectProto.html#Read">read</a> <a  href="obj_proto.TICObjectProto.html#GetProperties">GetProperties</a> <a  href="obj_proto.TICObjectProto.html#Write">write</a> <a  href="obj_proto.TICObjectProto.html#SetProperties">SetProperties</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetName"></span><code>function <b>GetName</b>(): AnsiString;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить наименование объекта</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetName"></span><code>procedure <b>SetName</b>(sName: AnsiString);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить наименование объекта</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetParent"></span><code>function <b>GetParent</b>(): TObject;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить родительский объект</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetParent"></span><code>procedure <b>SetParent</b>(oParent: TObject);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить родительский объект</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetProperties"></span><code>function <b>GetProperties</b>(): <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить словарь свойств объекта</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetProperties"></span><code>procedure <b>SetProperties</b>(dProperties: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить свойства объекта в виде словаря</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetPropertiesArray"></span><code>procedure <b>SetPropertiesArray</b>(aArgs: Array Of Const); virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Установить свойства в виде списка параметров</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="IsUnknown"></span><code>function <b>IsUnknown</b>(): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Проверка на то что объект не именованный</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Read"></span><code>function <b>Read</b>(aValues: TStringList): TStringList; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Фунция чтения данных</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReadAddresses"></span><code>function <b>ReadAddresses</b>(aValues: Array Of String): TStringList; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Чтение значений по адресам</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Write"></span><code>function <b>Write</b>(aValues: TStringList): Boolean; virtual;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Фунция записи данных</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="RegState"></span><code>function <b>RegState</b>(aValues: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Зарегистрировать значения переменных в словаре внутренного состояния</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetReadValues"></span><code>function <b>GetReadValues</b>(): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить имена записываемых значений в контроллер данных</p>
+</td></tr>
+</table>
+<h3 class="detail">Свойства</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="Properties"></span><code>property <b>Properties</b>: <a  href="dictionary.TStrDictionary.html">TStrDictionary</a> <a  href="obj_proto.TICObjectProto.html#Read">read</a> <a  href="obj_proto.TICObjectProto.html#GetProperties">GetProperties</a> <a  href="obj_proto.TICObjectProto.html#Write">write</a> <a  href="obj_proto.TICObjectProto.html#SetProperties">SetProperties</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

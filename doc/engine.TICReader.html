@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: engine: Класс TICReader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TICReader"></span><h1 class="cio">Класс TICReader</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section">Свойства</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="engine.html">engine</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TICReader = class(<a class="normal" href="engine.TICReaderProto.html">TICReaderProto</a>)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+TICReader - Движок ЧИТАТЕЛЯ ДАННЫХ из различных источников</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TObject</li>
+<li class="ancestor"><a class="normal" href="engine.TICReaderProto.html">TICReaderProto</a></li>
+<li class="thisitem">TICReader</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="engine.TICReader.html#Create">Create</a></b>(TheOwner: TComponent);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="engine.TICReader.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReader.html#Free">Free</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReader.html#ReadValueAsString">ReadValueAsString</a></b>(sSrcTypeName: AnsiString; const aArgs: Array Of Const; sAddress: AnsiString): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="engine.TICReader.html#ReadValuesAsStrings">ReadValuesAsStrings</a></b>(sSrcTypeName: AnsiString; const aArgs : Array Of Const; aAddresses : Array Of String): TStringList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReader.html#StartServer">StartServer</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReader.html#StopServer">StopServer</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReader.html#EchoTestRpcMethod">EchoTestRpcMethod</a></b>(Thread: <a  href="XmlRpcServer.html#TRpcThread">TRpcThread</a>; const sMethodName: string; List: TList; Return: <a  href="XmlRpcTypes.html#TRpcReturn">TRpcReturn</a>);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReader.html#ReadValueAsStringRpcMethod">ReadValueAsStringRpcMethod</a></b>(Thread: <a  href="XmlRpcServer.html#TRpcThread">TRpcThread</a>; const sMethodName: string; List: TList; Return: <a  href="XmlRpcTypes.html#TRpcReturn">TRpcReturn</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="engine.TICReader.html#ReadValuesAsStringsRpcMethod">ReadValuesAsStringsRpcMethod</a></b>(Thread: <a  href="XmlRpcServer.html#TRpcThread">TRpcThread</a>; const sMethodName: string; List: TList; Return: <a  href="XmlRpcTypes.html#TRpcReturn">TRpcReturn</a>);</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(TheOwner: TComponent);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Конструктор</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Free"></span><code>procedure <b>Free</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReadValueAsString"></span><code>function <b>ReadValueAsString</b>(sSrcTypeName: AnsiString; const aArgs: Array Of Const; sAddress: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Прочитать значение из источника данных    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sSrcTypeName</dt>
+<dd>Наименование типа источника</dd>
+<dt>aArgs</dt>
+<dd>Массив дополнительных аргументов</dd>
+<dt>sAddress</dt>
+<dd>Адрес значения в источнике данных в строковом виде</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Строка прочитанного значения</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReadValuesAsStrings"></span><code>function <b>ReadValuesAsStrings</b>(sSrcTypeName: AnsiString; const aArgs : Array Of Const; aAddresses : Array Of String): TStringList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Прочитать список значений из источника данных    </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sSrcTypeName</dt>
+<dd>Наименование типа источника</dd>
+<dt>aArgs</dt>
+<dd>Массив дополнительных аргументов</dd>
+<dt>aAddresses</dt>
+<dd>Массив строк читаемых адресов</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Список строк прочитанных значений</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StartServer"></span><code>procedure <b>StartServer</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Запуск сервера движка/Инициализировать методы удаленного вызова</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="StopServer"></span><code>procedure <b>StopServer</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Останов сервера движка</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="EchoTestRpcMethod"></span><code>procedure <b>EchoTestRpcMethod</b>(Thread: <a  href="XmlRpcServer.html#TRpcThread">TRpcThread</a>; const sMethodName: string; List: TList; Return: <a  href="XmlRpcTypes.html#TRpcReturn">TRpcReturn</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Тестовая функция для проверки удаленного вызова процедур</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReadValueAsStringRpcMethod"></span><code>procedure <b>ReadValueAsStringRpcMethod</b>(Thread: <a  href="XmlRpcServer.html#TRpcThread">TRpcThread</a>; const sMethodName: string; List: TList; Return: <a  href="XmlRpcTypes.html#TRpcReturn">TRpcReturn</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Функция чтения данных из источника удаленного вызова процедур</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="ReadValuesAsStringsRpcMethod"></span><code>procedure <b>ReadValuesAsStringsRpcMethod</b>(Thread: <a  href="XmlRpcServer.html#TRpcThread">TRpcThread</a>; const sMethodName: string; List: TList; Return: <a  href="XmlRpcTypes.html#TRpcReturn">TRpcReturn</a>);</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Функция чтения данных из источника удаленного вызова процедур</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

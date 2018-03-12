@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: strfunc</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль strfunc</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section">Классы, интерфейсы и объекты</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Типы</a></div><div class="one_section">Константы</div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+Функции работы со строками</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#SplitStr">SplitStr</a></b>(sString: String; cDelim: Char): <a  href="strfunc.html#TArrayOfString">TArrayOfString</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#JoinStr">JoinStr</a></b>(StringArray : Array Of String; cDelim : Char): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#StripStr">StripStr</a></b>(sString: AnsiString; sChar: Char = ' '): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#ParseStrArray">ParseStrArray</a></b>(sString: AnsiString): <a  href="strfunc.html#TArrayOfString">TArrayOfString</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#IsParseStrList">IsParseStrList</a></b>(sString: AnsiString): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#ParseStrList">ParseStrList</a></b>(sString: AnsiString): TStringList;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#ConvertStrListToString">ConvertStrListToString</a></b>(StrList: TStringList): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#IsStrInList">IsStrInList</a></b>(sString: AnsiString; StringArray: Array of String): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="strfunc.html#ToUTF8">ToUTF8</a></b>(var sStr: AnsiString): AnsiString;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Типы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="strfunc.html#TArrayOfString">TArrayOfString</a></b> = Array Of String;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="SplitStr"></span><code>function <b>SplitStr</b>(sString: String; cDelim: Char): <a  href="strfunc.html#TArrayOfString">TArrayOfString</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Разбивает строку с разделителями на части и возвращает массив частей   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sString</dt>
+<dd>Строка</dd>
+<dt>cDelim</dt>
+<dd>Символ разделителя</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Массив строк</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="JoinStr"></span><code>function <b>JoinStr</b>(StringArray : Array Of String; cDelim : Char): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Объединение массива строк в одну строку   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>StringArray</dt>
+<dd>Массив строк</dd>
+<dt>cDelim</dt>
+<dd>Символ разделителя</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Объединенная строка</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StripStr"></span><code>function <b>StripStr</b>(sString: AnsiString; sChar: Char = ' '): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Удалить обрамление кавычками одинарными и двойными из строки   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sString</dt>
+<dd>Строка</dd>
+<dt>sChar</dt>
+<dd>Обрамляющий символ</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Строка с удаленными обрамляющими симвлами</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ParseStrArray"></span><code>function <b>ParseStrArray</b>(sString: AnsiString): <a  href="strfunc.html#TArrayOfString">TArrayOfString</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Распарсить строку, представляющую собой список строк  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sString</dt>
+<dd>Обрабатываемая строка</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Массив строк</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IsParseStrList"></span><code>function <b>IsParseStrList</b>(sString: AnsiString): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Проверка является ли строка серилизованным списком  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sString</dt>
+<dd>Строка</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">True/False</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ParseStrList"></span><code>function <b>ParseStrList</b>(sString: AnsiString): TStringList;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Распарсить строку, представляющую собой список строк. Возврашает список строк.  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sString</dt>
+<dd>Строка</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Список строк</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ConvertStrListToString"></span><code>function <b>ConvertStrListToString</b>(StrList: TStringList): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Преобразование списка строк в строку вида [ aaaa, bbbb, cccc ]  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>StrList</dt>
+<dd>Спсок строк</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Преобразованная строка</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IsStrInList"></span><code>function <b>IsStrInList</b>(sString: AnsiString; StringArray: Array of String): Boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Проверка есть ли строка в списке строк   </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sString</dt>
+<dd>Строка</dd>
+<dt>StringArray</dt>
+<dd>Массив строк</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">True/False</p></td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ToUTF8"></span><code>function <b>ToUTF8</b>(var sStr: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Попытка перекодировать строку в UTF8. Функция сама определеяет кодировку строки и затем преобразует в UTF8.  </p>
+<h6 class="description_section">Параметры</h6>
+<dl class="parameters">
+<dt>sStr</dt>
+<dd>Исходная строка</dd>
+</dl>
+<h6 class="description_section">Возвращаемые значения</h6>
+<p class="return">Преобразованная строка в UTF8</p></td></tr>
+</table>
+<h3 class="detail">Типы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TArrayOfString"></span><code><b>TArrayOfString</b> = Array Of String;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

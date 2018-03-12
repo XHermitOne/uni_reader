@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: DIMime</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль DIMime</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section">Классы, интерфейсы и объекты</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section">Типы</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Константы</a></div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+Ligtening fast Mime (Base64) Encoding and Decoding routines.</p>
+<p>
+  The <code>DIMime</code> unit contains some lightening fast Mime (Base64) Encoding and Decoding routines. &lt;P&gt;All functions and procedures are coded in carefully optimized Pascal. Even without using assembler, they are the fastest of their kind I know about.</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeEncodeString">MimeEncodeString</a></b>(const S: AnsiString): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeEncodeStringNoCRLF">MimeEncodeStringNoCRLF</a></b>(const S: AnsiString): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeDecodeString">MimeDecodeString</a></b>(const S: AnsiString): AnsiString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeEncodedSize">MimeEncodedSize</a></b>(const InputSize: Cardinal): Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeEncodedSizeNoCRLF">MimeEncodedSizeNoCRLF</a></b>(const InputSize: Cardinal): Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeDecodedSize">MimeDecodedSize</a></b>(const InputSize: Cardinal): Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="DIMime.html#DecodeHttpBasicAuthentication">DecodeHttpBasicAuthentication</a></b>(const BasicCredentials: AnsiString; out UserId, PassWord: AnsiString);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="DIMime.html#MimeEncode">MimeEncode</a></b>(const InputBuffer; const InputByteCount: Cardinal; out OutputBuffer);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="DIMime.html#MimeEncodeNoCRLF">MimeEncodeNoCRLF</a></b>(const InputBuffer; const InputByteCount: Cardinal; out OutputBuffer);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="DIMime.html#MimeEncodeFullLines">MimeEncodeFullLines</a></b>(const InputBuffer; const InputByteCount: Cardinal; out OutputBuffer);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeDecode">MimeDecode</a></b>(const InputBuffer; const InputBytesCount: Cardinal; out OutputBuffer): Cardinal;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeDecodePartial">MimeDecodePartial</a></b>(const InputBuffer; const InputBytesCount: Cardinal; out OutputBuffer; var ByteBuffer: Cardinal; var ByteBufferSpace: Cardinal): Cardinal;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="DIMime.html#MimeDecodePartialEnd">MimeDecodePartialEnd</a></b>(out OutputBuffer; const ByteBuffer: Cardinal; const ByteBufferSpace: Cardinal): Cardinal;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Константы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="DIMime.html#MIME_ENCODED_LINE_BREAK">MIME_ENCODED_LINE_BREAK</a></b> = 76;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="DIMime.html#MIME_DECODED_LINE_BREAK">MIME_DECODED_LINE_BREAK</a></b> = <a  href="DIMime.html#MIME_ENCODED_LINE_BREAK">MIME_ENCODED_LINE_BREAK</a> div 4 * 3;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncodeString"></span><code>function <b>MimeEncodeString</b>(const S: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Mime-encodes an AnsiString.</p>
+<p>
+ <code>MimeEncodeString</code> takes an AnsiString, encodes it, and returns the result as an AnsiString. To decode the result string, use <a class="normal" href="DIMime.html#MimeDecodeString">MimeDecodeString</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncodeStringNoCRLF"></span><code>function <b>MimeEncodeStringNoCRLF</b>(const S: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Mime-encodes an AnsiString.</p>
+<p>
+ <code>MimeEncodeStringNoCRLF</code> is just like <a class="normal" href="DIMime.html#MimeEncodeString">MimeEncodeString</a>, but does &lt;B&gt;not&lt;/B&gt; insert line breaks.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeDecodeString"></span><code>function <b>MimeDecodeString</b>(const S: AnsiString): AnsiString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Mime-decodes an AnsiString.</p>
+<p>
+ <code>MimeDecodeString</code> takes a a string, decodes it, and returns the result as a string. Use <code>MimeDecodeString</code> to decode a string previously encoded with link(MimeEncodeString).</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncodedSize"></span><code>function <b>MimeEncodedSize</b>(const InputSize: Cardinal): Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Calculates Mime-encoding output size.</p>
+<p>
+ Calculates the output size of i MimeEncoded bytes, i.e. the memory required for all decoded data plus the line breaks. Use for <a class="normal" href="DIMime.html#MimeEncode">MimeEncode</a> only.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncodedSizeNoCRLF"></span><code>function <b>MimeEncodedSizeNoCRLF</b>(const InputSize: Cardinal): Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Calculates Mime-encoding output size.</p>
+<p>
+ Calculates the output size of i MimeEncodedNoCRLF bytes, i.e. the memory required for all decoded data. Use for <code>MimeEncodedNoCRLF</code> only.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeDecodedSize"></span><code>function <b>MimeDecodedSize</b>(const InputSize: Cardinal): Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Calculates Mime-decoding output size.</p>
+<p>
+ Calculates the maximum output size of i MimeDecoded bytes. You may use it for <a class="normal" href="DIMime.html#MimeDecode">MimeDecode</a> to calculate the maximum amount of memory required for decoding in one single pass.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DecodeHttpBasicAuthentication"></span><code>procedure <b>DecodeHttpBasicAuthentication</b>(const BasicCredentials: AnsiString; out UserId, PassWord: AnsiString);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Decodes UserID and Password for HTTP Basic Authentication.</p>
+<p>
+ Decodes the UserID and Password for HTTP Basic Authentication. Pass the contents of the Authorization Header as BasicCredentials and DecodeHttpBasicAuthentication will return the unencoded UserID and Password. If either of the two can not be decoded or found, they will result in an empty string (''). This procedure is inspired by Shiv. &lt;P&gt;The following quote from &quot;Request for Comments (RFC) 1945: Hypertext Transfer Protocol &ndash; HTTP/1.0&quot; has the details: &lt;UL&gt; &lt;P&gt;11.1 Basic Authentication Scheme &lt;P&gt;The &quot;basic&quot; authentication scheme is based on the model that the user agent must authenticate itself with a user-ID and a password for each realm. The realm value should be considered an opaque string which can only be compared for equality with other realms on that server. The server will authorize the request only if it can validate the user-ID and password for the protection space of the Request-URI. There are no optional authentication parameters. &lt;P&gt;Upon receipt of an unauthorized request for a URI within the protection space, the server should respond with a challenge like the following: &lt;P&gt;<code>WWW-Authenticate: Basic realm=&quot;WallyWorld&quot;</code> &lt;P&gt;where &quot;WallyWorld&quot; is the string assigned by the server to identify the protection space of the Request-URI. &lt;P&gt;To receive authorization, the client sends the user-ID and password, separated by a single colon (&quot;:&quot;) character, within a base64 [5] encoded string in the credentials. &lt;P&gt;<code>basic-credentials = &quot;Basic&quot; SP basic-cookie</code> &lt;P&gt;<code>basic-cookie</code> = @&lt;base64 [5] encoding of userid-password, except not limited to 76 char/line@&gt; &lt;BR&gt;<code>userid-password</code> = [ token ] &quot;:&quot; *TEXT &lt;P&gt;If the user agent wishes to send the user-ID &quot;Aladdin&quot; and password &quot;open sesame&quot;, it would use the following header field: &lt;P&gt;<code>Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</code> &lt;P&gt;The basic authentication scheme is a non-secure method of filtering unauthorized access to resources on an HTTP server. It is based on the assumption that the connection between the client and the server can be regarded as a trusted carrier. As this is not generally true on an open network, the basic authentication scheme should be used accordingly. In spite of this, clients should implement the scheme in order to communicate with servers that use it. &lt;/UL&gt;</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncode"></span><code>procedure <b>MimeEncode</b>(const InputBuffer; const InputByteCount: Cardinal; out OutputBuffer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Primary Mime encoding routine.</p>
+<p>
+ <code>MimeEncode</code> is the primary Mime encoding routine. Line breaks will be inserted after each full line. &lt;P&gt;&lt;B&gt;Caution&lt;/B&gt;: OutputBuffer must have enough memory allocated to take all encoded output. <a class="normal" href="DIMime.html#MimeEncodedSize">MimeEncodedSize</a>(InputBytesCount) calculates this amount in bytes. <code>MimeEncode</code> will then fill the entire OutputBuffer, so there is no OutputBytesCount result for this procedure. Preallocating all memory at once (as required by <code>MimeEncode</code>) avoids the time-cosuming process of reallocation. &lt;P&gt;If not all data fits into memory at once, you can &lt;B&gt;not&lt;/B&gt; use <code>MimeEncode</code> multiple times. Instead, use a combintion of <a class="normal" href="DIMime.html#MimeEncodeFullLines">MimeEncodeFullLines</a> and <a class="normal" href="DIMime.html#MimeEncodeNoCRLF">MimeEncodeNoCRLF</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncodeNoCRLF"></span><code>procedure <b>MimeEncodeNoCRLF</b>(const InputBuffer; const InputByteCount: Cardinal; out OutputBuffer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Primary Mime encoding routine.</p>
+<p>
+ <code>MimeEncodeNoCRLF</code> is just like <a class="normal" href="DIMime.html#MimeEncode">MimeEncode</a>, but does &lt;B&gt;not&lt;/B&gt; insert line breaks. &lt;P&gt;Unlike <a class="normal" href="DIMime.html#MimeEncode">MimeEncode</a>, you can use <code>MimeEncodeNoCRLF</code> multiple times if not all data fits into memory at once. But you must be very careful about the size of the InputBuffer. See comments on <code>BUFFER_SIZE</code> for details and <code>MimeEncodeStreamNoCRLF</code> for an example.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeEncodeFullLines"></span><code>procedure <b>MimeEncodeFullLines</b>(const InputBuffer; const InputByteCount: Cardinal; out OutputBuffer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal Mime encoding helper routine.</p>
+<p>
+ <code>MimeEncodeFullLines</code> will decode full lines of <a class="normal" href="DIMime.html#MIME_ENCODED_LINE_BREAK">MIME_ENCODED_LINE_BREAK</a> length. A line break (CRLF) will be inserted after each line including the last one. Any remaining input which would not result in a full line will not be encoded. To encode the remaining partial line, use <a class="normal" href="DIMime.html#MimeEncodeNoCRLF">MimeEncodeNoCRLF</a> with the appropriate parameters. <code>MimeEncodeFullLines</code> requires an OutputBuffer large enough for all encoded output. The required size of the OutputBuffer can be calculated with &lt;P&gt;<code>(InputByteCount + 2) div 3 * 4 + InputByteCount div MIME_DECODED_LINE_BREAK * 2</code> &lt;P&gt;<code>MimeEncodeFullLines</code> will fill the entire OutputBuffer of that size.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeDecode"></span><code>function <b>MimeDecode</b>(const InputBuffer; const InputBytesCount: Cardinal; out OutputBuffer): Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Primary Mime decoding routine.</p>
+<p>
+ The primary Mime decoding routines. <code>MimeDecode</code> works with all MimeEncoded data, no matter if it was encoded with or without line breaks. Line breaks characters which are outside of the base64 alphabet and will be ignored. &lt;P&gt;&lt;B&gt;Caution&lt;/B&gt;: OutputBuffer must have enough memory allocated to take all output. <a class="normal" href="DIMime.html#MimeDecodedSize">MimeDecodedSize</a>(InputBytesCount) calculates this amount in bytes. There is no guarantee that all output will be filled after decoding. All decoding functions therefore return the acutal number of bytes written to OutputBuffer. Preallocating all memory at once (as is required by MimeDecode) avoids the time-cosuming process of reallocation. After calling <code>MimeDecode</code>, simply cut the allocated memory down to OutputBytesCount, i.e. calling <code>SetLength (OutString, OutputBytesCount)</code> for strings. &lt;P&gt;If not all data fits into memory at once, you may &lt;B&gt;not&lt;/B&gt; use <code>MimeDecode</code> multiple times. Instead, you must use a combination of <a class="normal" href="DIMime.html#MimeDecodePartial">MimeDecodePartial</a> and <a class="normal" href="DIMime.html#MimeDecodePartialEnd">MimeDecodePartialEnd</a> functions. See <code>MimeDecodeStream</code> for an example.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeDecodePartial"></span><code>function <b>MimeDecodePartial</b>(const InputBuffer; const InputBytesCount: Cardinal; out OutputBuffer; var ByteBuffer: Cardinal; var ByteBufferSpace: Cardinal): Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal Mime decoding helper routine.</p>
+<p>
+ The <code>MimeDecodePartial</code> function is mostly for internal use. It serves the purpose of decoding very large data in multiple parts of smaller chunks, as in <code>MimeDecodeStream</code>. &lt;P&gt;Used in conjunction with <a class="normal" href="DIMime.html#MimeDecodePartialEnd">MimeDecodePartialEnd</a>.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MimeDecodePartialEnd"></span><code>function <b>MimeDecodePartialEnd</b>(out OutputBuffer; const ByteBuffer: Cardinal; const ByteBufferSpace: Cardinal): Cardinal;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal Mime decoding helper routine.</p>
+<p>
+ The <code>MimeDecodePartialEnd</code> function is mostly for internal use. It serves the purpose of decoding very large data in multiple parts of smaller chunks, as in <code>MimeDecodeStream</code>. &lt;P&gt;Used in conjunction with <a class="normal" href="DIMime.html#MimeDecodePartial">MimeDecodePartial</a>.</p>
+</td></tr>
+</table>
+<h3 class="detail">Константы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MIME_ENCODED_LINE_BREAK"></span><code><b>MIME_ENCODED_LINE_BREAK</b> = 76;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+According to RFC 2045, <code>MIME_ENCODED_LINE_BREAK</code> defaults to 76. If you ever need to change it, make sure it is a positive multiple of 4.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MIME_DECODED_LINE_BREAK"></span><code><b>MIME_DECODED_LINE_BREAK</b> = <a  href="DIMime.html#MIME_ENCODED_LINE_BREAK">MIME_ENCODED_LINE_BREAK</a> div 4 * 3;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Do not change this, even if you change <a class="normal" href="DIMime.html#MIME_ENCODED_LINE_BREAK">MIME_ENCODED_LINE_BREAK</a>. <code>MIME_DECODED_LINE_BREAK</code> will always be a multiple of 3.</p>
+</td></tr>
+</table>
+<h2 class="authors">Автор</h2>
+<ul class="authors">
+<li>Ralf Junker &lt;<a  href="mailto:delphi@zeitungsjunge.de">delphi@zeitungsjunge.de</a>&gt;</li>
+</ul>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

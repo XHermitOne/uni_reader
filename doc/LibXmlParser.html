@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: LibXmlParser</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль LibXmlParser</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Классы, интерфейсы и объекты</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Процедуры и функции</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Типы</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Константы</a></div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+&mdash; Delphi/Kylix Version Numbers As this is no code, this does not blow up your object or executable code at all (*$DEFINE D1_OR_NEWER *) (*$IFNDEF VER80 *) (*$DEFINE D2_OR_NEWER *) (*$IFNDEF VER90 *) (*$DEFINE D3_OR_NEWER *) (*$IFNDEF VER100 *) (*$DEFINE D4_OR_NEWER *) (*$IFNDEF VER120 *) (*$DEFINE D5_OR_NEWER *) (*$IFNDEF VER130 *) (*$IFNDEF VER140 *) (*$IFNDEF VER150 *) If the compiler gets stuck here, you are using a compiler version unknown to this code. You will probably have to change this code accordingly. At first, try to comment out these lines and see what will happen. (*$ENDIF *) (*$ENDIF *) (*$ENDIF *) (*$ENDIF *) (*$ENDIF *) (*$ENDIF *) (*$ENDIF *)</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Классы, интерфейсы и объекты</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Имя</th>
+<th class="itemdesc">Описание</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="LibXmlParser.TDtdElementRec.html"><code>TDtdElementRec</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TXmlParser.html"><code>TXmlParser</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TObjectList.html"><code>TObjectList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TNvpNode.html"><code>TNvpNode</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TNvpList.html"><code>TNvpList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TAttr.html"><code>TAttr</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TAttrList.html"><code>TAttrList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TEntityStack.html"><code>TEntityStack</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TAttrDef.html"><code>TAttrDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TElemDef.html"><code>TElemDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TElemList.html"><code>TElemList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TEntityDef.html"><code>TEntityDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TNotationDef.html"><code>TNotationDef</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Класс&nbsp;<a class="bold" href="LibXmlParser.TCustomXmlScanner.html"><code>TCustomXmlScanner</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Процедуры и функции</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.html#ConvertWs">ConvertWs</a></b> (Source: STRING; PackWs: BOOLEAN) : STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>PROCEDURE <b><a  href="LibXmlParser.html#SetStringSF">SetStringSF</a></b> (VAR S : STRING; BufferStart, BufferFinal : PChar);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.html#StrSFPas">StrSFPas</a></b> (Start, Finish : PChar) : STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.html#TrimWs">TrimWs</a></b> (Source : STRING) : STRING;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.html#AnsiToUtf8">AnsiToUtf8</a></b> (Source : ANSISTRING) : STRING;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>FUNCTION <b><a  href="LibXmlParser.html#Utf8ToAnsi">Utf8ToAnsi</a></b> (Source : STRING; UnknownChar : CHAR = '�') : ANSISTRING;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Типы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TPartType">TPartType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TDtdElemType">TDtdElemType</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TValueType">TValueType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TAttrDefault">TAttrDefault</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TAttrType">TAttrType</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TElemType">TElemType</a></b> = (...);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TCharset">TCharset</a></b> = SET OF CHAR;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TXmlPrologEvent">TXmlPrologEvent</a></b> = PROCEDURE (Sender : TObject; XmlVersion, Encoding: STRING; Standalone : BOOLEAN) OF OBJECT;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TCommentEvent">TCommentEvent</a></b> = PROCEDURE (Sender : TObject; Comment : STRING) OF OBJECT;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TPIEvent">TPIEvent</a></b> = PROCEDURE (Sender : TObject; Target, Content: STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>) OF OBJECT;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TDtdEvent">TDtdEvent</a></b> = PROCEDURE (Sender : TObject; RootElementName : STRING) OF OBJECT;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TStartTagEvent">TStartTagEvent</a></b> = PROCEDURE (Sender : TObject; TagName : STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>) OF OBJECT;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TEndTagEvent">TEndTagEvent</a></b> = PROCEDURE (Sender : TObject; TagName : STRING) OF OBJECT;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TContentEvent">TContentEvent</a></b> = PROCEDURE (Sender : TObject; Content : STRING) OF OBJECT;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TElementEvent">TElementEvent</a></b> = PROCEDURE (Sender : TObject; ElemDef : <a  href="LibXmlParser.TElemDef.html">TElemDef</a>) OF OBJECT;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TEntityEvent">TEntityEvent</a></b> = PROCEDURE (Sender : TObject; EntityDef : <a  href="LibXmlParser.TEntityDef.html">TEntityDef</a>) OF OBJECT;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TNotationEvent">TNotationEvent</a></b> = PROCEDURE (Sender : TObject; NotationDef : <a  href="LibXmlParser.TNotationDef.html">TNotationDef</a>) OF OBJECT;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TErrorEvent">TErrorEvent</a></b> = PROCEDURE (Sender : TObject; ErrorPos : PChar) OF OBJECT;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TExternalEvent">TExternalEvent</a></b> = PROCEDURE (Sender : TObject; SystemId, PublicId, NotationId : STRING; VAR Result : <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>) OF OBJECT;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#TEncodingEvent">TEncodingEvent</a></b> = FUNCTION (Sender : TObject; CurrentEncoding, Source : STRING) : STRING OF OBJECT;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Константы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CVersion">CVersion</a></b> = '1.0.17';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CWhitespace">CWhitespace</a></b>   = [#32, #9, #13, #10];</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CLetter">CLetter</a></b>       = [#$41..#$5A, #$61..#$7A, #$C0..#$D6, #$D8..#$F6, #$F8..#$FF];</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CDigit">CDigit</a></b>        = [#$30..#$39];</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CNameChar">CNameChar</a></b>     = <a  href="LibXmlParser.html#CLetter">CLetter</a> + <a  href="LibXmlParser.html#CDigit">CDigit</a> + ['.', '-', '_', ':', #$B7];</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CNameStart">CNameStart</a></b>    = <a  href="LibXmlParser.html#CLetter">CLetter</a> + ['_', ':'];</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CQuoteChar">CQuoteChar</a></b>    = ['&quot;', ''''];</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CPubidChar">CPubidChar</a></b>    = [#32, &circ;M, &circ;J, #9, 'a'..'z', 'A'..'Z', '0'..'9',
+                   '-', '''', '(', ')', '+', ',', '.', '/', ':',
+                   '=', '?', ';', '!', '*', '#', '@', '$', '_', '%'];</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CDStart">CDStart</a></b>       = '&lt;![CDATA[';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CDEnd">CDEnd</a></b>         = ']]&gt;';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CPartType_Name">CPartType_Name</a></b> : ARRAY [<a  href="LibXmlParser.html#TPartType">TPartType</a>] OF STRING =
+                   ('', 'XML Prolog', 'Comment', 'PI',
+                    'DTD Declaration', 'Start Tag', 'Empty Tag', 'End Tag',
+                    'Text', 'CDATA');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CValueType_Name">CValueType_Name</a></b>   : ARRAY [<a  href="LibXmlParser.html#TValueType">TValueType</a>]    OF STRING = ('Normal', 'Implied', 'Fixed', 'Default');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CAttrDefault_Name">CAttrDefault_Name</a></b> : ARRAY [<a  href="LibXmlParser.html#TAttrDefault">TAttrDefault</a>]  OF STRING = ('Default', 'Required', 'Implied', 'Fixed');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CElemType_Name">CElemType_Name</a></b>    : ARRAY [<a  href="LibXmlParser.html#TElemType">TElemType</a>]     OF STRING = ('Empty', 'Any', 'Childs only', 'Mixed');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="LibXmlParser.html#CAttrType_Name">CAttrType_Name</a></b>    : ARRAY [<a  href="LibXmlParser.html#TAttrType">TAttrType</a>]     OF STRING = ('Unknown', 'CDATA',
+                                                         'ID', 'IDREF', 'IDREFS',
+                                                         'ENTITY', 'ENTITIES',
+                                                         'NMTOKEN', 'NMTOKENS',
+                                                         'Notation', 'Enumeration');</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Процедуры и функции</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ConvertWs"></span><code>FUNCTION <b>ConvertWs</b> (Source: STRING; PackWs: BOOLEAN) : STRING;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="SetStringSF"></span><code>PROCEDURE <b>SetStringSF</b> (VAR S : STRING; BufferStart, BufferFinal : PChar);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Convert WS to spaces #x20</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="StrSFPas"></span><code>FUNCTION <b>StrSFPas</b> (Start, Finish : PChar) : STRING;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+SetString by Start/Final of buffer</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TrimWs"></span><code>FUNCTION <b>TrimWs</b> (Source : STRING) : STRING;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Convert buffer part to Pascal string</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="AnsiToUtf8"></span><code>FUNCTION <b>AnsiToUtf8</b> (Source : ANSISTRING) : STRING;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Trim Whitespace</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Utf8ToAnsi"></span><code>FUNCTION <b>Utf8ToAnsi</b> (Source : STRING; UnknownChar : CHAR = '�') : ANSISTRING;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Convert Win-1252 to UTF-8</p>
+</td></tr>
+</table>
+<h3 class="detail">Типы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TPartType"></span><code><b>TPartType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+This variable will be updated for every release (I hope, I won't forget to do it everytime ...)</p>
+<h6 class="description_section">Значение</h6>
+<ul>
+<li>
+<span id="ptNone">ptNone</span>: &mdash; Document Part Types</li>
+<li>
+<span id="ptXmlProlog">ptXmlProlog</span>: Nothing</li>
+<li>
+<span id="ptComment">ptComment</span>: XML Prolog XmlSpec 2.8 / 4.3.1</li>
+<li>
+<span id="ptPI">ptPI</span>: Comment XmlSpec 2.5</li>
+<li>
+<span id="ptDtdc">ptDtdc</span>: Processing Instruction XmlSpec 2.6</li>
+<li>
+<span id="ptStartTag">ptStartTag</span>: Document Type Declaration XmlSpec 2.8</li>
+<li>
+<span id="ptEmptyTag">ptEmptyTag</span>: Start Tag XmlSpec 3.1</li>
+<li>
+<span id="ptEndTag">ptEndTag</span>: Empty-Element Tag XmlSpec 3.1</li>
+<li>
+<span id="ptContent">ptContent</span>: End Tag XmlSpec 3.1</li>
+<li>
+<span id="ptCData">ptCData</span>: Text Content between Tags</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TDtdElemType"></span><code><b>TDtdElemType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+CDATA Section XmlSpec 2.7</p>
+<h6 class="description_section">Значение</h6>
+<ul>
+<li>
+<span id="deElement">deElement</span>: &mdash; DTD Elements</li>
+<li>
+<span id="deAttList">deAttList</span>: !ELEMENT declaration</li>
+<li>
+<span id="deEntity">deEntity</span>: !ATTLIST declaration</li>
+<li>
+<span id="deNotation">deNotation</span>: !ENTITY declaration</li>
+<li>
+<span id="dePI">dePI</span>: !NOTATION declaration</li>
+<li>
+<span id="deComment">deComment</span>: PI in DTD</li>
+<li>
+<span id="deError">deError</span>: Comment in DTD</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TValueType"></span><code><b>TValueType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Значение</h6>
+<ul>
+<li>
+<span id="vtNormal">vtNormal</span>: &mdash; Attribute Value Type</li>
+<li>
+<span id="vtImplied">vtImplied</span>: Normal specified Attribute</li>
+<li>
+<span id="vtFixed">vtFixed</span>: #IMPLIED attribute value</li>
+<li>
+<span id="vtDefault">vtDefault</span>: #FIXED attribute value</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TAttrDefault"></span><code><b>TAttrDefault</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Attribute value from default value in !ATTLIST declaration</p>
+<h6 class="description_section">Значение</h6>
+<ul>
+<li>
+<span id="adDefault">adDefault</span>: &mdash; Attribute Default Type</li>
+<li>
+<span id="adRequired">adRequired</span>: Normal default value</li>
+<li>
+<span id="adImplied">adImplied</span>: #REQUIRED attribute</li>
+<li>
+<span id="adFixed">adFixed</span>: #IMPLIED attribute</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TAttrType"></span><code><b>TAttrType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+#FIXED attribute</p>
+<h6 class="description_section">Значение</h6>
+<ul>
+<li>
+<span id="atUnknown">atUnknown</span>: &mdash; Type of attribute</li>
+<li>
+<span id="atCData">atCData</span>: Unknown type</li>
+<li>
+<span id="atID">atID</span>: Character data only</li>
+<li>
+<span id="atIdRef">atIdRef</span>: ID</li>
+<li>
+<span id="atIdRefs">atIdRefs</span>: ID Reference</li>
+<li>
+<span id="atEntity">atEntity</span>: Several ID References, separated by Whitespace</li>
+<li>
+<span id="atEntities">atEntities</span>: Name of an unparsed Entity</li>
+<li>
+<span id="atNmToken">atNmToken</span>: Several unparsed Entity names, separated by Whitespace</li>
+<li>
+<span id="atNmTokens">atNmTokens</span>: Name Token</li>
+<li>
+<span id="atNotation">atNotation</span>: Several Name Tokens, separated by Whitespace</li>
+<li>
+<span id="atEnumeration">atEnumeration</span>: A selection of Notation names (Unparsed Entity)</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TElemType"></span><code><b>TElemType</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Enumeration</p>
+<h6 class="description_section">Значение</h6>
+<ul>
+<li>
+<span id="etEmpty">etEmpty</span>: &mdash; Element content type</li>
+<li>
+<span id="etAny">etAny</span>: Element is always empty</li>
+<li>
+<span id="etChildren">etChildren</span>: Element can have any mixture of PCDATA and any elements</li>
+<li>
+<span id="etMixed">etMixed</span>: Element must contain only elements</li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TCharset"></span><code><b>TCharset</b> = SET OF CHAR;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TXmlPrologEvent"></span><code><b>TXmlPrologEvent</b> = PROCEDURE (Sender : TObject; XmlVersion, Encoding: STRING; Standalone : BOOLEAN) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TCommentEvent"></span><code><b>TCommentEvent</b> = PROCEDURE (Sender : TObject; Comment : STRING) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TPIEvent"></span><code><b>TPIEvent</b> = PROCEDURE (Sender : TObject; Target, Content: STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TDtdEvent"></span><code><b>TDtdEvent</b> = PROCEDURE (Sender : TObject; RootElementName : STRING) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TStartTagEvent"></span><code><b>TStartTagEvent</b> = PROCEDURE (Sender : TObject; TagName : STRING; Attributes : <a  href="LibXmlParser.TAttrList.html">TAttrList</a>) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TEndTagEvent"></span><code><b>TEndTagEvent</b> = PROCEDURE (Sender : TObject; TagName : STRING) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TContentEvent"></span><code><b>TContentEvent</b> = PROCEDURE (Sender : TObject; Content : STRING) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TElementEvent"></span><code><b>TElementEvent</b> = PROCEDURE (Sender : TObject; ElemDef : <a  href="LibXmlParser.TElemDef.html">TElemDef</a>) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TEntityEvent"></span><code><b>TEntityEvent</b> = PROCEDURE (Sender : TObject; EntityDef : <a  href="LibXmlParser.TEntityDef.html">TEntityDef</a>) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TNotationEvent"></span><code><b>TNotationEvent</b> = PROCEDURE (Sender : TObject; NotationDef : <a  href="LibXmlParser.TNotationDef.html">TNotationDef</a>) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TErrorEvent"></span><code><b>TErrorEvent</b> = PROCEDURE (Sender : TObject; ErrorPos : PChar) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TExternalEvent"></span><code><b>TExternalEvent</b> = PROCEDURE (Sender : TObject; SystemId, PublicId, NotationId : STRING; VAR Result : <a  href="LibXmlParser.TXmlParser.html">TXmlParser</a>) OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TEncodingEvent"></span><code><b>TEncodingEvent</b> = FUNCTION (Sender : TObject; CurrentEncoding, Source : STRING) : STRING OF OBJECT;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Константы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CVersion"></span><code><b>CVersion</b> = '1.0.17';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CWhitespace"></span><code><b>CWhitespace</b>   = [#32, #9, #13, #10];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CLetter"></span><code><b>CLetter</b>       = [#$41..#$5A, #$61..#$7A, #$C0..#$D6, #$D8..#$F6, #$F8..#$FF];</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Whitespace characters (XmlSpec 2.3)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CDigit"></span><code><b>CDigit</b>        = [#$30..#$39];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CNameChar"></span><code><b>CNameChar</b>     = <a  href="LibXmlParser.html#CLetter">CLetter</a> + <a  href="LibXmlParser.html#CDigit">CDigit</a> + ['.', '-', '_', ':', #$B7];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CNameStart"></span><code><b>CNameStart</b>    = <a  href="LibXmlParser.html#CLetter">CLetter</a> + ['_', ':'];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CQuoteChar"></span><code><b>CQuoteChar</b>    = ['&quot;', ''''];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CPubidChar"></span><code><b>CPubidChar</b>    = [#32, &circ;M, &circ;J, #9, 'a'..'z', 'A'..'Z', '0'..'9',
+                   '-', '''', '(', ')', '+', ',', '.', '/', ':',
+                   '=', '?', ';', '!', '*', '#', '@', '$', '_', '%'];</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CDStart"></span><code><b>CDStart</b>       = '&lt;![CDATA[';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CDEnd"></span><code><b>CDEnd</b>         = ']]&gt;';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CPartType_Name"></span><code><b>CPartType_Name</b> : ARRAY [<a  href="LibXmlParser.html#TPartType">TPartType</a>] OF STRING =
+                   ('', 'XML Prolog', 'Comment', 'PI',
+                    'DTD Declaration', 'Start Tag', 'Empty Tag', 'End Tag',
+                    'Text', 'CDATA');</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+&mdash; Name Constants for the above enumeration types</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CValueType_Name"></span><code><b>CValueType_Name</b>   : ARRAY [<a  href="LibXmlParser.html#TValueType">TValueType</a>]    OF STRING = ('Normal', 'Implied', 'Fixed', 'Default');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CAttrDefault_Name"></span><code><b>CAttrDefault_Name</b> : ARRAY [<a  href="LibXmlParser.html#TAttrDefault">TAttrDefault</a>]  OF STRING = ('Default', 'Required', 'Implied', 'Fixed');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CElemType_Name"></span><code><b>CElemType_Name</b>    : ARRAY [<a  href="LibXmlParser.html#TElemType">TElemType</a>]     OF STRING = ('Empty', 'Any', 'Childs only', 'Mixed');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CAttrType_Name"></span><code><b>CAttrType_Name</b>    : ARRAY [<a  href="LibXmlParser.html#TAttrType">TAttrType</a>]     OF STRING = ('Unknown', 'CDATA',
+                                                         'ID', 'IDREF', 'IDREFS',
+                                                         'ENTITY', 'ENTITIES',
+                                                         'NMTOKEN', 'NMTOKENS',
+                                                         'Notation', 'Enumeration');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

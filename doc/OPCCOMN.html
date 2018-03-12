@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: OPCCOMN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<h1 class="unit">Модуль OPCCOMN</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section">Используемые модули</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Классы, интерфейсы и объекты</a></div><div class="one_section">Процедуры и функции</div><div class="one_section"><a class="section" href="#PasDoc-Types">Типы</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Константы</a></div><div class="one_section">Переменные</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Описание</h2>
+<p>
+*******************************************************</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Классы, интерфейсы и объекты</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Имя</th>
+<th class="itemdesc">Описание</th>
+</tr>
+<tr class="list">
+<td class="itemname">Интерфейс&nbsp;<a class="bold" href="OPCCOMN.IOPCCommon.html"><code>IOPCCommon</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Интерфейс&nbsp;<a class="bold" href="OPCCOMN.IOPCShutdown.html"><code>IOPCShutdown</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Интерфейс&nbsp;<a class="bold" href="OPCCOMN.IOPCServerList.html"><code>IOPCServerList</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Интерфейс&nbsp;<a class="bold" href="OPCCOMN.IOPCEnumGUID.html"><code>IOPCEnumGUID</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Интерфейс&nbsp;<a class="bold" href="OPCCOMN.IOPCServerList2.html"><code>IOPCServerList2</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Типы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#PGUIDList">PGUIDList</a></b> = &circ;<a  href="OPCCOMN.html#TGUIDList">TGUIDList</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#TGUIDList">TGUIDList</a></b> = array[0..65535] of TGUID;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#LCIDARRAY">LCIDARRAY</a></b>  = array[0..65535] of LCID;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#PLCIDARRAY">PLCIDARRAY</a></b> = &circ;<a  href="OPCCOMN.html#LCIDARRAY">LCIDARRAY</a>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Константы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#LIBID_OPCCOMN">LIBID_OPCCOMN</a></b> : TGUID      = '{B28EEDB1-AC6F-11D1-84D5-00608CB8A7E9}';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#IID_IOPCCommon">IID_IOPCCommon</a></b> : TIID      = '{F31DFDE2-07B6-11D2-B2D8-0060083BA1FB}';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#IID_IOPCShutdown">IID_IOPCShutdown</a></b> : TIID    = '{F31DFDE1-07B6-11D2-B2D8-0060083BA1FB}';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#IID_IOPCServerList">IID_IOPCServerList</a></b> : TIID  = '{13486D50-4821-11D2-A494-3CB306C10000}';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#IID_IOPCEnumGUID">IID_IOPCEnumGUID</a></b> : TIID    = '{55C382C8-21C7-4e88-96C1-BECFB1E3F483}';</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#IID_IOPCServerList2">IID_IOPCServerList2</a></b> : TIID = '{9DD0B56C-AD9E-43ee-8305-487F3188BF7A}';</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="OPCCOMN.html#CLSID_OPCServerList">CLSID_OPCServerList</a></b> : TGUID = '{13486D51-4821-11D2-A494-3CB306C10000}';</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Типы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PGUIDList"></span><code><b>PGUIDList</b> = &circ;<a  href="OPCCOMN.html#TGUIDList">TGUIDList</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TCAUUID structure - a counted array of TGUID</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TGUIDList"></span><code><b>TGUIDList</b> = array[0..65535] of TGUID;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="LCIDARRAY"></span><code><b>LCIDARRAY</b>  = array[0..65535] of LCID;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+*********************************************************************// Declaration of structures, unions and aliases. // *********************************************************************//</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PLCIDARRAY"></span><code><b>PLCIDARRAY</b> = &circ;<a  href="OPCCOMN.html#LCIDARRAY">LCIDARRAY</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Константы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="LIBID_OPCCOMN"></span><code><b>LIBID_OPCCOMN</b> : TGUID      = '{B28EEDB1-AC6F-11D1-84D5-00608CB8A7E9}';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+*********************************************************************// GUIDS declared in the TypeLibrary // *********************************************************************//</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IID_IOPCCommon"></span><code><b>IID_IOPCCommon</b> : TIID      = '{F31DFDE2-07B6-11D2-B2D8-0060083BA1FB}';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IID_IOPCShutdown"></span><code><b>IID_IOPCShutdown</b> : TIID    = '{F31DFDE1-07B6-11D2-B2D8-0060083BA1FB}';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IID_IOPCServerList"></span><code><b>IID_IOPCServerList</b> : TIID  = '{13486D50-4821-11D2-A494-3CB306C10000}';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IID_IOPCEnumGUID"></span><code><b>IID_IOPCEnumGUID</b> : TIID    = '{55C382C8-21C7-4e88-96C1-BECFB1E3F483}';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="IID_IOPCServerList2"></span><code><b>IID_IOPCServerList2</b> : TIID = '{9DD0B56C-AD9E-43ee-8305-487F3188BF7A}';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="CLSID_OPCServerList"></span><code><b>CLSID_OPCServerList</b> : TGUID = '{13486D51-4821-11D2-A494-3CB306C10000}';</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

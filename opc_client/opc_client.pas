@@ -1,25 +1,24 @@
-{ OPCClient - это компонент. Предназначен для написания систем сбора и управления
-  данными, других программ, или превращения Lazarus в программу для создания
-  SCADA систем.
-
-  Copyright (C) 2013 Чигрин В.Н. vchigrin@mail.ru
-
-  This library is free software; you can redistribute it and/or modify it
-  under the terms of the GNU Library General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or (at your
-  option) any later version.
-
-  This program is distributed in the hope that it will be useful, but WITHOUT
-  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License
-  for more details.
-
-  You should have received a copy of the GNU Library General Public License
-  along with this library; if not, write to the Free Software Foundation,
-  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-}
-
 {
+OPCClient - это компонент. Предназначен для написания систем сбора и управления
+данными, других программ, или превращения Lazarus в программу для создания
+SCADA систем.
+
+Copyright (C) 2013 Чигрин В.Н. vchigrin@mail.ru
+
+This library is free software; you can redistribute it and/or modify it
+under the terms of the GNU Library General Public License as published by
+the Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU Library General Public License
+for more details.
+
+You should have received a copy of the GNU Library General Public License
+along with this library; if not, write to the Free Software Foundation,
+Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
 Ошибки COM пр работе с OPC серверами:
 Взято из
 https://www.boschrexroth.com/country_units/america/united_states/sub_websites/brus_dcc/documentation_downloads/ProductDocumentation/CurrentProducts/ControlSystems/MTC200/V23/misc/28888001.pdf

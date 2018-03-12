@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Uni Reader: opc_client: Класс TOPCClient</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Uni Reader</h2><p><a href="AllUnits.html" class="navigation">Модули</a></p><p><a href="ClassHierarchy.html" class="navigation">Иерархия классов</a></p><p><a href="AllClasses.html" class="navigation">Классы, интерфейсы и объекты</a></p><p><a href="AllTypes.html" class="navigation">Типы</a></p><p><a href="AllVariables.html" class="navigation">Переменные</a></p><p><a href="AllConstants.html" class="navigation">Константы</a></p><p><a href="AllFunctions.html" class="navigation">Процедуры и функции</a></p><p><a href="AllIdentifiers.html" class="navigation">Идентификаторы</a></p></td><td class="content">
+<span id="TOPCClient"></span><h1 class="cio">Класс TOPCClient</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Описание</a></div><div class="one_section"><a class="section" href="#PasDoc-Hierarchy">Иерархия</a></div><div class="one_section">Поля</div><div class="one_section"><a class="section" href="#PasDoc-Methods">Методы</a></div><div class="one_section"><a class="section" href="#PasDoc-Properties">Свойства</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Модуль</h2>
+<p class="unitlink">
+<a  href="opc_client.html">opc_client</a></p>
+<h2 class="declaration">Объявления</h2>
+<p class="declaration">
+<code>type TOPCClient = class(TComponent)</code></p>
+<h2 class="description">Описание</h2>
+<p>
+TOPCClient</p>
+<span id="PasDoc-Hierarchy"></span><h2 class="hierarchy">Иерархия</h2>
+<ul class="hierarchy"><li class="ancestor">TComponent</li>
+<li class="thisitem">TOPCClient</li></ul><h2 class="overview">Обзор</h2>
+<span id="PasDoc-Methods"></span><h3 class="summary">Методы</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#DefineProperties">DefineProperties</a></b>(Filer: TFiler); override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetOPCErrorString">GetOPCErrorString</a></b>(dwError: HResult): AnsiString;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#StdOpcErrorToStr">StdOpcErrorToStr</a></b>(Code: HRESULT; var Res: string): Boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>constructor <b><a  href="opc_client.TOPCClient.html#Create">Create</a></b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>destructor <b><a  href="opc_client.TOPCClient.html#Destroy">Destroy</a></b>; override;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#Connect">Connect</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#Disconnect">Disconnect</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#FindSGroup">FindSGroup</a></b>(const aName: String): Integer;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#FindSTag">FindSTag</a></b>(const nG: Integer; const aName: String): <a  href="opc_client.TTagPosition.html">TTagPosition</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#FindSGroupSTag">FindSGroupSTag</a></b>(const GName, TName: String): <a  href="opc_client.TTagPosition.html">TTagPosition</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagQuality">GetTagQuality</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Word;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagBoolean">GetTagBoolean</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagBoolean">SetTagBoolean</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Boolean);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagBoolean">SetQuiqTagBoolean</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Boolean);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagSmallInt">GetTagSmallInt</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): SmallInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagSmallInt">SetTagSmallInt</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: SmallInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagSmallInt">SetQuiqTagSmallInt</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: SmallInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagLongint">GetTagLongint</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): LongInt;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagLongint">SetTagLongint</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagLongint">SetQuiqTagLongint</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagShortInt">GetTagShortInt</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): ShortInt;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagShortInt">SetTagShortInt</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: ShortInt);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagShortInt">SetQuiqTagShortInt</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: ShortInt);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagInt64">GetTagInt64</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Int64;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagInt64">SetTagInt64</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Int64);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagInt64">SetQuiqTagInt64</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Int64);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagByte">GetTagByte</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Byte;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagByte">SetTagByte</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Byte);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagByte">SetQuiqTagByte</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagWord">GetTagWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Word;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagWord">SetTagWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Word);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagWord">SetQuiqTagWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Word);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagLongWord">GetTagLongWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): LongWord;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagLongWord">SetTagLongWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongWord);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagLongWord">SetQuiqTagLongWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongWord);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagQWord">GetTagQWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): QWord;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagQWord">SetTagQWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: QWord);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagQWord">SetQuiqTagQWord</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: QWord);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagCurrency">GetTagCurrency</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Currency;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagCurrency">SetTagCurrency</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Currency);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagCurrency">SetQuiqTagCurrency</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Currency);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagSingle">GetTagSingle</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Single;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagSingle">SetTagSingle</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Single);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagSingle">SetQuiqTagSingle</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Single);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagDouble">GetTagDouble</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Double;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagDouble">SetTagDouble</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Double);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagDouble">SetQuiqTagDouble</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Double);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagDateTime">GetTagDateTime</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): TDateTime;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagDateTime">SetTagDateTime</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: TDateTime);</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagDateTime">SetQuiqTagDateTime</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: TDateTime);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>function <b><a  href="opc_client.TOPCClient.html#GetTagString">GetTagString</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): String;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetTagString">SetTagString</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: String);</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>procedure <b><a  href="opc_client.TOPCClient.html#SetQuiqTagString">SetQuiqTagString</a></b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: String);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Properties"></span><h3 class="summary">Свойства</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="opc_client.TOPCClient.html#TagList">TagList</a></b> : <a  href="tag_list.TTagList.html">TTagList</a> read FTagList;</code></td>
+</tr>
+<tr class="list2">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><code>property <b><a  href="opc_client.TOPCClient.html#Active">Active</a></b> : Boolean read FActive ;</code></td>
+</tr>
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><code>property <b><a  href="opc_client.TOPCClient.html#ServerName">ServerName</a></b> : String read FServerName write SetServerName;</code></td>
+</tr>
+</table>
+<h2 class="description">Описание</h2>
+<h3 class="detail">Методы</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="DefineProperties"></span><code>procedure <b>DefineProperties</b>(Filer: TFiler); override;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+procedure Unadvise(const Group : TGroup);</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="GetOPCErrorString"></span><code>function <b>GetOPCErrorString</b>(dwError: HResult): AnsiString;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Получить строку ошибки по резльтату взаимодействия с OPC сервером</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="protected.gif" alt="Protected" title="Protected"></a></td>
+<td class="itemcode"><span id="StdOpcErrorToStr"></span><code>function <b>StdOpcErrorToStr</b>(Code: HRESULT; var Res: string): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Преобразование стандартных ошибок OPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Create"></span><code>constructor <b>Create</b>(AOwner: TComponent); override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Destroy"></span><code>destructor <b>Destroy</b>; override;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Connect"></span><code>procedure <b>Connect</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Подключить клиент к серверу</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Disconnect"></span><code>procedure <b>Disconnect</b>;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Отключить клиент от сервера</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindSGroup"></span><code>function <b>FindSGroup</b>(const aName: String): Integer;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Поиск номера Группы и Тэга, сначала надо найти группу и сохранить номер, т.к. поиск по имени занимает много времени, потом вызвать чтение и запись Тэга</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindSTag"></span><code>function <b>FindSTag</b>(const nG: Integer; const aName: String): <a  href="opc_client.TTagPosition.html">TTagPosition</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="FindSGroupSTag"></span><code>function <b>FindSGroupSTag</b>(const GName, TName: String): <a  href="opc_client.TTagPosition.html">TTagPosition</a>;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagQuality"></span><code>function <b>GetTagQuality</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Word;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagBoolean"></span><code>function <b>GetTagBoolean</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Boolean;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_BOOL (True=-1, False=0) (VARIANT_BOOL)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagBoolean"></span><code>procedure <b>SetTagBoolean</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Boolean);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagBoolean"></span><code>procedure <b>SetQuiqTagBoolean</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Boolean);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagSmallInt"></span><code>function <b>GetTagSmallInt</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): SmallInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_I2 (2 byte signed int)(SmallInt)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagSmallInt"></span><code>procedure <b>SetTagSmallInt</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: SmallInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagSmallInt"></span><code>procedure <b>SetQuiqTagSmallInt</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: SmallInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagLongint"></span><code>function <b>GetTagLongint</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): LongInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_INT (signed machine int)(Longint)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagLongint"></span><code>procedure <b>SetTagLongint</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagLongint"></span><code>procedure <b>SetQuiqTagLongint</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagShortInt"></span><code>function <b>GetTagShortInt</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): ShortInt;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_I1 (signed char)(ShortInt)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagShortInt"></span><code>procedure <b>SetTagShortInt</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: ShortInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagShortInt"></span><code>procedure <b>SetQuiqTagShortInt</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: ShortInt);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagInt64"></span><code>function <b>GetTagInt64</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Int64;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_I8 (signed 64-bit int)(Int64)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagInt64"></span><code>procedure <b>SetTagInt64</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Int64);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagInt64"></span><code>procedure <b>SetQuiqTagInt64</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Int64);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagByte"></span><code>function <b>GetTagByte</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Byte;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_UI1 (unsigned char)(Byte)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagByte"></span><code>procedure <b>SetTagByte</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Byte);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagByte"></span><code>procedure <b>SetQuiqTagByte</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Byte);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagWord"></span><code>function <b>GetTagWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Word;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_UI2 (unsigned short)(Word)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagWord"></span><code>procedure <b>SetTagWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Word);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagWord"></span><code>procedure <b>SetQuiqTagWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Word);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagLongWord"></span><code>function <b>GetTagLongWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): LongWord;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_UINT (unsigned machine int)(LongWord)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagLongWord"></span><code>procedure <b>SetTagLongWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongWord);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagLongWord"></span><code>procedure <b>SetQuiqTagLongWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: LongWord);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagQWord"></span><code>function <b>GetTagQWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): QWord;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_UI8 (unsigned 64-bit int)(QWord)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagQWord"></span><code>procedure <b>SetTagQWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: QWord);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagQWord"></span><code>procedure <b>SetQuiqTagQWord</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: QWord);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagCurrency"></span><code>function <b>GetTagCurrency</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Currency;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+(8 байт, с плавающей запятой и 4 знаками после запятой, диапазон от -922 337 203 685 477,5808 до 922 337 203 685 477,5807, сопроцсссорпый тип)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagCurrency"></span><code>procedure <b>SetTagCurrency</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Currency);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagCurrency"></span><code>procedure <b>SetQuiqTagCurrency</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Currency);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagSingle"></span><code>function <b>GetTagSingle</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Single;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_R4 (4 byte real)(Single)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagSingle"></span><code>procedure <b>SetTagSingle</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Single);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagSingle"></span><code>procedure <b>SetQuiqTagSingle</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Single);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagDouble"></span><code>function <b>GetTagDouble</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): Double;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_R8 (8 byte real)(Double)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagDouble"></span><code>procedure <b>SetTagDouble</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagDouble"></span><code>procedure <b>SetQuiqTagDouble</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: Double);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagDateTime"></span><code>function <b>GetTagDateTime</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): TDateTime;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_DATE (date)(TOleDate)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagDateTime"></span><code>procedure <b>SetTagDateTime</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: TDateTime);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagDateTime"></span><code>procedure <b>SetQuiqTagDateTime</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: TDateTime);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="GetTagString"></span><code>function <b>GetTagString</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>): String;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+VT_LPWSTR (wide null terminated string)(PWideChar) (Указатель па строку, в который для храпения каждого символа используют 2 байта. Размер — 4 байта)</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetTagString"></span><code>procedure <b>SetTagString</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="SetQuiqTagString"></span><code>procedure <b>SetQuiqTagString</b>(const aTagPosition: <a  href="opc_client.TTagPosition.html">TTagPosition</a>; const Val: String);</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Свойства</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="TagList"></span><code>property <b>TagList</b> : <a  href="tag_list.TTagList.html">TTagList</a> read FTagList;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+procedure TagChange(const aTagPosition : TTagPosition ;const aTag : TTagItem);</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="public.gif" alt="Public" title="Public"></a></td>
+<td class="itemcode"><span id="Active"></span><code>property <b>Active</b> : Boolean read FActive ;</code></td>
+</tr>
+<tr><td colspan="2">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="visibility"><a  href="legend.html"><img  src="published.gif" alt="Published" title="Published"></a></td>
+<td class="itemcode"><span id="ServerName"></span><code>property <b>ServerName</b> : String read FServerName write SetServerName;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+Имя OPC - сервера</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Сгенерировал <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

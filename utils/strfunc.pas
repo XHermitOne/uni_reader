@@ -1,3 +1,6 @@
+{
+Функции работы со строками
+}
 unit strfunc;
 
 {$mode objfpc}{$H+}
@@ -14,30 +17,63 @@ uses
 type
     TArrayOfString = Array Of String;
 {
-Разбивает строку с разделителями на части
-и возвращает массив частей.
+Разбивает строку с разделителями на части и возвращает массив частей
+@param sString Строка
+@param cDelim Символ разделителя
+@return Массив строк
 }
 function SplitStr(sString: String; cDelim: Char): TArrayOfString;
 
-{ Объединение массива строк в одну строку }
+{
+Объединение массива строк в одну строку
+@param StringArray Массив строк
+@param cDelim Символ разделителя
+@return Объединенная строка
+}
 function JoinStr(StringArray : Array Of String; cDelim : Char): AnsiString;
 
-{ Удалить обрамление кавычками одинарными и двойными из строки. }
+{
+Удалить обрамление кавычками одинарными и двойными из строки
+@param sString Строка
+@param sChar Обрамляющий символ
+@return Строка с удаленными обрамляющими симвлами
+}
 function StripStr(sString: AnsiString; sChar: Char = ' '): AnsiString;
 
-{ Распарсить строку, представляющую собой список строк }
+{
+Распарсить строку, представляющую собой список строк
+@param sString Обрабатываемая строка
+@return Массив строк
+}
 function ParseStrArray(sString: AnsiString): TArrayOfString;
 
-{ Проверка является ли строка серилизованным списком }
+{
+Проверка является ли строка серилизованным списком
+@param sString Строка
+@return True/False
+}
 function IsParseStrList(sString: AnsiString): Boolean;
 
-{ Распарсить строку, представляющую собой список строк. Возврашает список строк. }
+{
+Распарсить строку, представляющую собой список строк. Возврашает список строк.
+@param sString Строка
+@return Список строк
+}
 function ParseStrList(sString: AnsiString): TStringList;
 
-{ Преобразование списка строк в строку вида [ aaaa, bbbb, cccc ] }
+{
+Преобразование списка строк в строку вида [ aaaa, bbbb, cccc ]
+@param StrList Спсок строк
+@return Преобразованная строка
+}
 function ConvertStrListToString(StrList: TStringList): AnsiString;
 
-{ Проверка есть ли строка в списке строк }
+{
+Проверка есть ли строка в списке строк
+@param sString Строка
+@param StringArray Массив строк
+@return True/False
+}
 function IsStrInList(sString: AnsiString; StringArray: Array of String): Boolean;
 
 { Перекодировка CP866 -> CP1251 и обратно }
@@ -46,7 +82,12 @@ function StrOemToAnsi(const S: AnsiString): AnsiString;
 function StrAnsiToOem(const S: AnsiString): AnsiString;
 {$ENDIF}
 
-{ Попытка перекодировать строку в UTF8 }
+{
+Попытка перекодировать строку в UTF8. Функция сама определеяет кодировку строки и
+затем преобразует в UTF8.
+@param sStr Исходная строка
+@return Преобразованная строка в UTF8
+}
 function ToUTF8(var sStr: AnsiString): AnsiString;
 
 implementation

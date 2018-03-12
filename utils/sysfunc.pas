@@ -1,3 +1,6 @@
+{
+Функции взаимодействия с операционной системой
+}
 unit sysfunc;
 
 {$mode objfpc}{$H+}
@@ -8,12 +11,12 @@ uses
     Classes, SysUtils;
 
 {$IFDEF linux}
-//some linux-specific code
+{ some linux-specific code }
 const OS: AnsiString = 'linux';
 {$ENDIF}
 
 {$IFDEF windows}
-//some M$-specific code
+{ some M$-specific code }
 const OS: AnsiString = 'windows';
 {$ENDIF}
 
