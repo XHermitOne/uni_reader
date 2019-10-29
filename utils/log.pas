@@ -104,7 +104,7 @@ const
   DEFAULT_LOG_MODE: Boolean = False;
 
   { Режим журналирования Application.Log. Включается для служб Windows }
-  DEFAULT_APP_LOG_MODE = True;
+  DEFAULT_APP_LOG_MODE = False;
 
 
 {
