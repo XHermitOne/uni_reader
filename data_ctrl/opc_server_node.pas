@@ -23,6 +23,8 @@ uses
     opc_client, tag_list;
 
 const
+  OPC_SRV_NODE_TYPE: AnsiString = 'OPC_SERVER_NODE';
+
   RESERV_PROPERTIES: Array [1..4] Of String = ('type', 'name', 'description', 'opc_server');
 
   UNKNOWN_GROUP_NAME: AnsiString = 'UNKNOWN_GROUP';

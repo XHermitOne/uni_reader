@@ -1,5 +1,7 @@
 {
 Модуль абстрактного объекта системы
+
+Версия: 0.0.3.2
 }
 unit obj_proto;
 
@@ -9,6 +11,10 @@ interface
 
 uses
     Classes, SysUtils, dictionary;
+
+const
+  DATETIME_TXT_FMT: AnsiString = 'yyyy-mm-dd hh:nn:ss';
+  DATE_TXT_SEPARATOR: Char = '-';
 
 type
   {
@@ -29,6 +35,14 @@ type
      последующего доступа к ним объектов приемников данных
      Вот это словарь переменных }
     FState: TStrDictionary;
+    {
+    Буфер изменения состояний во времени
+    На верхнем уровне ключи представляют из себя время в виде строки:
+    yyyy-mm-dd hh:nn:ss
+    Некоторые источники данных могут предоставлять значения только порционно,
+    кадрами-буферами. Для таких случаев и используется этот буфер
+    }
+    FTimeStateBuffer: TStrDictionary;
 
     { Свойства контроллера данных. Прописаны в INI файле }
     FProperties: TStrDictionary;
@@ -36,7 +50,22 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    //procedure Free;
+
+    {
+    Функция очистки читаемых значений
+    @param bAutoFree Автоматическое удаление элементов из памяти
+    }
+    function ClearReadValues(bAutoFree: Boolean = True): Boolean;
+    {
+    Функция очистки текущего состояния
+    @param bAutoFree Автоматическое удаление элементов из памяти
+    }
+    function ClearState(bAutoFree: Boolean = True): Boolean;
+    {
+    Функция очистки буфера изменения состояния
+    @param bAutoFree Автоматическое удаление элементов из памяти
+    }
+    function ClearTimeState(bAutoFree: Boolean = True): Boolean;
 
     { Получить наименование объекта }
     function GetName(): AnsiString;
@@ -51,27 +80,102 @@ type
     { Получить словарь свойств объекта }
     function GetProperties(): TStrDictionary;
     { Установить свойства объекта в виде словаря }
-    procedure SetProperties(dProperties: TStrDictionary);
+    procedure SetProperties(dProperties: TStrDictionary); virtual;
 
     { Установить свойства в виде списка параметров }
     procedure SetPropertiesArray(aArgs: Array Of Const); virtual;
 
     { Проверка на то что объект не именованный }
     function IsUnknown(): Boolean;
-    { Фунция чтения данных }
-    function Read(aValues: TStringList): TStringList; virtual;
-    { Чтение значений по адресам }
-    function ReadAddresses(aValues: Array Of String): TStringList; virtual;
 
-    { Фунция записи данных }
-    function Write(aValues: TStringList): Boolean; virtual;
+    { 
+    Фунция чтения данных 
+    @param sAddresses Список адресов для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные. 
+                  Если не определено, то берется текущее системное время.
+    @return Список прочитанных значений.
+    }
+    function Read(sAddresses: TStringList; dtTime: TDateTime = 0): TStringList; virtual;
+    { 
+    Чтение значений по адресам 
+    @param sAddresses Массив адресов для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные. 
+                  Если не определено, то берется текущее системное время.
+    @return Список прочитанных значений.
+    }
+    function ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime = 0): TStringList; virtual;
+    { 
+    Чтение значения по адресу 
+    @param sAddress Строка адреса для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные. 
+                  Если не определено, то берется текущее системное время.
+    @return Прочитанное значение в виде строки.
+    }
+    function ReadAddress(sAddress: AnsiString; dtTime: TDateTime = 0): AnsiString; virtual;
+    { 
+    Чтение всех внутренних данных, описанных в свойствах.
+    @param dtTime: Время актуальности за которое необходимо получить данные. 
+                  Если не определено, то берется текущее системное время.
+    @return Список прочитанных значений.
+    }
+    function ReadAll(dtTime: TDateTime = 0): TStringList; virtual;
+
+    {
+    Чтение значений исторических данных по адресам
+    @param sAddresses Массив адресов для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные.
+                   Если не определено, то берется текущее системное время.
+    @param iValueTimeCount: Количество считываемых записей.
+    @param sValueTimeTick: Период регистрации контроллера в формате yyyy-mm-dd hh:nn:ss в виде строки.
+    @return Список прочитанных значений.
+    }
+    function ReadHistoryAddresses(sAddresses: Array Of String; dtTime: TDateTime = 0; iValueTimeCount: Integer = 0; sValueTimeTick: AnsiString = ''): TStringList; virtual;
+
+    { 
+    Фунция записи данных 
+    @param sAddresses Список адресов для записи
+    @param aValues Список значений для записи
+    @param dtTime: Время актуальности данных. 
+                  Если не определено, то берется текущее системное время.
+    @return Результат записи - True - запись прошла успешно False - ошибка
+    }
+    function Write(sAddresses, aValues: TStringList; dtTime: TDateTime = 0): Boolean; virtual;
+    { 
+    Запись значений по адресам 
+    @param sAddresses Массив адресов для записи
+    @param aValues Массив значений для записи
+    @param dtTime: Время актуальности данных. 
+                  Если не определено, то берется текущее системное время.
+    @return Результат записи - True - запись прошла успешно False - ошибка
+    }
+    function WriteAddresses(sAddresses,aValues: Array Of String; dtTime: TDateTime = 0): Boolean; virtual;
+    { 
+    Запись значения по адресу 
+    @param sAddress Значение адреса для записи
+    @param aValue Значение для записи в строковом представлении
+    @param dtTime: Время актуальности данных. 
+                  Если не определено, то берется текущее системное время.
+    @return Результат записи - True - запись прошла успешно False - ошибка
+    }
+    function WriteAddress(sAddress, aValue: AnsiString; dtTime: TDateTime = 0): Boolean; virtual;
+    { 
+    Запись всех внутренних данных 
+    @param dtTime: Время актуальности данных. 
+                  Если не определено, то берется текущее системное время.
+    @return Результат записи - True - запись прошла успешно False - ошибка
+    }
+    function WriteAll(dtTime: TDateTime = 0): Boolean; virtual;
+
     { Зарегистрировать значения переменных в словаре внутренного состояния }
     function RegState(aValues: TStrDictionary): Boolean;
     { Получить имена записываемых значений в контроллер данных }
     function GetReadValues(): TStringList;
 
   published
+    property Name: AnsiString read GetName write SetName;
     property Properties: TStrDictionary read GetProperties write SetProperties;
+    property State: TStrDictionary read FState write FState;
+    property TimeState: TStrDictionary read FTimeStateBuffer write FTimeStateBuffer;
 
 end;
 
@@ -79,43 +183,77 @@ end;
 implementation
 
 uses
-    log;
+  log, memfunc;
 
 constructor TICObjectProto.Create;
 begin
-     inherited Create;
-     FParent := nil;
-     FName := 'Unknown';
-     FDescription := '';
-     FReadValues := TStringList.Create;
-     FState := TStrDictionary.Create;
+  inherited Create;
+  FParent := nil;
+  FName := 'Unknown';
+  FDescription := '';
+
+  FReadValues := TStringList.Create;
+  FState := TStrDictionary.Create;
+  FTimeStateBuffer := TStrDictionary.Create;
 end;
 
 destructor TICObjectProto.Destroy;
 begin
   if FReadValues <> nil then
   begin
-    FReadValues.Free;
+    FReadValues.Destroy;
     FReadValues := nil;
   end;
   if FState <> nil then
   begin
-    FState.Free;
+    FState.Destroy;
     FState := nil;
+  end;
+  if FTimeStateBuffer <> nil then
+  begin
+    FTimeStateBuffer.Destroy;
+    FTimeStateBuffer := nil;
   end;
 
   if FProperties <> nil then
   begin
-    FProperties.Free;
+    FProperties.Destroy;
     FProperties := nil;
   end;
   inherited Destroy;
 end;
 
-//procedure TICObjectProto.Free;
-//begin
-//  inherited Free;
-//end;
+function TICObjectProto.ClearReadValues(bAutoFree: Boolean): Boolean;
+var
+  i: Integer;
+begin
+  Result := False;
+  if FReadValues.Count > 0 then
+    if not bAutoFree then
+    begin
+      FReadValues.Clear;
+      Result := True;
+    end
+    else
+    begin
+      for i := FReadValues.Count - 1 downto 0 do
+      begin
+        FReadValues.Objects[i].Destroy;
+        FReadValues.Delete(i);
+      end;
+    end;
+end;
+
+function TICObjectProto.ClearState(bAutoFree: Boolean): Boolean;
+begin
+  Result := FState.ClearContent(bAutoFree);
+end;
+
+function TICObjectProto.ClearTimeState(bAutoFree: Boolean): Boolean;
+begin
+  Result := FTimeStateBuffer.ClearContent(bAutoFree);
+end;
+
 
 function TICObjectProto.GetName(): AnsiString;
 begin
@@ -134,12 +272,12 @@ end;
 
 procedure TICObjectProto.SetParent(oParent: TObject);
 begin
-     FParent := oParent;
+  FParent := oParent;
 end;
 
 function TICObjectProto.GetProperties(): TStrDictionary;
 begin
-  result := FProperties;
+  Result := FProperties;
 end;
 
 procedure TICObjectProto.SetProperties(dProperties: TStrDictionary);
@@ -147,8 +285,8 @@ begin
   FProperties := dProperties;
   if FProperties.HasKey('name') then
     SetName(FProperties.GetStrValue('name'))
-  //else
-  //  WarningMsg(Format('Не определено имя объекта в свойствах. Класс <%s>', [ClassName]));
+  else
+    log.WarningMsgFmt('Не определено имя объекта в свойствах. Класс <%s>', [ClassName]);
 end;
 
 {
@@ -156,7 +294,7 @@ end;
 }
 function TICObjectProto.IsUnknown(): Boolean;
 begin
-     result := FName = 'Unknown';
+  Result := FName = 'Unknown';
 end;
 
 {
@@ -177,32 +315,131 @@ begin
 end;
 
 {
-Фунция чтения данных
-}
-function TICObjectProto.Read(aValues: TStringList): TStringList;
-begin
-  Result := nil;
-end;
-
-function TICObjectProto.ReadAddresses(aValues: Array of String): TStringList;
-begin
-  Result := nil;
-end;
-
-{
-Фунция записи данных
-}
-function TICObjectProto.Write(aValues: TStringList): Boolean;
-begin
-  Result := False;
-end;
-
-{
 Установить свойства в виде списка параметров
 }
 procedure TICObjectProto.SetPropertiesArray(aArgs: Array Of Const);
 begin
 
+end;
+
+{ 
+Фунция чтения данных 
+@param sAddresses Список адресов для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные. 
+              Если не определено, то берется текущее системное время.
+@return Список прочитанных значений.
+}
+function TICObjectProto.Read(sAddresses: TStringList; dtTime: TDateTime): TStringList;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода Read объекта <%s>', [FName]);
+  Result := nil;
+end;
+
+{ 
+Чтение значений по адресам 
+@param sAddresses Массив адресов для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные. 
+              Если не определено, то берется текущее системное время.
+@return Список прочитанных значений.
+}
+function TICObjectProto.ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime): TStringList;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода ReadAddresses объекта <%s>', [FName]);
+  Result := nil;
+end;
+
+{
+Чтение значений исторических данных по адресам
+@param sAddresses Массив адресов для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные.
+               Если не определено, то берется текущее системное время.
+@param iValueTimeCount: Количество считываемых записей.
+@param sValueTimeTick: Период регистрации контроллера в формате yyyy-mm-dd hh:nn:ss в виде строки.
+@return Список прочитанных значений.
+}
+function TICObjectProto.ReadHistoryAddresses(sAddresses: Array Of String; dtTime: TDateTime; iValueTimeCount: Integer; sValueTimeTick: AnsiString): TStringList;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода ReadHistoryAddresses объекта <%s>', [FName]);
+  Result := nil;
+end;
+
+{ 
+Чтение значения по адресу 
+@param sAddress Строка адреса для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные. 
+              Если не определено, то берется текущее системное время.
+@return Прочитанное значение в виде строки.
+}
+function TICObjectProto.ReadAddress(sAddress: AnsiString; dtTime: TDateTime): AnsiString;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода ReadAddress объекта <%s>', [FName]);
+  Result := '';
+end;
+
+{ 
+Чтение всех внутренних данных, описанных в свойствах.
+@param dtTime: Время актуальности за которое необходимо получить данные. 
+              Если не определено, то берется текущее системное время.
+@return Список прочитанных значений.
+}
+function TICObjectProto.ReadAll(dtTime: TDateTime): TStringList;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода ReadAll объекта <%s>', [FName]);
+  Result := nil;
+end;
+
+{ 
+Фунция записи данных 
+@param sAddresses Список адресов для записи
+@param aValues Список значений для записи
+@param dtTime: Время актуальности данных. 
+              Если не определено, то берется текущее системное время.
+@return Результат записи - True - запись прошла успешно False - ошибка
+}
+function TICObjectProto.Write(sAddresses, aValues: TStringList; dtTime: TDateTime): Boolean;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода Write объекта <%s>', [FName]);
+  Result := False;
+end;
+
+{ 
+Запись значений по адресам 
+@param sAddresses Массив адресов для записи
+@param aValues Массив значений для записи
+@param dtTime: Время актуальности данных. 
+              Если не определено, то берется текущее системное время.
+@return Результат записи - True - запись прошла успешно False - ошибка
+}
+function TICObjectProto.WriteAddresses(sAddresses,aValues: Array Of String; dtTime: TDateTime): Boolean;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода WriteAddresses объекта <%s>', [FName]);
+  Result := False;
+end;
+
+{ 
+Запись значения по адресу 
+@param sAddress Значение адреса для записи
+@param aValue Значение для записи в строковом представлении
+@param dtTime: Время актуальности данных. 
+              Если не определено, то берется текущее системное время.
+@return Результат записи - True - запись прошла успешно False - ошибка
+}
+function TICObjectProto.WriteAddress(sAddress, aValue: AnsiString; dtTime: TDateTime): Boolean;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода WriteAddress объекта <%s>', [FName]);
+  Result := False;
+end;
+
+{ 
+Запись всех внутренних данных 
+@param dtTime: Время актуальности данных. 
+              Если не определено, то берется текущее системное время.
+@return Результат записи - True - запись прошла успешно False - ошибка
+}
+function TICObjectProto.WriteAll(dtTime: TDateTime): Boolean;
+begin
+  log.WarningMsgFmt('Вызов не определенного метода WriteAll объекта <%s>', [FName]);
+  Result := False;
 end;
 
 end.

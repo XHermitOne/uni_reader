@@ -1,5 +1,7 @@
 {
 Модуль классов движка
+
+Версия: 0.0.3.1
 }
 
 unit engine;
@@ -103,6 +105,18 @@ type
       }
       function ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; aAddresses : Array Of String): TStringList;
 
+      {
+      Прочитать список исторических значений из источника данных
+      @param sSrcTypeName Наименование типа источника
+      @param aArgs Массив дополнительных аргументов
+      @param aAddresses Массив строк читаемых адресов
+      @param iValueTimeCount: Количество считываемых записей.
+      @param sValueTimeTick: Период регистрации контроллера в формате yyyy-mm-dd hh:nn:ss в виде строки.
+      @return Список строк прочитанных значений
+      }
+      function ReadHistoryValuesAsStrings(sSrcTypeName: AnsiString; const aArgs : Array Of Const; aAddresses : Array Of String;
+                                          iValueTimeCount: Integer; sValueTimeTick: AnsiString): TStringList;
+
       { Запуск сервера движка/Инициализировать методы удаленного вызова }
       procedure StartServer;
       { Останов сервера движка }
@@ -120,6 +134,10 @@ type
       { Функция чтения данных из источника удаленного вызова процедур }
       procedure ReadValuesAsStringsRpcMethod(Thread: TRpcThread; const sMethodName: string;
                                              List: TList; Return: TRpcReturn);
+
+      { Функция чтения исторических данных из источника удаленного вызова процедур }
+      procedure ReadHistoryValuesAsStringsRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                                    List: TList; Return: TRpcReturn);
     end;
 
 var
@@ -325,7 +343,9 @@ begin
   ctrl_obj := nil;
   str_list := nil;
   try
+    // Создаем объект источника данных
     ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    // Читаем значения по списку адресов
     str_list := ctrl_obj.ReadAddresses([sAddress]);
     Result := str_list.Strings[0];
   except
@@ -350,11 +370,42 @@ begin
   str_list := nil;
 
   try
+    // Создаем объект источника данных
     ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    // Читаем значения по списку адресов
     str_list := ctrl_obj.ReadAddresses(aAddresses);
     Result := str_list;
   except
     log.FatalMsg('Ошибка чтения значений по адресам:');
+  end;
+
+  //if str_list <> nil then
+  //  str_list.Free;
+  if ctrl_obj <> nil then
+    ctrl_obj.Free;
+end;
+
+{ Прочитать список исторических значений из источника данных }
+function TICReader.ReadHistoryValuesAsStrings(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddresses: Array Of String;
+                                              iValueTimeCount: Integer; sValueTimeTick: AnsiString): TStringList;
+var
+  ctrl_obj: TICObjectProto;
+  str_list: TStringList;
+
+begin
+  Result := nil;
+  ctrl_obj := nil;
+  str_list := nil;
+
+  try
+    // Создаем объект источника данных
+    ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    // Читаем значения по списку адресов
+    log.DebugMsg('Запуск чтения данных по адресам');
+    str_list := ctrl_obj.ReadHistoryAddresses(aAddresses, 0, iValueTimeCount, sValueTimeTick);
+    Result := str_list;
+  except
+    log.FatalMsg('Ошибка чтения исторических данных по адресам:');
   end;
 
   //if str_list <> nil then
@@ -388,6 +439,7 @@ begin
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+      // Метод удаленного вызова чтения значения в виде строки по адресу
       MethodHandler := TRpcMethodHandler.Create;
       MethodHandler.Name := 'sources.ReadValueAsString';
       MethodHandler.Method := @ReadValueAsStringRpcMethod;
@@ -397,11 +449,22 @@ begin
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+      // Метод удаленного вызова чтения списка значений в виде строк по адресам
       MethodHandler := TRpcMethodHandler.Create;
       MethodHandler.Name := 'sources.ReadValuesAsStrings';
       MethodHandler.Method := @ReadValuesAsStringsRpcMethod;
       MethodHandler.Signature := 'string (string myval)';
       MethodHandler.Help := 'Read values as strings from data source';
+      FRpcServer.RegisterMethodHandler(MethodHandler);
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+      // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+      // Метод удаленного вызова чтения списка исторических значений в виде таблицы строк по адресам
+      MethodHandler := TRpcMethodHandler.Create;
+      MethodHandler.Name := 'sources.ReadHistoryValuesAsStrings';
+      MethodHandler.Method := @ReadHistoryValuesAsStringsRpcMethod;
+      MethodHandler.Signature := 'string (string myval)';
+      MethodHandler.Help := 'Read history values as table strings from data source';
       FRpcServer.RegisterMethodHandler(MethodHandler);
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -481,6 +544,44 @@ begin
   end;
 
   opc_result := ReadValuesAsStrings(src_type_name, [opc_server_name], addresses);
+  addresses := nil;
+
+  {return a message showing what was sent}
+  if opc_result <> nil then
+  begin
+    for i := 0 to opc_result.Count - 1 do
+      Return.AddItem(opc_result.Strings[i]);
+    opc_result.Free;
+    opc_result := nil;
+  end;
+end;
+
+{ Функция чтения исторических данных из источника удаленного вызова процедур }
+procedure TICReader.ReadHistoryValuesAsStringsRpcMethod(Thread: TRpcThread; const sMethodName: string;
+                                                        List: TList; Return: TRpcReturn);
+var
+  src_type_name: AnsiString;
+  opc_server_name: AnsiString;
+  value_time_count: Integer;
+  value_time_tick: AnsiString;
+  addresses: Array of String;
+  opc_result: TStringList;
+  i: Integer;
+
+begin
+  src_type_name := TRpcParameter(List[0]).AsString;
+  opc_server_name := TRpcParameter(List[1]).AsString;
+  value_time_count := TRpcParameter(List[2]).AsInteger;
+  value_time_tick := TRpcParameter(List[3]).AsString;
+
+  SetLength(addresses, List.Count - 4);
+  for i := 0 to List.Count - 5 do
+  begin
+    addresses[i] := TRpcParameter(List[i + 4]).AsString;
+    log.DebugMsgFmt('Чтение тега <tag%d>. Адрес <%s>', [i, addresses[i]]);
+  end;
+
+  opc_result := ReadHistoryValuesAsStrings(src_type_name, [opc_server_name], addresses, value_time_count, value_time_tick);
   addresses := nil;
 
   {return a message showing what was sent}

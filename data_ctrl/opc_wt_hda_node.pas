@@ -1,7 +1,7 @@
 {
 Модуль узла OPC HDA сервера. Работа через обертку WtHDAClient.DLL.
 
-Версия: 0.0.1.1
+Версия: 0.0.2.1
 }
 
 unit opc_wt_hda_node;
@@ -149,6 +149,34 @@ type
     }
     function ReadAll(dtTime: TDateTime = 0): TStringList; override;
 
+    {
+    Чтение значений по адресам
+    @param sAddresses Массив адресов для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные.
+                  Если не определено, то берется текущее системное время.
+    @return Список прочитанных значений.
+    }
+    function ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime = 0): TStringList; override;
+    {
+    Чтение значения по адресу
+    @param sAddress Строка адреса для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные.
+                  Если не определено, то берется текущее системное время.
+    @return Прочитанное значение в виде строки.
+    }
+    function ReadAddress(sAddress: AnsiString; dtTime: TDateTime = 0): AnsiString; override;
+
+    {
+    Чтение значений исторических данных по адресам
+    @param sAddresses Массив адресов для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные.
+                   Если не определено, то берется текущее системное время.
+    @param iValueTimeCount: Количество считываемых записей.
+    @param sValueTimeTick: Период регистрации контроллера в формате yyyy-mm-dd hh:nn:ss в виде строки.
+    @return Список прочитанных значений.
+    }
+    function ReadHistoryAddresses(sAddresses: Array Of String; dtTime: TDateTime = 0; iValueTimeCount: Integer = 0; sValueTimeTick: AnsiString = ''): TStringList; override;
+
   published
     property ValueTimeCount: Integer read FValueTimeCount write FValueTimeCount;
     property ValueTimeTick: dtfunc.TDateTimeDelta read FValueTimeTick write FValueTimeTick;
@@ -199,18 +227,27 @@ end;
 Установить свойства в виде списка параметров
 }
 procedure TICWtOPCHDANode.SetPropertiesArray(aArgs: Array Of Const);
+var
+  value: AnsiString;
+  opc_server_name: AnsiString;
+  len_args: Integer;
+
 begin
-  if Length(aArgs) >= 1 then
-  begin
-    try
+  try
+    len_args := Length(aArgs);
+    //log.DebugMsgFmt('Количество свойств [%d]', [len_args]);
+    if len_args >= 1 then
+    begin
       { Первый элемент - это имя OPC сервера }
       { ВНИМАНИЕ! Преобразование элемента массива параметров в строку:
                   AnsiString(item.vAnsiString) }
-      SetOPCServerName(AnsiString(aArgs[0].vAnsiString));
+      opc_server_name := AnsiString(aArgs[0].vAnsiString);
+      SetOPCServerName(opc_server_name);
+      log.DebugMsgFmt('Установлен OPC сервер <%s>', [opc_server_name]);
 
-    except
-      log.FatalMsgFmt('Ошибка установки массива спойств в <%s>', [ClassName]);
     end;
+  except
+    log.FatalMsgFmt('Ошибка установки массива свойств в <%s>', [ClassName]);
   end;
 end;
 
@@ -380,7 +417,7 @@ begin
     sComputer := FComputerName;
   if sOPCServerName = '' then
     sOPCServerName := FOPCServerName;
-  //log.InfoMsgFmt('Установка связи с <%s : %s>', [sComputer, sOPCServerName]);
+  log.InfoMsgFmt('Установка связи с <%s : %s>', [sComputer, sOPCServerName]);
 
   // Подключение к OPC
   if Trim(sOPCServerName) <> '' then
@@ -638,7 +675,11 @@ var
   key, value: AnsiString;
   tags: TStrDictionary;
 begin
-  //log.DebugMsg('Создание тегов');
+  if Properties.Count = 0 then
+     log.WarningMsg('Нет данных для определения тегов')
+  else
+    log.DebugMsg('Создание тегов');
+
   tags := TStrDictionary.Create;
   for i := 0 to Properties.Count - 1 do
   begin
@@ -649,7 +690,7 @@ begin
         value := ''
       else
         value := Properties.GetStrValue(key);
-      //log.DebugMsgFmt('Тег <%s : %s>', [key, value]);
+      log.DebugMsgFmt('Тег <%s : %s>', [key, value]);
       tags.AddStrValue(key, value);
     end;
   end;
@@ -755,6 +796,151 @@ begin
   end;
 
   Result := dtEnd;
+end;
+
+{
+Чтение значений по адресам
+@param sAddresses Массив адресов для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные.
+              Если не определено, то берется текущее системное время.
+@return Список прочитанных значений.
+}
+function TICWtOPCHDANode.ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime): TStringList;
+//var
+//  i: Integer;
+//  log_tags: AnsiString;
+//  group_name: AnsiString;
+//  tags: TStrDictionary;
+//  grp: TGroup;
+//  tag_item: TTagItem;
+//  value, address: AnsiString;
+
+begin
+  Result := ReadAll(dtTime);
+//
+//  group_name := UNKNOWN_GROUP_NAME;
+//
+//  log_tags := LineEnding;
+//  try
+//    // Сначала добавить адреса в свойства
+//    if Properties <> nil then
+//      Properties.Clear
+//    else
+//      Properties := TStrDictionary.Create;
+//
+//    for i := 0 to Length(sAddresses) - 1 do
+//    begin
+//      log_tags := log_tags + Format('tag%d', [i]) + ' = ' + AnsiString(sAddresses[i]) + LineEnding;
+//      // log.DebugMsg(Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i]));
+//      Properties.AddStrValue(Format('tag%d', [i]),
+//                             { Преобразование элемента списка параметров в AnsiString:}
+//                             AnsiString(sAddresses[i]));
+//    end;
+//
+//    // Сначала адреса указать в свойствах
+//    FOPCClient := TOPCClient.Create(nil);
+//    FOPCClient.ServerName := FOPCServerName;
+//
+//    tags := CreateTags;
+//
+//    grp := TGroup.Create(group_name, 500, 0);
+//    for i := 0 to tags.Count - 1 do
+//    begin
+//      address := tags.GetStrValue(tags.GetKey(i));
+//      tag_item := TTagItem.Create(tags.GetKey(i), address, VT_BSTR, acRead);
+//      grp.AddTag(tag_item);
+//    end;
+//    FOPCClient.TagList.AddGroup(grp);
+//
+//    FOPCClient.Connect;
+//
+//    for i := 0 to tags.Count - 1 do
+//    begin
+//      // Чтение значения тега
+//      value := FOPCClient.GetTagString(FOPCClient.FindSGroupSTag(group_name, tags.GetKey(i)));
+//      Result.Add(value);
+//    end;
+//    FOPCClient.Disconnect;
+//
+//    tags.Free;
+//
+//  except
+//    FOPCClient.Disconnect;
+//    tags.Free;
+//
+//    if Result <> nil then
+//    begin
+//      Result.Free;
+//      Result := nil;
+//    end;
+//    log.FatalMsgFmt('Ошибка чтения значений адресов в <%s> %s', [ClassName, log_tags]);
+  //end;
+end;
+
+{
+Чтение значения по адресу
+@param sAddress Строка адреса для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные.
+              Если не определено, то берется текущее системное время.
+@return Прочитанное значение в виде строки.
+}
+function TICWtOPCHDANode.ReadAddress(sAddress: AnsiString; dtTime: TDateTime): AnsiString;
+var
+  addresses: Array Of String;
+  values: TStringList;
+begin
+  Result := '';
+  SetLength(addresses, 1);
+  addresses[0] := sAddress;
+
+  values := ReadAddresses(addresses);
+  if values.Count and values.Count = 1 then
+    Result := values[0];
+
+  values.Free;
+end;
+
+{
+Чтение значений исторических данных по адресам
+@param sAddresses Массив адресов для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные.
+               Если не определено, то берется текущее системное время.
+@param iValueTimeCount: Количество считываемых записей.
+@param sValueTimeTick: Период регистрации контроллера в формате yyyy-mm-dd hh:nn:ss в виде строки.
+@return Список прочитанных значений.
+}
+function TICWtOPCHDANode.ReadHistoryAddresses(sAddresses: Array Of String; dtTime: TDateTime; iValueTimeCount: Integer; sValueTimeTick: AnsiString): TStringList;
+var
+  tag_name: AnsiString;
+  value: AnsiString;
+  i: Integer;
+begin
+  // Количество считываемых записей
+  log.DebugMsgFmt('Количество регистрируемых данных в буфере <%d>', [iValueTimeCount]);
+  ValueTimeCount := iValueTimeCount;
+
+  // Период регистрации контроллера в формате yyyy-mm-dd hh:nn:ss
+  log.DebugMsgFmt('Время одного тика регистрации данных в буфере <%s>', [sValueTimeTick]);
+  // ValueTimeTick := DateUtils.ScanDateTime(obj_proto.DATETIME_TXT_FMT, value);
+  ValueTimeTick.Scan(obj_proto.DATETIME_TXT_FMT, sValueTimeTick);
+  log.DebugMsgFmt('Время одного тика регистрации данных в буфере <%s>. Временное значение <%s>', [sValueTimeTick,
+                                                                                                  ValueTimeTick.ToFormat(obj_proto.DATETIME_TXT_FMT)]);
+
+  // Если словаря свойств нет, то создаем его, в противном случае очищаем его
+  if Properties = nil then
+    Properties := TStrDictionary.Create
+  else
+    Properties.Clear;
+
+  for i := 0 to Length(sAddresses) - 1 do
+  begin
+    value := sAddresses[i];
+    tag_name := 'tag' + IntToStr(i);
+    Properties.AddStrValue(tag_name, value);
+    log.DebugMsgFmt('Установлен тег <%s> с адресом <%s>', [tag_name, value]);
+  end;
+
+  Result := ReadAll(dtTime);
 end;
 
 end.

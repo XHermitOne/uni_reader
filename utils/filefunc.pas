@@ -1,5 +1,7 @@
 {
 Функции работы с файлами.
+
+Версия: 0.0.2.1
 }
 unit filefunc;
 
@@ -8,7 +10,11 @@ unit filefunc;
 interface
 
 uses
-    Classes, SysUtils, sysfunc, strfunc;
+  {$IFDEF windows}
+  Windows,
+  {$ENDIF}
+  Classes, SysUtils,
+  sysfunc, strfunc, exttypes;
 
 { Определить папку домашней директории }
 function GetHomeDir(): AnsiString;
@@ -38,22 +44,32 @@ function CreateEmptyFileIfNotExists(sPath: AnsiString): Boolean;
 { Нормализовать путь до файла }
 function NormalPathFileName(sPath: AnsiString): AnsiString;
 
+{ Преобразование Даты-времени }
+{$IFDEF windows}
+function DateTimeToFileTime(dtFileTime: TDateTime): TFileTime;
+{$ENDIF}
+
+{$IFDEF windows}
+function FileTimeToDateTime(const ftFileTime: TFileTime): TDateTime;
+{$ENDIF}
+
 implementation
 
 uses
-    log;
+  log;
+
 {
 Определить папку домашней директории
 }
 function GetHomeDir(): AnsiString;
 begin
-  result := '';
+  Result := '';
   if IsOSLinux() then
-     result := GetOSLinuxHomeDir()
+    Result := GetOSLinuxHomeDir()
   else if IsOSWindows() then
-     result := GetOSWindowsHomeDir()
-     else
-       WarningMsg(Format('Не поддерживаемая ОС <%s>', [GetOSType()]));
+    Result := GetOSWindowsHomeDir()
+  else
+    log.WarningMsgFmt('Не поддерживаемая ОС <%s>', [GetOSType()]);
 end;
 
 {
@@ -61,9 +77,9 @@ end;
 }
 function GetOSLinuxHomeDir(): AnsiString;
 begin
-  result := '';
+  Result := '';
   {$IFDEF linux}
-  result := GetEnvironmentVariable('HOME');
+  Result := GetEnvironmentVariable('HOME');
   {$ENDIF}
 end;
 
@@ -72,10 +88,10 @@ end;
 }
 function GetOSWindowsHomeDir(): AnsiString;
 begin
-    result := '';
-    {$IFDEF windows}
-    result := GetAppConfigDir(False);
-    {$ENDIF}
+  Result := '';
+  {$IFDEF windows}
+  Result := GetAppConfigDir(False);
+  {$ENDIF}
 end;
 
 {
@@ -83,7 +99,7 @@ end;
 }
 function JoinPath(PathParts: Array Of String): AnsiString;
 begin
-     result := JoinStr(PathParts, PathDelim);
+  Result := JoinStr(PathParts, PathDelim);
 end;
 
 {
@@ -91,7 +107,7 @@ end;
 }
 function SplitPath(sPath: AnsiString): TArrayOfString;
 begin
-     result := SplitStr(sPath, PathDelim);
+  Result := SplitStr(sPath, PathDelim);
 end;
 
 
@@ -100,15 +116,15 @@ end;
 }
 function CreateDirPath(sPath: AnsiString): Boolean;
 begin
-  result := False;
+  Result := False;
 
   // Нормализация пути
   sPath := NormalPathFileName(sPath);
 
   if not DirectoryExists(sPath) then
   begin
-     InfoMsg(Format('Создание папки <%s>', [sPath]));
-     result := CreateDirPathTree(sPath);
+     log.InfoMsgFmt('Создание папки <%s>', [sPath]);
+     Result := CreateDirPathTree(sPath);
   end;
 end;
 
@@ -119,17 +135,16 @@ function CreateDirPathTree(sPath: AnsiString): Boolean;
 var
   parent_path: AnsiString;
 begin
-
   if not DirectoryExists(sPath) then
   begin
     parent_path := ExtractFileDir(sPath);
     if not DirectoryExists(parent_path) then
-       result := CreateDirPathTree(parent_path);
+       Result := CreateDirPathTree(parent_path);
     CreateDir(sPath);
-    result := True;
-    exit;
+    Result := True;
+    Exit;
   end;
-  result := False;
+  Result := False;
 end;
 
 {
@@ -137,22 +152,22 @@ end;
 }
 function CreateEmptyFile(sPath: AnsiString): Boolean;
 var
-    file_tmp: Text;
+  file_tmp: Text;
 begin
-    // Нормализация пути
-    sPath := NormalPathFileName(sPath);
+  // Нормализация пути
+  sPath := NormalPathFileName(sPath);
 
-    InfoMsg(Format('Создание пустого файла <%s>', [sPath]));
-    AssignFile(file_tmp, sPath);
-    try
-       Rewrite(file_tmp);
-       Writeln(file_tmp, '');   //Remember AnsiStrings are case sensitive
-       CloseFile(file_tmp);
-       result := True;
-    except
-       result := False;
-       CloseFile(file_tmp);
-    end;
+  log.InfoMsgFmt('Создание пустого файла <%s>', [sPath]);
+  AssignFile(file_tmp, sPath);
+  try
+    Rewrite(file_tmp);
+    Writeln(file_tmp, '');   //Remember AnsiStrings are case sensitive
+    CloseFile(file_tmp);
+    Result := True;
+  except
+    Result := False;
+    CloseFile(file_tmp);
+  end;
 end;
 
 {
@@ -160,9 +175,9 @@ end;
 }
 function CreateEmptyFileIfNotExists(sPath: AnsiString): Boolean;
 begin
-     result := False;
-     if not FileExists(sPath) then
-        result := CreateEmptyFile(sPath)
+  Result := False;
+  if not FileExists(sPath) then
+    Result := CreateEmptyFile(sPath)
 end;
 
 {
@@ -170,10 +185,39 @@ end;
 }
 function NormalPathFileName(sPath: AnsiString): AnsiString;
 begin
-     // Замена двойных слешей
-     sPath := StringReplace(sPath, PathDelim + PathDelim, PathDelim, [rfReplaceAll]);
-     result := ExpandFileName(sPath);
+  // Замена двойных слешей
+  sPath := StringReplace(sPath, PathDelim + PathDelim, PathDelim, [rfReplaceAll]);
+  Result := ExpandFileName(sPath);
 end;
+
+{$IFDEF windows}
+{
+Преобразование Даты-времени
+}
+function DateTimeToFileTime(dtFileTime: TDateTime): TFileTime;
+var
+  LocalFileTime, Ft: TFileTime;
+  SystemTime: TSystemTime;
+begin
+  Result.dwLowDateTime  := 0;
+  Result.dwHighDateTime := 0;
+  DateTimeToSystemTime(dtFileTime, SystemTime);
+  SystemTimeToFileTime(SystemTime, LocalFileTime);
+  LocalFileTimeToFileTime(LocalFileTime, Ft);
+  Result := Ft;
+end;
+{$ENDIF}
+
+{$IFDEF windows}
+function FileTimeToDateTime(const ftFileTime: TFileTime): TDateTime;
+const
+  FileTimeBase = -109205.0;
+  FileTimeStep: Extended = 24.0 * 60.0 * 60.0 * 1000.0 * 1000.0 * 10.0; // 100 nSek per Day
+begin
+  Result := Int64(ftFileTime) / FileTimeStep;
+  Result := Result + FileTimeBase;
+end;
+{$ENDIF}
 
 end.
 

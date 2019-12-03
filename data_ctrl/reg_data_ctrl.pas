@@ -1,5 +1,7 @@
 {
 Функции регистрации объектов источников данных
+
+Версия: 0.0.3.3
 }
 unit reg_data_ctrl;
 
@@ -8,7 +10,8 @@ unit reg_data_ctrl;
 interface
 
 uses
-    Classes, SysUtils, obj_proto, dictionary;
+  Classes, SysUtils,
+  obj_proto, dictionary;
 
 {
 Функция создания объекта контроллера данных по имени типа
@@ -37,7 +40,10 @@ function CreateRegDataCtrlArgs(oParent: TObject; sTypeName: AnsiString; const aA
 implementation
 
 uses
-    log, remoute_opc_node, opc_server_node;
+  log,
+  // Компоненты - источники данных
+  opc_da_node, opc_hda_node, opc_wt_hda_node;
+
 {
 Функция создания объекта контроллера данных по имени типа.
 
@@ -47,18 +53,34 @@ uses
 }
 function CreateRegDataCtrl(oParent: TObject; sTypeName: AnsiString; Properties: TStrDictionary): TICObjectProto;
 begin
-  if sTypeName = 'REMOUTE_OPC_NODE' then
+  if sTypeName = opc_da_node.OPC_DA_NODE_TYPE then
   begin
-    result := TICRemouteOPCNode.Create;
-    if oParent <> nil then
-        result.SetParent(oParent);
-    if Properties <> nil then
-        result.SetProperties(Properties);
-    exit;
+    { Создание и инициализация OPC DA сервера }
+    Result := opc_da_node.TICOPCDANode.Create;
+  end
+  else if sTypeName = opc_hda_node.OPC_HDA_NODE_TYPE then
+  begin
+    { Создание и инициализация OPC DA сервера }
+    Result := opc_hda_node.TICOPCHDANode.Create;
+  end
+  else if sTypeName = opc_wt_hda_node.OPC_WT_HDA_NODE_TYPE then
+  begin
+    { Создание и инициализация OPC DA сервера }
+    Result := opc_wt_hda_node.TICWtOPCHDANode.Create;
+  end
+  else
+  begin
+    log.WarningMsgFmt('Не поддерживаемый тип объекта контроллера данных <%s>', [sTypeName]);
+    Result := nil;
   end;
 
-  WarningMsg(Format('Не поддерживаемый тип объекта контроллера данных <%s>', [sTypeName]));
-  result := nil;
+  if Result <> nil then
+  begin
+    if oParent <> nil then
+      Result.SetParent(oParent);
+    if Properties <> nil then
+      Result.SetProperties(Properties);
+  end;
 end;
 
 {
@@ -70,17 +92,34 @@ end;
 }
 function CreateRegDataCtrlArgs(oParent: TObject; sTypeName: AnsiString; const aArgs: Array Of Const): TICObjectProto;
 begin
-  if sTypeName = 'OPC_SERVER_NODE' then
+  if sTypeName = opc_da_node.OPC_DA_NODE_TYPE then
   begin
-    Result := TICOPCServerNode.Create;
+    { Создание и инициализация OPC DA сервера }
+    Result := opc_da_node.TICOPCDANode.Create;
+  end
+  else if sTypeName = opc_hda_node.OPC_HDA_NODE_TYPE then
+  begin
+    { Создание и инициализация OPC HDA сервера }
+    Result := opc_hda_node.TICOPCHDANode.Create;
+  end
+  else if sTypeName = opc_wt_hda_node.OPC_WT_HDA_NODE_TYPE then
+  begin
+    { Создание и инициализация OPC HDA сервера }
+    Result := opc_wt_hda_node.TICWtOPCHDANode.Create;
+  end
+  else
+    Result := nil;
+
+  if Result = nil then
+  begin
+    log.WarningMsgFmt('Не поддерживаемый тип объекта контроллера данных <%s>', [sTypeName]);
+  end
+  else
+  begin
     if oParent <> nil then
         Result.SetParent(oParent);
     Result.SetPropertiesArray(aArgs);
-    exit;
   end;
-
-  WarningMsg(Format('Не поддерживаемый тип объекта контроллера данных <%s>', [sTypeName]));
-  result := nil;
 end;
 
 end.

@@ -1,3 +1,9 @@
+{
+Модуль удаленного узла OPC сервера
+
+Версия: 0.0.1.2
+}
+
 unit remoute_opc_node;
 
 {$mode objfpc}{$H+}
@@ -10,6 +16,7 @@ uses
     opc_client, tag_list;
 
 const
+  REMOUTE_OPC_NODE_TYPE: AnsiString = 'REMOUTE_OPC_DA';
   RESERV_PROPERTIES: Array [1..6] Of String = ('type', 'name', 'description', 'opc_server', 'opc_host', 'topic');
 
 type
@@ -29,47 +36,25 @@ type
     { Выбрать описания тегов из свойств }
     function CreateTags(): TStrDictionary;
 
-    { Фунция чтения данных }
-    function Read(aValues: TStringList): TStringList; override;
-    { Фунция записи данных }
-    function Write(aValues: TStringList): Boolean; override;
-
-
 end;
 
 implementation
 
 uses
-    LCLIntf, // Для вычисления времени выполнения
-    log;
+  LCLIntf, // Для вычисления времени выполнения
+  log;
 
 constructor TICRemouteOPCNode.Create;
 begin
-     inherited Create;
-     FOPCClient := nil;
+  inherited Create;
+  FOPCClient := nil;
 end;
 
 procedure TICRemouteOPCNode.Free;
 begin
   if FOPCClient <> nil then
-     FOPCClient.Destroy;
+    FOPCClient.Destroy;
   inherited Free;
-end;
-
-{
-Фунция чтения данных
-}
-function TICRemouteOPCNode.Read(aValues: TStringList): TStringList;
-begin
-  result := nil;
-end;
-
-{
-Фунция записи данных
-}
-function TICRemouteOPCNode.Write(aValues: TStringList): Boolean;
-begin
-  result := False;
 end;
 
 { Выбрать описания тегов из свойств }

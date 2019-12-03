@@ -139,6 +139,23 @@ type
     }
     function ReadAll(dtTime: TDateTime = 0): TStringList; override;
 
+    {
+    Чтение значений по адресам
+    @param sAddresses Массив адресов для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные.
+                  Если не определено, то берется текущее системное время.
+    @return Список прочитанных значений.
+    }
+    function ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime = 0): TStringList; override;
+    {
+    Чтение значения по адресу
+    @param sAddress Строка адреса для чтения
+    @param dtTime: Время актуальности за которое необходимо получить данные.
+                  Если не определено, то берется текущее системное время.
+    @return Прочитанное значение в виде строки.
+    }
+    function ReadAddress(sAddress: AnsiString; dtTime: TDateTime = 0): AnsiString; override;
+
   published
     property ValueTimeCount: Integer read FValueTimeCount write FValueTimeCount;
     property ValueTimeTick: dtfunc.TDateTimeDelta read FValueTimeTick write FValueTimeTick;
@@ -819,6 +836,108 @@ begin
   end;
 
   Result := dtEnd;
+end;
+
+{
+Чтение значений по адресам
+@param sAddresses Массив адресов для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные.
+              Если не определено, то берется текущее системное время.
+@return Список прочитанных значений.
+}
+function TICOPCHDANode.ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime): TStringList;
+//var
+//  i: Integer;
+//  log_tags: AnsiString;
+//  group_name: AnsiString;
+//  tags: TStrDictionary;
+//  grp: TGroup;
+//  tag_item: TTagItem;
+//  value, address: AnsiString;
+
+begin
+  Result := ReadAll(dtTime);
+//
+//  group_name := UNKNOWN_GROUP_NAME;
+//
+//  log_tags := LineEnding;
+//  try
+//    // Сначала добавить адреса в свойства
+//    if Properties <> nil then
+//      Properties.Clear
+//    else
+//      Properties := TStrDictionary.Create;
+//
+//    for i := 0 to Length(sAddresses) - 1 do
+//    begin
+//      log_tags := log_tags + Format('tag%d', [i]) + ' = ' + AnsiString(sAddresses[i]) + LineEnding;
+//      // log.DebugMsg(Format('tag%d', [i]) + ' = ' + AnsiString(aValues[i]));
+//      Properties.AddStrValue(Format('tag%d', [i]),
+//                             { Преобразование элемента списка параметров в AnsiString:}
+//                             AnsiString(sAddresses[i]));
+//    end;
+//
+//    // Сначала адреса указать в свойствах
+//    FOPCClient := TOPCClient.Create(nil);
+//    FOPCClient.ServerName := FOPCServerName;
+//
+//    tags := CreateTags;
+//
+//    grp := TGroup.Create(group_name, 500, 0);
+//    for i := 0 to tags.Count - 1 do
+//    begin
+//      address := tags.GetStrValue(tags.GetKey(i));
+//      tag_item := TTagItem.Create(tags.GetKey(i), address, VT_BSTR, acRead);
+//      grp.AddTag(tag_item);
+//    end;
+//    FOPCClient.TagList.AddGroup(grp);
+//
+//    FOPCClient.Connect;
+//
+//    for i := 0 to tags.Count - 1 do
+//    begin
+//      // Чтение значения тега
+//      value := FOPCClient.GetTagString(FOPCClient.FindSGroupSTag(group_name, tags.GetKey(i)));
+//      Result.Add(value);
+//    end;
+//    FOPCClient.Disconnect;
+//
+//    tags.Free;
+//
+//  except
+//    FOPCClient.Disconnect;
+//    tags.Free;
+//
+//    if Result <> nil then
+//    begin
+//      Result.Free;
+//      Result := nil;
+//    end;
+//    log.FatalMsgFmt('Ошибка чтения значений адресов в <%s> %s', [ClassName, log_tags]);
+  //end;
+end;
+
+{
+Чтение значения по адресу
+@param sAddress Строка адреса для чтения
+@param dtTime: Время актуальности за которое необходимо получить данные.
+              Если не определено, то берется текущее системное время.
+@return Прочитанное значение в виде строки.
+}
+function TICOPCHDANode.ReadAddress(sAddress: AnsiString; dtTime: TDateTime): AnsiString;
+var
+  addresses: Array Of String;
+  values: TStringList;
+begin
+  Result := '';
+  SetLength(addresses, 1);
+  addresses[0] := sAddress;
+
+  values := ReadAddresses(addresses);
+  if values.Count and values.Count = 1 then
+    Result := values[0];
+
+  values.Free;
 end;
 
 end.
