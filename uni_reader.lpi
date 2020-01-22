@@ -35,7 +35,7 @@
         <PackageName Value="FCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="44">
+    <Units Count="45">
       <Unit0>
         <Filename Value="uni_reader.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -217,6 +217,10 @@
         <Filename Value="opcdelphi\OPCtypes.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit43>
+      <Unit44>
+        <Filename Value="data_ctrl\opc_server_node.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit44>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -1,7 +1,7 @@
 {
 Функции регистрации объектов источников данных
 
-Версия: 0.0.3.3
+Версия: 0.0.4.1
 }
 unit reg_data_ctrl;
 
@@ -42,7 +42,8 @@ implementation
 uses
   log,
   // Компоненты - источники данных
-  opc_da_node, opc_hda_node, opc_wt_hda_node;
+  opc_da_node, opc_hda_node, opc_wt_hda_node,
+  opc_server_node;  // Поддержка старого типа узла (для совместимости)
 
 {
 Функция создания объекта контроллера данных по имени типа.
@@ -67,6 +68,11 @@ begin
   begin
     { Создание и инициализация OPC DA сервера }
     Result := opc_wt_hda_node.TICWtOPCHDANode.Create;
+  end
+  else if sTypeName = opc_server_node.OPC_SRV_NODE_TYPE then
+  begin
+    { Создание и инициализация OPC сервера }
+    Result := opc_server_node.TICOPCServerNode.Create;
   end
   else
   begin
@@ -106,6 +112,11 @@ begin
   begin
     { Создание и инициализация OPC HDA сервера }
     Result := opc_wt_hda_node.TICWtOPCHDANode.Create;
+  end
+  else if sTypeName = opc_server_node.OPC_SRV_NODE_TYPE then
+  begin
+    { Создание и инициализация OPC сервера }
+    Result := opc_server_node.TICOPCServerNode.Create;
   end
   else
     Result := nil;

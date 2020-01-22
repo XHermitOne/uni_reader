@@ -107,7 +107,7 @@ Uses
 {$ENDIF}{$ENDIF}
   DaemonApp,  EventLog, SysUtils,
   lazdaemonapp, uni_daemonmapperunit, uni_daemonunit,
-  engine, log
+  engine, opc_server_node, log
   { add your units here };
 
 begin
