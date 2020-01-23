@@ -9,11 +9,10 @@
         <Filename Value="uni_reader.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="116"/>
         <CursorPos Y="149"/>
         <UsageCount Value="152"/>
-        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="uni_daemonmapperunit.pas"/>
@@ -45,11 +44,10 @@
       <Unit4>
         <Filename Value="obj_proto.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="145"/>
         <CursorPos Y="168"/>
         <UsageCount Value="152"/>
-        <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="settings.pas"/>
@@ -61,10 +59,9 @@
       <Unit6>
         <Filename Value="data_ctrl\reg_data_ctrl.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="45"/>
         <UsageCount Value="152"/>
-        <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="data_ctrl\remoute_opc_node.pas"/>
@@ -288,11 +285,10 @@
       <Unit34>
         <Filename Value="data_ctrl\opc_da_node.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="51"/>
         <CursorPos X="6" Y="339"/>
         <UsageCount Value="34"/>
-        <Loaded Value="True"/>
       </Unit34>
       <Unit35>
         <Filename Value="data_ctrl\opc_wt_hda_node.pas"/>
@@ -377,10 +373,10 @@
       <Unit44>
         <Filename Value="data_ctrl\opc_server_node.pas"/>
         <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="284"/>
         <CursorPos Y="316"/>
         <UsageCount Value="132"/>
-        <Loaded Value="True"/>
       </Unit44>
       <Unit45>
         <Filename Value="config.pas"/>
@@ -440,19 +436,9 @@
         <UsageCount Value="8"/>
       </Unit52>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
-      <Position1>
-        <Filename Value="data_ctrl\reg_data_ctrl.pas"/>
-        <Caret Line="119" Column="43" TopLine="94"/>
-      </Position1>
-      <Position2>
-        <Filename Value="data_ctrl\reg_data_ctrl.pas"/>
-        <Caret Line="116" TopLine="97"/>
-      </Position2>
-      <Position3>
-        <Filename Value="data_ctrl\opc_server_node.pas"/>
-        <Caret Line="316" TopLine="284"/>
-      </Position3>
-    </JumpHistory>
+    <General>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
+    <JumpHistory HistoryIndex="-1"/>
   </ProjectSession>
 </CONFIG>
