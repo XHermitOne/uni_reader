@@ -210,7 +210,6 @@ end;
 Фунция чтения данных
 }
 function TICOPCServerNode.Read(sAddresses: TStringList; dtTime: TDateTime = 0): TStringList;
-//function TICOPCServerNode.Read(aValues: TStringList): TStringList;
 var
   i: Integer;
   tags: TStrDictionary;
@@ -260,8 +259,8 @@ begin
   end;
 end;
 
+
 function TICOPCServerNode.ReadAddresses(sAddresses: Array Of String; dtTime: TDateTime = 0): TStringList;
-//function TICOPCServerNode.ReadAddresses(aValues: Array Of String): TStringList;
 var
   i: Integer;
   log_tags: AnsiString;
@@ -317,11 +316,11 @@ begin
     end;
     FOPCClient.Disconnect;
 
-    tags.Free;
+    tags.Destroy;
 
   except
     FOPCClient.Disconnect;
-    tags.Free;
+    tags.Destroy;
 
     if Result <> nil then
     begin
@@ -336,7 +335,6 @@ end;
 Фунция записи данных
 }
 function TICOPCServerNode.Write(sAddresses, aValues: TStringList; dtTime: TDateTime = 0): Boolean;
-//function TICOPCServerNode.Write(aValues: TStringList): Boolean;
 begin
   Result := False;
 end;
