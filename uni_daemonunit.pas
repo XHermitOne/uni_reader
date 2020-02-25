@@ -80,7 +80,7 @@ procedure TUniReaderDaemon.DataModuleStop(Sender: TCustomDaemon; var OK: Boolean
   );
 begin
   engine.READER_ENGINE.StopServer;
-  engine.READER_ENGINE.Free;
+  engine.READER_ENGINE.Destroy;
   engine.READER_ENGINE := nil;
 end;
 

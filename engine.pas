@@ -174,16 +174,22 @@ end;
 
 destructor TICReaderProto.Destroy;
 begin
-  //Free;
-  FRpcServer.Free;
+  // ВНИМАНИЕ! Из Destroy необходимо вызывать Free.
+  // В Free не должно быть вызова inherited Free.
+  // Тогда не происходит утечки памяти
+  Free;
   inherited Destroy;
 end;
 
 procedure TICReaderProto.Free;
 begin
-  FObjects.Free;
-  FSettingsManager.Free;
-  inherited Free;
+  FRpcServer.Free;
+  // ВНИМАНИЕ! Из Destroy необходимо вызывать Free.
+  // В Free не должно быть вызова inherited Free.
+  // Тогда не происходит утечки памяти
+  FObjects.Destroy;
+  FSettingsManager.Destroy;
+  // inherited Free;
 end;
 
 {
