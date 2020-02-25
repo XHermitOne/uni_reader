@@ -9,8 +9,7 @@
         <Filename Value="uni_reader.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="116"/>
+        <TopLine Value="126"/>
         <CursorPos Y="149"/>
         <UsageCount Value="153"/>
       </Unit0>
@@ -29,18 +28,17 @@
         <ComponentName Value="UniReaderDaemon"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="62"/>
         <CursorPos X="108" Y="72"/>
         <UsageCount Value="153"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="engine.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="171"/>
-        <CursorPos X="104" Y="188"/>
+        <TopLine Value="470"/>
+        <CursorPos X="16" Y="491"/>
         <UsageCount Value="153"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -143,11 +141,10 @@
       <Unit16>
         <Filename Value="utils\dictionary.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="166"/>
         <CursorPos Y="182"/>
         <UsageCount Value="153"/>
-        <Loaded Value="True"/>
       </Unit16>
       <Unit17>
         <Filename Value="utils\filefunc.pas"/>
@@ -238,8 +235,8 @@
         <Filename Value="xml_rpc\XmlRpcServer.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="281"/>
-        <CursorPos X="91" Y="249"/>
+        <TopLine Value="259"/>
+        <CursorPos X="20" Y="278"/>
         <UsageCount Value="153"/>
       </Unit28>
       <Unit29>
@@ -440,7 +437,19 @@
         <UsageCount Value="8"/>
       </Unit52>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="3" HistoryIndex="2">
+      <Position1>
+        <Filename Value="engine.pas"/>
+      </Position1>
+      <Position2>
+        <Filename Value="engine.pas"/>
+        <Caret Line="40" Column="17" TopLine="20"/>
+      </Position2>
+      <Position3>
+        <Filename Value="engine.pas"/>
+        <Caret Line="491" Column="16" TopLine="470"/>
+      </Position3>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode="default"/>

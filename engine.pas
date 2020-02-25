@@ -1,7 +1,7 @@
 {
 Модуль классов движка
 
-Версия: 0.0.3.1
+Версия: 0.0.3.2
 }
 
 unit engine;
@@ -164,6 +164,8 @@ constructor TICReaderProto.Create(TheOwner: TComponent);
 begin
   inherited Create;
 
+  FRpcServer := nil;
+
   // Менеджер настроек
   FSettingsManager := TICSettingsManager.Create;
 
@@ -183,7 +185,8 @@ end;
 
 procedure TICReaderProto.Free;
 begin
-  FRpcServer.Free;
+  if FRpcServer <> nil then
+    FRpcServer.Destroy;
   // ВНИМАНИЕ! Из Destroy необходимо вызывать Free.
   // В Free не должно быть вызова inherited Free.
   // Тогда не происходит утечки памяти
@@ -484,6 +487,8 @@ end;
 procedure TICReader.StopServer;
 begin
   FRpcServer.Active := False;
+  FRpcServer.Destroy;
+  FRpcServer := nil;
 end;
 
 { Тестовая функция для проверки удаленного вызова процедур }
