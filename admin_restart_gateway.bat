@@ -52,4 +52,7 @@ if '%errorlevel%' NEQ '0' (
 
 :Start
 
-reastart_gateway.bat
+echo Stop UniReaderGateway
+sc.exe stop UniReaderGateway
+echo Start UniReaderGateway
+sc.exe start UniReaderGateway
