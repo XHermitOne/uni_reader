@@ -7,7 +7,7 @@
 Везде необходимо использовать функцию Destroy
 для освобождения памяти!!!
 
-Версия: 0.0.3.1
+Версия: 0.0.3.2
 }
 unit memfunc;
 
@@ -49,7 +49,7 @@ type
 { Инициализировать состояние памяти на данный момент }
 function InitStatusMemory(): Boolean;
 { Подсчитать количество утерянной памяти с момента инициализации состояния }
-function GetLostMemory(): LongInt;
+function GetLostMemory(bAutoDestroy: Boolean = True): LongInt;
 { Распечатать количество утерянной памяти }
 procedure PrintLostMemory(bAutoDestroy: Boolean = True);
 
@@ -120,11 +120,20 @@ begin
 end;
 
 { Подсчитать количество утерянной памяти с момента инициализации состояния }
-function GetLostMemory(): LongInt;
+function GetLostMemory(bAutoDestroy: Boolean): LongInt;
 begin
   Result := 0;
   if GlobMemoryStatus <> nil then
+  begin
     Result := GlobMemoryStatus.GetLost();
+    if bAutoDestroy then
+    begin
+      GlobMemoryStatus.Destroy();
+      GlobMemoryStatus := nil;
+
+      log.InfoMsgFmt('Удаление глобального объекта состояния памяти. Память [%d]', [GetHeapStatus().TotalAllocated]);
+    end;
+  end;
 end;
 
 { Распечатать количество утерянной памяти }

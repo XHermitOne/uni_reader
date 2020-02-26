@@ -167,8 +167,8 @@ uses
 
 constructor TICOPCServerNode.Create;
 begin
-     inherited Create;
-     FOPCClient := nil;
+  inherited Create;
+  FOPCClient := nil;
 end;
 
 destructor TICOPCServerNode.Destroy;

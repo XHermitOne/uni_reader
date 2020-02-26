@@ -290,6 +290,7 @@ var
    i: Integer;
    obj_properties: TStrDictionary;
    is_obj_names_options: Boolean;
+
 begin
     log.InfoMsg('Создание объектов...');
     Result := TList.Create;
@@ -340,7 +341,7 @@ begin
   str_list := nil;
   try
     // Создаем объект источника данных
-    ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    ctrl_obj := reg_data_ctrl.CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
     // Читаем значения по списку адресов
     str_list := ctrl_obj.ReadAddresses([sAddress]);
     Result := str_list.Strings[0];
@@ -349,9 +350,9 @@ begin
   end;
 
   if str_list <> nil then
-    str_list.Free;
+    str_list.Destroy;
   if ctrl_obj <> nil then
-    ctrl_obj.Free;
+    ctrl_obj.Destroy;
 end;
 
 { Прочитать список значений из источника данных }
@@ -367,7 +368,7 @@ begin
 
   try
     // Создаем объект источника данных
-    ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    ctrl_obj := reg_data_ctrl.CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
     // Читаем значения по списку адресов
     Result := ctrl_obj.ReadAddresses(aAddresses);
     //Result := str_list;
@@ -378,7 +379,7 @@ begin
   //if str_list <> nil then
   //  str_list.Free;
   if ctrl_obj <> nil then
-    ctrl_obj.Free;
+    ctrl_obj.Destroy;
 end;
 
 { Прочитать список исторических значений из источника данных }
@@ -395,7 +396,7 @@ begin
 
   try
     // Создаем объект источника данных
-    ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
+    ctrl_obj := reg_data_ctrl.CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
     // Читаем значения по списку адресов
     log.DebugMsg('Запуск чтения данных по адресам');
     Result := ctrl_obj.ReadHistoryAddresses(aAddresses, 0, iValueTimeCount, sValueTimeTick);
@@ -407,7 +408,7 @@ begin
   //if str_list <> nil then
   //  str_list.Free;
   if ctrl_obj <> nil then
-    ctrl_obj.Free;
+    ctrl_obj.Destroy;
 end;
 
 { Инициализировать методы удаленного вызова }
