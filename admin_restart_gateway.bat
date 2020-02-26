@@ -52,6 +52,9 @@ if '%errorlevel%' NEQ '0' (
 
 :Start
 
+REM Чтобы запуск происходил без запроса необходимо:
+REM Панель управления->Учетные записи пользователей->Изменение параметров контроля учетных записей->Бегунок до Никогда не уведомлять->OK
+
 echo Stop UniReaderGateway
 sc.exe stop UniReaderGateway
 echo Start UniReaderGateway
