@@ -284,7 +284,7 @@ end;
 }
 function TICReaderProto.CreateDataControllers(ObjectNames: TStringList): TList;
 var
-   ctrl_objects: TList;
+   //ctrl_objects: TList;
    obj: TICObjectProto;
    obj_names_str: AnsiString;
    i: Integer;
@@ -292,7 +292,7 @@ var
    is_obj_names_options: Boolean;
 begin
     log.InfoMsg('Создание объектов...');
-    ctrl_objects := TList.Create;
+    Result := TList.Create;
     is_obj_names_options := False;
     if ObjectNames = nil then
     begin
@@ -308,14 +308,14 @@ begin
         // Создаем объекты источников данных
         obj := CreateDataCtrl(obj_properties);
         if obj <> nil then
-            ctrl_objects.Add(obj)
+            Result.Add(obj)
     end;
 
     // Освободить память если мы выделяли
     if is_obj_names_options then
        ObjectNames.Free;
 
-    result := ctrl_objects;
+    //result := ctrl_objects;
 end;
 
 constructor TICReader.Create(TheOwner: TComponent);
@@ -358,19 +358,19 @@ end;
 function TICReader.ReadValuesAsStrings(sSrcTypeName: AnsiString; const aArgs: Array Of Const; aAddresses: Array Of String): TStringList;
 var
   ctrl_obj: TICObjectProto;
-  str_list: TStringList;
+  //str_list: TStringList;
 
 begin
   Result := nil;
   ctrl_obj := nil;
-  str_list := nil;
+  //str_list := nil;
 
   try
     // Создаем объект источника данных
     ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
     // Читаем значения по списку адресов
-    str_list := ctrl_obj.ReadAddresses(aAddresses);
-    Result := str_list;
+    Result := ctrl_obj.ReadAddresses(aAddresses);
+    //Result := str_list;
   except
     log.FatalMsg('Ошибка чтения значений по адресам:');
   end;
@@ -386,20 +386,20 @@ function TICReader.ReadHistoryValuesAsStrings(sSrcTypeName: AnsiString; const aA
                                               iValueTimeCount: Integer; sValueTimeTick: AnsiString): TStringList;
 var
   ctrl_obj: TICObjectProto;
-  str_list: TStringList;
+  //str_list: TStringList;
 
 begin
   Result := nil;
   ctrl_obj := nil;
-  str_list := nil;
+  //str_list := nil;
 
   try
     // Создаем объект источника данных
     ctrl_obj := CreateRegDataCtrlArgs(self, sSrcTypeName, aArgs);
     // Читаем значения по списку адресов
     log.DebugMsg('Запуск чтения данных по адресам');
-    str_list := ctrl_obj.ReadHistoryAddresses(aAddresses, 0, iValueTimeCount, sValueTimeTick);
-    Result := str_list;
+    Result := ctrl_obj.ReadHistoryAddresses(aAddresses, 0, iValueTimeCount, sValueTimeTick);
+    //Result := str_list;
   except
     log.FatalMsg('Ошибка чтения исторических данных по адресам:');
   end;
@@ -413,7 +413,7 @@ end;
 { Инициализировать методы удаленного вызова }
 procedure TICReader.StartServer;
 var
-  MethodHandler: TRpcMethodHandler;
+  RpcMethodHandler: TRpcMethodHandler;
 
 begin
   if not Assigned(FRpcServer) then
@@ -424,48 +424,54 @@ begin
 
     try
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-      MethodHandler := TRpcMethodHandler.Create;
-      MethodHandler.Name := 'tests.echoString';
+      RpcMethodHandler := TRpcMethodHandler.Create;
+      RpcMethodHandler.Name := 'tests.echoString';
       // ВНИМАНИЕ! В Lazarus необходимо указывать @ для связки события с обработчиком
       //                         V
-      MethodHandler.Method := @EchoTestRpcMethod;
-      MethodHandler.Signature := 'string (string myval)';
-      MethodHandler.Help := 'Just a simple test rpc example method';
-      FRpcServer.RegisterMethodHandler(MethodHandler);
+      RpcMethodHandler.Method := @EchoTestRpcMethod;
+      RpcMethodHandler.Signature := 'string (string myval)';
+      RpcMethodHandler.Help := 'Just a simple test rpc example method';
+      FRpcServer.RegisterMethodHandler(RpcMethodHandler);
+      RpcMethodHandler := nil;
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
       // Метод удаленного вызова чтения значения в виде строки по адресу
-      MethodHandler := TRpcMethodHandler.Create;
-      MethodHandler.Name := 'sources.ReadValueAsString';
-      MethodHandler.Method := @ReadValueAsStringRpcMethod;
-      MethodHandler.Signature := 'string (string myval)';
-      MethodHandler.Help := 'Read value as string from data source';
-      FRpcServer.RegisterMethodHandler(MethodHandler);
+      RpcMethodHandler := TRpcMethodHandler.Create;
+      RpcMethodHandler.Name := 'sources.ReadValueAsString';
+      RpcMethodHandler.Method := @ReadValueAsStringRpcMethod;
+      RpcMethodHandler.Signature := 'string (string myval)';
+      RpcMethodHandler.Help := 'Read value as string from data source';
+      FRpcServer.RegisterMethodHandler(RpcMethodHandler);
+      RpcMethodHandler := nil;
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
       // Метод удаленного вызова чтения списка значений в виде строк по адресам
-      MethodHandler := TRpcMethodHandler.Create;
-      MethodHandler.Name := 'sources.ReadValuesAsStrings';
-      MethodHandler.Method := @ReadValuesAsStringsRpcMethod;
-      MethodHandler.Signature := 'string (string myval)';
-      MethodHandler.Help := 'Read values as strings from data source';
-      FRpcServer.RegisterMethodHandler(MethodHandler);
+      RpcMethodHandler := TRpcMethodHandler.Create;
+      RpcMethodHandler.Name := 'sources.ReadValuesAsStrings';
+      RpcMethodHandler.Method := @ReadValuesAsStringsRpcMethod;
+      RpcMethodHandler.Signature := 'string (string myval)';
+      RpcMethodHandler.Help := 'Read values as strings from data source';
+      FRpcServer.RegisterMethodHandler(RpcMethodHandler);
+      RpcMethodHandler := nil;
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
       // Метод удаленного вызова чтения списка исторических значений в виде таблицы строк по адресам
-      MethodHandler := TRpcMethodHandler.Create;
-      MethodHandler.Name := 'sources.ReadHistoryValuesAsStrings';
-      MethodHandler.Method := @ReadHistoryValuesAsStringsRpcMethod;
-      MethodHandler.Signature := 'string (string myval)';
-      MethodHandler.Help := 'Read history values as table strings from data source';
-      FRpcServer.RegisterMethodHandler(MethodHandler);
+      RpcMethodHandler := TRpcMethodHandler.Create;
+      RpcMethodHandler.Name := 'sources.ReadHistoryValuesAsStrings';
+      RpcMethodHandler.Method := @ReadHistoryValuesAsStringsRpcMethod;
+      RpcMethodHandler.Signature := 'string (string myval)';
+      RpcMethodHandler.Help := 'Read history values as table strings from data source';
+      FRpcServer.RegisterMethodHandler(RpcMethodHandler);
+      RpcMethodHandler := nil;
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       FRpcServer.Active := True;
     except
+      RpcMethodHandler.Free;
+
       log.FatalMsg('Ошибка запуска XML RPC сервера');
     end;
   end;
@@ -497,7 +503,7 @@ begin
   log.DebugMsgFmt('Test echo. You just sent: <%s>', [Msg]);
 
   {return a message showing what was sent}
-  Return.AddItem('You just sent: ' + Msg);
+  Return.AddItem(Format('You just sent: <%s>', [Msg]));
 end;
 
 { Функция чтения данных из источника удаленного вызова процедур }
